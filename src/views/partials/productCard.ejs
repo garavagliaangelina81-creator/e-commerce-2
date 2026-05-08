@@ -1,9 +1,9 @@
 <!-- Molde para los productos -->
 <!-- Tener en cuenta cuando llame a la tarjeta que sea bajo el nombre producto-->
 
-<a href = "/detalleProducto/<%= producto.id %>">
+<a href = "/producto/<%= producto.id %>">
     <article class="productCard">
-        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+        <img src="<%= producto.imagen%>" alt="<%= producto.nombre %>">
         <h2><%= producto.nombre%></h2>
         <p><%= producto.precio %> puntos</p>
     </article>
