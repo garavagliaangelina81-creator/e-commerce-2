@@ -2,6 +2,12 @@ const express = require("express");
 
 const app = express();
 
+// Importar las rutas de productos
+const rutasProducto = require('./routes/rutasProducto');
+
+// Usar las rutas en la aplicación
+app.use('/', rutasProducto);
+
 app.use(express.static("public"));
 
 const PORT = 3000;

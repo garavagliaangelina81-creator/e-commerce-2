@@ -1,0 +1,8 @@
+<link rel="stylesheet" href="/css/categoria.css">
+
+
+<nav class = "categoriasBarra">
+    <% categorias.forEach(categoria => { %>
+        <a href= "/productos/categoria/<%= categoria %>" ><%= categoria %></a>
+    <% }); %>
+</nav>

@@ -1,0 +1,34 @@
+<%- include('../partials/header') %>
+<main>
+
+    <div class = "tarjetaProducto">
+        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+        <div class ="producto-info">
+            <h1 class = "productoNombre"><%= producto.nombre %></h1>
+            <p class="productoDescripcion"><%= producto.descripcion %></p>
+
+            <div class = "precioYCarrito">
+                <p class="productoPrecio"><%= producto.precio %> puntos</p>
+                
+                <form action="/agregar-carrito" method="post">
+                    <input type="hidden" name="idProducto" value="<%= producto.id %>">
+                    <button>Agregar al Carrito</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div class="puedeInteresar">
+    
+    <h2>Productos Relacionados</h2>
+
+    <div class="listadoProductos">
+        <% relacionados.forEach(producto => { %>
+        <%- include('../partials/productCard', { producto }) %>
+        <% }); %>
+    </div>
+    
+</div>
+<%- include('../partials/categorias') %>
+<%- include('../partials/footer') %>
+</main>
