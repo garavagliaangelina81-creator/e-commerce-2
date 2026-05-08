@@ -1,0 +1,152 @@
+<main>
+
+    <div class = "tarjetaProducto">
+        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+        <div class ="producto-info">
+            <h1 class = "productoNombre"><%= producto.nombre %></h1>
+            <p class="productoDescripcion"><%= producto.descripcion %></p>
+
+            <div class = "precioYCarrito">
+                <p class="productoPrecio"><%= producto.precio %> puntos</p>
+                
+                <form action="/agregar-carrito" method="post">
+                    <input type="hidden" name="idProducto" value="<%= producto.id %>">
+                    <button>Agregar al Carrito</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div class="puedeInteresar">
+    
+    <h2>Productos Relacionados</h2>
+
+    <div class="listadoProductos">
+        <% relacionados.forEach(producto => { %>
+        <%- include('../partials/productCard', { producto }) %>
+        <% }); %>
+    </div>
+    
+</div>
+<%- include('../partials/categorias') %>
+</main>
+
+
+<style>
+    .tarjetaProducto {
+    background-color: #ebebeb;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    margin: 5%;
+    border-radius: 10px;
+}
+
+.products-section {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.products-section h2 {
+    font-size: 2em;
+    margin-bottom: 5%;
+    color: #333333;
+    text-align: center;
+}
+
+.producto-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 5%;
+}
+
+.productoNombre {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.productoDescripcion {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #666666;
+    font-weight: bold;
+}
+
+main img {
+    width: 40%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.precioYCarrito {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    margin-bottom: 10px;
+    }   
+
+.productoPrecio {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#agregar-carrito {
+    background-color: #eac926;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+form #agregar-carrito:hover {
+    background-color: #0022aa;
+}
+
+
+
+
+.listadoProductos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+
+
+    .productCard {
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+        margin: 10px;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .productCard:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .productCard img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .productCard h2 {
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+
+    .productCard p {
+        font-size: 1em;
+        color: #555;
+    }
+
+    
+</style>

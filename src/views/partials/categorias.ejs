@@ -2,7 +2,30 @@
 
 
 <nav class = "categoriasBarra">
-    <% categorias.forEach(categoria => { %>
-        <a href= "/productos/categoria/<%= categoria %>" ><%= categoria %></a>
+    <% categoriasBarra.forEach(categoria => { %>
+        <a href= "/categoria/<%= categoria %>" ><%= categoria %></a> <!--VER BIEN COMO ES LA RUTA PARA QUE RENDERICE EL INDEX-->
     <% }); %>
 </nav>
+
+<style>
+        .categoriasBarra{
+        text-align: center; 
+        padding: 20px; 
+        border: 3px solid rgb(66, 61, 61); 
+        border-radius: 40px; 
+        display: flex; 
+        justify-content: center; 
+        justify-content: space-between;
+    }
+    .categoriasBarra a {
+        color: black;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        margin: auto;
+    }
+
+    .categoriasBarra a:hover {
+        color: #007BFF; /* Cambia el color al pasar el mouse */
+    }
+</style>

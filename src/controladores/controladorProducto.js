@@ -8,28 +8,27 @@ const controladorProducto = {
         const producto = productoServicio.buscarPorID(id);
 
         //bonus, si no existe pág 404
-        if(!producto) return res.status(404).render('error404'); //Verificar con Maia como se va a llamar la pagina del error
+//        if(!producto) return res.status(404).render('error404'); //Verificar con Maia como se va a llamar la pagina del error
     
         //productos relacionados us8
-        const relacionadosTodos = productoServicio.buscarCategoria(producto.categoria);
+        const relacionados = productoServicio.buscarCategoria(producto.categoria)
+                                                                                .filter(p=> p.id != id)
+                                                                                .sort(() => 0.5 - Math.random()) 
+                                                                                .slice(0, 4);
+                                     
+        const categoriasBarra = productoServicio.todasCategorias();
 
-        //filtrar para no ver el mismo producto y mostrar de manera aleatoria cada vez que se llama
-        const relacionados = relacionadosTodos
-        .filter(p=> p.id != id)
-        .sort(() => 0.5 - Math.random()) 
-        .slice(0, 4);
-
-        //enviamos el producto con los relacionados a la vista
-        res.render('detalleProducto', {producto, relacionados});
+        //enviamos el producto con los relacionados y las categorias a la vista
+        res.render('pages/producto', {producto, relacionados, categoriasBarra});
     },
 
-    //cuando se filtra por categorias
+    //cuando se filtra por categorias   NO VA ACÁ
     verCategoria: (req, res) => {
         const nombreCategoria = req.params.categoria;
         const productosFiltrados = productoServicio.buscarCategoria(nombreCategoria);
 
         //renderizar
-        res.render('/index', {producto: productosFiltrados});
+        res.render('index', {producto: productosFiltrados});
     }
 }
 
