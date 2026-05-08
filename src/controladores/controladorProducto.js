@@ -29,7 +29,7 @@ const controladorProducto = {
         const productosFiltrados = productoServicio.buscarCategoria(nombreCategoria);
 
         //renderizar
-        res.render('/index', {productos: productosFiltrados});
+        res.render('/index', {producto: productosFiltrados});
     }
 }
 
