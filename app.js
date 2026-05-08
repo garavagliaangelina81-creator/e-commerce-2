@@ -1,4 +1,5 @@
 const express = require("express");
+const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador
 
 const app = express();
 
@@ -25,3 +26,7 @@ app.set("view engine", "ejs");
 app.listen(PORT, ()=> {
     console.log(`App funcionando en el puerto ${PORT}`);
 })
+
+
+//al final de todo para que no aparezcan todas las páginas con error, se pone el middleware del error 404
+app.use(controlador404.error404);
