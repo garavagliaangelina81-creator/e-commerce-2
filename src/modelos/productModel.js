@@ -4,27 +4,16 @@ const path = require('path');
 const productsFilePath = path.join(__dirname, '../../data/productos.json');
 
 //objeto literal
-const productoServicio = {
+const productoModelo = {
     todos: () => {
         const jsonData = fs.readFileSync(productsFilePath, 'utf-8');
         return JSON.parse(jsonData); //convertimos en objeto
     },
 
     buscarPorID: (id) => {
-        const productos = productoServicio.todos();
+        const productos = productoModelo.todos();
         return productos.find(p => p.id == id);
-    },
-
-    buscarCategoria: (categoria) => {
-        const productos = productoServicio.todos();
-        return productos.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase());
-    },
-
-    todasCategorias: () => {
-        const categorias = productoServicio.todos().map(p => p.categoria);
-        return [...new Set(categorias)];
-
     }
 };
 
-module.exports = productoServicio;
+module.exports = productoModelo;
