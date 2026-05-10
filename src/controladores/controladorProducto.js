@@ -1,6 +1,12 @@
 const productoServicio = require('../servicios/productoServicios');
 
 const controladorProducto = {
+    //inicio:
+    index: (req, res) => {
+        const sugreidos = productoServicio.getSugeridos(); //obetenemos los 5 productos sugeridos
+
+        res.render('pages/index', {sugreidos});
+    },
 
     //para ver detalle
     detalle: (req, res) => {
