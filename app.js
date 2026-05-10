@@ -30,6 +30,11 @@ const rutasRegistro = require('./src/routes/rutasRegistro');
 //ruta de registro
 app.use('/', rutasRegistro);
 
+//importar ruta de checkout
+const rutasCheckout = require('./src/routes/rutasCheckout');
+//ruta de checkout
+app.use('/', rutasCheckout);
+
 //al final de todo para que no aparezcan todas las páginas con error, se pone el middleware del error 404
 app.use(controlador404.error404);
 
