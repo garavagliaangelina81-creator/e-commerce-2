@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+<link rel="stylesheet" href="/css/style.css">
+
+<main class="home-main">
+
+    <%- include('../partials/categorias') %>
+
+    <section class="hero-container">
+    <article class="hero-card hero-offer">
+        <div class="hero-text">
+            <h2>Ofertas de temporada</h2>
+            <button>Ver mas</button>
+        </div>
+    </article>
+    </section>
+
+    <section class="products-section">
+        <h2>Te puede interesar</h2>
+        <div class="products-grid">
+            <% sugeridos.forEach(producto => { %>
+                <%- include('../partials/productoCard', {producto}) %>
+            <% }) %>
+      
+        </div>
+    </section>
+    <%- include('../partials/categorias') %>
+</main>
+<%- include('../partials/footer') %>
+</body>
+</html> 

@@ -25,3 +25,12 @@ const productoServicio = {
     }
 }
 module.exports = productoServicio;
+
+//funcion para elegir los 5 productos aleatorios, esto cumple con no usar APls ni base de datos
+getSugeridos: ( ) => {
+    const todosLosproductos = productoModelo.todos(); 
+    return todosLosproductos
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 5);
+}
+
