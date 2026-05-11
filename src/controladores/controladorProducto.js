@@ -1,4 +1,6 @@
 const productoServicio = require('../servicios/productoServicios');
+const productoModelo = require('../modelos/productModel');
+
 
 const controladorProducto = {
     //inicio:
@@ -11,7 +13,7 @@ const controladorProducto = {
     //para ver detalle
     detalle: (req, res) => {
         const id = req.params.id;
-        const producto = productoModelo.buscarPorID(id);
+        const producto = productoServicio.buscarPorID(id);
 
         //bonus, si no existe pág 404
         if(!producto) return res.status(404).render('404');

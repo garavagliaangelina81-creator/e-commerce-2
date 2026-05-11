@@ -3,6 +3,7 @@ const router = express.Router();
 
 // Importar el controlador
 const controladorProducto = require('../controladores/controladorProducto');
+const carritoControlador = require('../controladores/carritoControlador');
 
 //ruta para el inicio
 router.get('/', controladorProducto.index);
@@ -11,8 +12,8 @@ router.get('/', controladorProducto.index);
 
 router.get('/:id', controladorProducto.detalle);
 
-// Ruta para ver los productos de una categoría
+/*Ruta para ver los productos de una categoría
 
-router.get('/categoria/:categoria', controladorProducto.verCategoria);
-
+router.get('/categoria/:categoria', controladorProducto.verCategoria);     ver si va acá
+*/
 module.exports = router;

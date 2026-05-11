@@ -1,3 +1,6 @@
 /node_modules
 /notas.txt
 /diagrama.drawio
+/data/secreto.js
+/src/views/pages/carrito.ejs
+
