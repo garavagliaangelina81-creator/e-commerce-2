@@ -5,6 +5,7 @@
         "precio": 9500, 
         "descripcion": "Descubrí el sabor único de Jack Daniels Honey, una combinación perfecta de whiskey y miel que deleitará tu paladar. Su suave dulzura y notas de vainilla lo convierten en la elección ideal para disfrutar solo o en cocktails innovadores. Con su presentación elegante es el regalo perfecto para compartir en ocasiones especiales o simplemente para darte un gusto.", 
         "categoria": "Bebidas", 
+        "destacado": true,
         "imagen": "/img/whiskey.jpg",
         "stock": 15
     }, 
@@ -14,6 +15,7 @@
         "precio": 3000, 
         "descripcion": "Hamburguesa de carne 100% vacuna de primera calidad con jamón, queso fundido, tomate fresco y lechuga manteca. Un clásico para compartir en todo momento que satisfará los paladares más exigentes. Preparada al momento con ingredientes seleccionados, esta hamburguesa es perfecta para una comida rápida pero de excelente calidad. Ideal para disfrutar con amigos y familia.", 
         "categoria": "Comidas", 
+        "destacado": true,
         "imagen": "/img/hamburguesa.jpg",
         "stock": 30
     },  
@@ -21,7 +23,8 @@
         "id": 3, 
         "nombre": "Chenin dulce Santa Julia", 
         "precio": 1500, 
-        "descripcion": "Santa Julia Chenin Dulce Natural es un vino elaborado con uvas de la variedad Chenin Blanc cultivadas en los viñedos mendocinos. Es un vino suave y delicado, de color amarillo verdoso y aromas que recuerdan a durazno blanco, damasco, hierbas frescas y algunas notas cítricas como limón y pomelo.", 
+        "descripcion": "Santa Julia Chenin Dulce Natural es un vino elaborado con uvas de la variedad Chenin Blanc cultivadas en los viñedos mendocinos. Es un vino suave y delicado, de color amarillo verdoso y aromas que recuerdan a durazno blanco, damasco, hierbas frescas y algunas notas cítricas como limón y pomelo.",
+        "destacado": true,
         "imagen": "/img/vino.jpg", 
         "categoria": "Bebidas",
         "stock": 0
@@ -30,7 +33,8 @@
         "id": 4, 
         "nombre": "Wrap de ensalada caesar", 
         "precio": 1800, 
-        "descripcion": "El wrap de ensalada César es una opción práctica y sabrosa que envuelve la clásica ensalada en una tortilla de harina integral o blanca. Combina lechuga romana crujiente, pollo asado tierno, queso parmesano rallado y aderezo César cremoso artesanal, acompañado de croutones para aportar textura. Es una opción de comida rápida, portátil y versátil, perfecta para llevar. Ideal para quienes buscan una alternativa saludable sin sacrificar el sabor.", 
+        "descripcion": "El wrap de ensalada César es una opción práctica y sabrosa que envuelve la clásica ensalada en una tortilla de harina integral o blanca. Combina lechuga romana crujiente, pollo asado tierno, queso parmesano rallado y aderezo César cremoso artesanal, acompañado de croutones para aportar textura. Es una opción de comida rápida, portátil y versátil, perfecta para llevar. Ideal para quienes buscan una alternativa saludable sin sacrificar el sabor.",
+        "destacado": true,
         "imagen": "/img/wrap.jpg", 
         "categoria": "Comidas",
         "stock": 12
@@ -49,6 +53,7 @@
         "nombre": "Papas Fritas con cheddar", 
         "precio": 2000, 
         "descripcion": "Calientes, crujientes y deliciosas, una nueva variedad llega para quedarse: Papas Fritas con Cheddar fundido que se derrite en cada bocado. Preparadas con papas de primera calidad y cortadas al grosor perfecto para mantener su textura ideal. El cheddar es derretido artesanalmente para garantizar una cobertura uniforme y un sabor irresistible. Perfectas como acompañamiento o para disfrutar como snack principal.", 
+        "destacado": true,
         "imagen": "/img/papas.jpg", 
         "categoria": "Comidas",
         "stock": 0
@@ -59,6 +64,7 @@
         "precio": 1200, 
         "descripcion": "Cerveza artesanal estilo India Pale Ale, caracterizada por su color ámbar y un amargor intenso y refrescante. Presenta notas cítricas y frutales aportadas por una cuidadosa selección de lúpulos patagónicos. Ideal para acompañar comidas especiadas o disfrutar bien fría al final del día.", 
         "imagen": "/img/cerveza_ipa.jpg", 
+        "destacado": true,
         "categoria": "Bebidas",
         "stock": 24
     },
@@ -68,6 +74,7 @@
         "precio": 2500, 
         "descripcion": "Clásica pizza italiana a la piedra elaborada con masa madre de fermentación lenta. Cubierta con salsa de tomates perita naturales, mozzarella de búfala fundida, hojas de albahaca fresca y un toque de aceite de oliva extra virgen. Simpleza y calidad en cada porción.", 
         "imagen": "/img/pizza_margarita.jpg", 
+        "destacado": true,
         "categoria": "Comidas",
         "stock": 8
     },
@@ -75,7 +82,8 @@
         "id": 9, 
         "nombre": "Mojito Cubano Clásico", 
         "precio": 1300, 
-        "descripcion": "Un cóctel clásico, fresco y aromático. Preparado con ron blanco de alta calidad, jugo de limón recién exprimido, hojas de menta fresca, azúcar y un toque de soda. La opción perfecta para refrescar tu tarde con un equilibrio ideal entre lo dulce, lo cítrico y lo herbáceo.", 
+        "descripcion": "Un cóctel clásico, fresco y aromático. Preparado con ron blanco de alta calidad, jugo de limón recién exprimido, hojas de menta fresca, azúcar y un toque de soda. La opción perfecta para refrescar tu tarde con un equilibrio ideal entre lo dulce, lo cítrico y lo herbáceo.",
+        "destacado": true, 
         "imagen": "/img/mojito.jpg", 
         "categoria": "Cocteles",
         "stock": 0
@@ -84,7 +92,8 @@
         "id": 10, 
         "nombre": "Tacos al Pastor (3 unidades)", 
         "precio": 2200, 
-        "descripcion": "Auténticos tacos mexicanos servidos en tortilla de maíz suave. Rellenos de carne de cerdo marinada en especias tradicionales y achiote, cocinada lentamente. Se sirven acompañados de trozos de ananá asado, cebolla finamente picada, cilantro fresco y salsa taquera a elección.", 
+        "descripcion": "Auténticos tacos mexicanos servidos en tortilla de maíz suave. Rellenos de carne de cerdo marinada en especias tradicionales y achiote, cocinada lentamente. Se sirven acompañados de trozos de ananá asado, cebolla finamente picada, cilantro fresco y salsa taquera a elección.",
+        "destacado": true,
         "imagen": "/img/tacos.jpg", 
         "categoria": "Comidas",
         "stock": 15
@@ -93,7 +102,8 @@
         "id": 11, 
         "nombre": "Gaseosa Cola 1.5L", 
         "precio": 800, 
-        "descripcion": "Gaseosa sabor cola en presentación familiar de litro y medio. Bebida gasificada refrescante ideal para acompañar tus comidas diarias o compartir en reuniones. Disfrutala bien helada para maximizar su sabor característico.", 
+        "descripcion": "Gaseosa sabor cola en presentación familiar de litro y medio. Bebida gasificada refrescante ideal para acompañar tus comidas diarias o compartir en reuniones. Disfrutala bien helada para maximizar su sabor característico.",
+        "destacado": true,
         "imagen": "/img/gaseosa_cola.jpg", 
         "categoria": "Bebidas",
         "stock": 0
