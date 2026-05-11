@@ -1,20 +1,20 @@
+require('dotenv').config(); //lee el archivo .env y carga las variables de entorno en process.env
 const express = require("express");
-const controlador404 = require('./src/controladores/404Controlador'); 
-
 const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador
-const session = require('express-session');
+const session = require('express-session'); //requiero el paquete de sesiones para usarlo en la app
+
 
 const app = express();
 
 app.use(session({
-    secret: require('./data/secreto.js'),
-    httpOnly: true,
+    secret: process.env.SESSION_SECRET, //accede a la clave secreta del archivo .env
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie: { httpOnly: true }
 }));
 
 // "traductores" para que req.body funcione
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true })); //"traductor" de los datos que se envian desde el formulario al servidor
 app.use(express.json());
 
 
@@ -23,8 +23,6 @@ app.set("views", path.join(__dirname, "src/views"));
 
 app.use(express.static("public"));
 
-app.use(express.urlencoded({ extended: false })); 
-app.use(express.json());
 
 // Ruta de fallback: Si no se encuentra la imagen en /public/img/
 app.use('/img', (req, res) => {

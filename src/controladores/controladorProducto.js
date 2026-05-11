@@ -1,7 +1,6 @@
 const productoServicio = require('../servicios/productoServicios');
 const productoModelo = require('../modelos/productModel');
 
-
 const controladorProducto = {
     //inicio:
     index: (req, res) => {
@@ -18,13 +17,35 @@ const controladorProducto = {
 
         //bonus, si no existe pág 404
         if(!producto) return res.status(404).render('404');
-                                     
+        
         const relacionados = productoServicio.getRelacionados(producto);
         const categoriasBarra = productoServicio.todasCategorias();
-
         //enviamos el producto con los relacionados y las categorias a la vista
         res.render('pages/producto', {producto, relacionados, categoriasBarra});
+    },
+    //US19: funcion de buscar en el header
+    buscar: (req, res) => {
+        const busquedaUsuario = req.query.consulta;
+        const resultados = productoServicio.buscarPorNombre(busquedaUsuario);
+
+        const categoriasBarra = productoServicio.todasCategorias();
+
+        if (resultados.length > 0){
+            res.render('pages/index', {
+                sugeridos: resultados,
+                categoriasBarra: categoriasBarra, 
+                destacados: [],
+                esBusqueda: true
+            });
+        } else {
+            res.render('pages/index', {
+                sugeridos: [],
+                categoriasBarra: categoriasBarra, 
+                destacados: [],
+                esBusqueda: true,
+                mensaje: 'No se encontraron productos que coincidan con tu búsqueda'
+            })
+        }
     }
 }
-
 module.exports = controladorProducto;

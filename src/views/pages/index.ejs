@@ -2,38 +2,44 @@
 <link rel="stylesheet" href="/css/style.css">
 
 <main class="home-main">
+    <% if (!locals.esBusqueda) { %>
+        <%- include('../partials/categorias') %>
 
-    <%- include('../partials/categorias') %>
-
-    <section class="hero-container">
-    <article class="hero-card hero-offer">
-        <div class="hero-text">
-            <h2>Ofertas de temporada</h2>
-            <button>Ver mas</button>
-        </div>
-    </article>
-    </section>
-
-    <section class="products-section">
-        <h2>Te puede interesar</h2>
-        <div class="products-grid">
-            <% sugeridos.forEach(producto => { %>
-                <%- include('../partials/productoCard', {producto}) %>
-            <% }) %>
-      
-        </div>
-    </section>
-
-    <section class="products-section highlighted">
-        <h2>Los productos mas pedidos</h2>
-        <div class="products-grid">
-            <% destacados.forEach(producto => { %>
-                <%- include('../partials/productoCard', {producto}) %>
-            <% }) %>
-        </div>
-    </section>
-
-    <%- include('../partials/categorias') %>
+        <section class="hero-container">
+        <article class="hero-card hero-offer">
+            <div class="hero-text">
+                <h2>Ofertas de temporada</h2>
+                <button>Ver mas</button>
+            </div>
+        </article>
+        </section>
+    <% } %>
+        <section class="products-section">
+            <h2><%= locals.esBusqueda ? 'Resultados de tu búsqueda' : 'Te puede interesar' %></h2>
+            <% if (locals.mensaje) { %>
+                <div class="no-results">
+                    <p><%= mensaje %></p>
+                </div>
+            <% } %>
+            <div class="products-grid">
+                <% sugeridos.forEach(producto => { %>
+                    <%- include('../partials/productCard', {producto}) %>
+                <% }) %>
+    
+            </div>
+        </section>
+    
+    <% if (!locals.esBusqueda) { %>
+        <section class="products-section highlighted">
+            <h2>Los productos mas pedidos</h2>
+            <div class="products-grid">
+                <% destacados.forEach(producto => { %>
+                    <%- include('../partials/productCard', {producto}) %>
+                <% }) %>
+            </div>
+        </section>
+        <%- include('../partials/categorias') %>
+    <% } %>
 </main>
 <%- include('../partials/footer') %>
 </body>

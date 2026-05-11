@@ -17,10 +17,11 @@
   },
   "homepage": "https://github.com/garavagliaangelina81-creator/e-commerce-2#readme",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "ejs": "^5.0.2",
     "express": "^5.2.1",
-    "express-validator": "^7.3.2",
-    "express-session": "^1.19.0"
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

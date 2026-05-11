@@ -23,6 +23,10 @@ const productoServicio = {
         const categorias = productoModelo.todos().map(p => p.categoria);
         return [...new Set(categorias)];
 
+    },
+    buscarPorNombre: (nombre) => {
+        const todos = productoModelo.todos();
+        return todos.filter(p => p.nombre.toLowerCase().includes(nombre.toLowerCase()));
     }
 }
 module.exports = productoServicio;
