@@ -5,4 +5,5 @@ const checkoutControlador = require('../controladores/checkoutControlador');
 
 router.get('/checkout', checkoutControlador.index);
 
+
 module.exports = router;

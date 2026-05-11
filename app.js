@@ -35,8 +35,16 @@ const rutasCheckout = require('./src/routes/rutasCheckout');
 //ruta de checkout
 app.use('/', rutasCheckout);
 
+
+
 //al final de todo para que no aparezcan todas las páginas con error, se pone el middleware del error 404
 app.use(controlador404.error404);
+
+//importo el middleware del error 500
+const middlewareError500 = require('./src/middlewares/error500');
+
+// El middleware de error siempre va último para evitar problemas
+app.use(middlewareError500);
 
 app.listen(PORT, ()=> {
     console.log(`App funcionando en el puerto ${PORT}`);
