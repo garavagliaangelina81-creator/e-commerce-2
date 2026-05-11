@@ -11,6 +11,7 @@
             <div class = "precioYCarrito">
                 <p class="productoPrecio"><%= producto.precio %> puntos</p>
                 
+                <!-- acá va la lógica para deshabilitar el botón si no hay stock-->
                 <form action="/carrito/agregar" method="post">
                     <input type="hidden" name="idProducto" value="<%= producto.id %>">
                     <button>Agregar al Carrito</button>

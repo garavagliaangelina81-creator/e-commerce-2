@@ -1,6 +1,7 @@
 const productoModelo = require('../servicios/productoServicios');
 const error = require('../controladores/404Controlador');
 const productoServicio = require('../servicios/productoServicios');
+const { eliminar } = require('../controladores/carritoControlador');
 
 const carritoServicio = {
     agregarAlCarrito: (session, idProducto, cantidad = 1) => {
@@ -27,7 +28,7 @@ const carritoServicio = {
         }
     },
 
-    quitarDelCarrito: (session, idProducto) => {
+    eliminar: (session, idProducto) => {
         if(!session.cart) return;
 
         session.cart = session.cart.filter(p => p.id != idProducto); //modifico la session cart sin ningun producto eliminado

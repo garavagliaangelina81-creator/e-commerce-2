@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+
+<main>
+    <section class="carrito">
+        
+        <% if (productos.length != 0) { %>
+            
+            <h1>Tu Carrito</h1>
+
+            <% productos.forEach(producto => { %>
+                <article class= "carrito-item">
+                    <div class="carrito-item-info">
+                        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                        <h2><%= producto.nombre %></h2>
+                    </div>
+                    <div class="carrito-item.acciones">
+                        <a class = "boton-sumar" href ="/carrito/sumar/<%= producto.id %>">+</a>
+                        <span class="cantidad"><%= producto.cantidad * producto.precio %></span>
+                        <a class = "boton-restar" href ="/carrito/restar/<%= producto.id %>">-</a>
+
+                        <a class="boton-eliminar" href="/carrito/eliminar/<%= producto.id %>">Eliminar</a>
+                    </div>
+
+                </article>
+            <% }); %>
+
+            <div class="total">
+                <h2>Total: <%= total %> puntos</h2>
+            </div>
+
+            <div class="vaciar">
+                <a class="boton-vaciar" href="/carrito/vaciar">Vaciar Carrito</a>
+            </div>
+
+
+            <% } else { %>
+                <p id="carrito-vacio" >Tu carrito está vacío.</p>
+            <% } %>
+        
+    </section>
+</main>
+<%- include('../partials/footer') %>
+
+
+<style>
+.carrito {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.carrito h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.carrito-contenedor {
+    display: flex;
+    gap: 20px;
+    background-color: #1abc9c;
+    border-radius: 20px;
+}
+
+.carrito-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    width: 100%;
+}
+</style>
