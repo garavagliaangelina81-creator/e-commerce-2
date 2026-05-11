@@ -23,6 +23,16 @@
       
         </div>
     </section>
+
+    <section class="products-section highlighted">
+        <h2>Los productos mas pedidos</h2>
+        <div class="products-grid">
+            <% destacados.forEach(producto => { %>
+                <%- include('../partials/productoCard', {producto}) %>
+            <% }) %>
+        </div>
+    </section>
+
     <%- include('../partials/categorias') %>
 </main>
 <%- include('../partials/footer') %>

@@ -3,9 +3,10 @@ const productoServicio = require('../servicios/productoServicios');
 const controladorProducto = {
     //inicio:
     index: (req, res) => {
-        const sugreidos = productoServicio.getSugeridos(); //obetenemos los 5 productos sugeridos
+        const sugeridos = productoServicio.getSugeridos(); //obetenemos los 5 productos sugeridos
+        const destacados = productoServicio.getDestacados(); //obtenemos los 10 productos destacados
 
-        res.render('pages/index', {sugreidos});
+        res.render('pages/index', {sugeridos, destacados});
     },
 
     //para ver detalle

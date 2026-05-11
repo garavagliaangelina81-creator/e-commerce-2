@@ -34,3 +34,12 @@ getSugeridos: ( ) => {
         .slice(0, 5);
 }
 
+//us7
+getDestacados: () => {
+    const todosLosProductos = productoModelo.todos();
+
+    return todosLosProductos
+    .filter(p => p.destacado === true) //filtramos ´por el "flag" destacado
+    .sort(() => 0.5 - Math.random()) //mezclamos el orden
+    .slice(0, 10); //y elegimos los primeros 10
+} 
