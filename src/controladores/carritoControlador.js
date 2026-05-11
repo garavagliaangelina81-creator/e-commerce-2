@@ -1,5 +1,6 @@
 const productoModelo = require('../modelos/productModel');
 const carritoServicio = require('../servicios/carritoServicio');
+const controladorProducto = require('./controladorProducto');
 
 const carritoControlador = {
     agregar: (req, res) =>
@@ -13,7 +14,7 @@ const carritoControlador = {
         //si existe llamo al servicio para que se comunique con la session
         carritoServicio.agregarAlCarrito(req.session, idProducto);
 
-        res.redirect('pages/carrito');
+        res.redirect('/carrito');
     },
 
     verCarrito: (req, res) => {
@@ -24,6 +25,29 @@ const carritoControlador = {
         const total = carritoServicio.calcularTotal(req.session);
 
         res.render('pages/carrito', {productos, total});
+    },
+
+    sumar: (req, res) => {
+        const idProducto = req.params.id;
+        carritoServicio.sumar(req.session, idProducto);
+        res.redirect('/carrito');
+    },
+
+    restar: (req, res) => {
+        const idProducto = req.params.id;
+        carritoServicio.restar(req.session, idProducto);
+        res.redirect('/carrito');
+    },
+
+    eliminar: (req, res) => {
+        const idProducto = req.params.id;
+        carritoServicio.eliminar(req.session, idProducto);
+        res.redirect('/carrito');
+    },
+
+    vaciar: (req, res) => {
+        carritoServicio.vaciar(req.session);
+        res.redirect('/carrito');
     }
 }
 
