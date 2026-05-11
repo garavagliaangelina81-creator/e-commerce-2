@@ -1,8 +1,26 @@
 [
-    {
-    "nombreU": "Maia",
-    "apellido": "Bulacio",
-    "email": "bulaciomaia23@gmail.com",
-    "password": "Maiabe.23"
-    }
+ {
+  "nombreU": "Maia",
+  "apellido": "Bulacio",
+  "email": "bulaciomaia23@gmail.com",
+  "password": "Maiabe.23"
+ },
+ {
+  "nombreU": "zoe",
+  "apellido": "bram",
+  "email": "zoebrambilla123@gmail.com",
+  "password": "Zoeoeoeoeooe47474!!!!!"
+ },
+ {
+  "nombreU": "Pedro",
+  "apellido": "Suarez",
+  "email": "Pedro@gmail.com",
+  "password": "Pedro.2025asd"
+ },
+ {
+  "nombreU": "Jennifer",
+  "apellido": "Aguilar",
+  "email": "Jenn013@gmail.com",
+  "password": "Hol@13blda#"
+ }
 ]
