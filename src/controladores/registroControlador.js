@@ -1,9 +1,8 @@
 const { validationResult } = require('express-validator');
-const fs = require('fs');
-const path = require('path');
-const usuariosFilePath = path.join(__dirname, '../../data/usuarios.json');
+const registroModelo = require('../modelos/usuarioModel');
 
 let listaUsuarios = [];
+
 const registroControlador = {
     mostrarRegistro: (req, res) => {
         return res.render('pages/register'); 
@@ -18,9 +17,7 @@ const registroControlador = {
                     oldData: req.body // oldData se usa para que no se pierda lo que ya escribio el usuario
                 });
             }
-            let usuarios = JSON.parse(fs.readFileSync(usuariosFilePath, 'utf-8')); //lee el archivo json donde se guardan los usuarios
-            //si no hay errores de validacion, se busca al usuario
-            let usuarioExiste = usuarios.find(u => u.email === req.body.email);
+            let usuarioExiste = registroModelo.buscarPorEmail(req.body.email);
             //si el usuario ya esta registrado manda un error avisando al usuario
             if(usuarioExiste) {
                 return res.render('pages/register', {
@@ -37,9 +34,7 @@ const registroControlador = {
                 email: req.body.email, 
                 password: req.body.password
             };
-            usuarios.push(nuevoUsuario);
-            fs.writeFileSync(usuariosFilePath, JSON.stringify(usuarios, null, ' '));
-
+            registroModelo.crear(nuevoUsuario);
             res.redirect('/login');
     }
 };
