@@ -1,3 +1,5 @@
+<%- include('../partials/header') %>
+
 <main>
 
     <div class = "tarjetaProducto">
@@ -9,7 +11,7 @@
             <div class = "precioYCarrito">
                 <p class="productoPrecio"><%= producto.precio %> puntos</p>
                 
-                <form action="/agregar-carrito" method="post">
+                <form action="/carrito/agregar" method="post">
                     <input type="hidden" name="idProducto" value="<%= producto.id %>">
                     <button>Agregar al Carrito</button>
                 </form>
@@ -30,6 +32,7 @@
 </div>
 <%- include('../partials/categorias') %>
 </main>
+<%- include('../partials/footer') %>
 
 
 <style>

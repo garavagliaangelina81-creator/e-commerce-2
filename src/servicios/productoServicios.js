@@ -1,16 +1,17 @@
-const productModel = require('../modelos/productModel');
+const productoModelo = require('../modelos/productModel');
 
 const productoServicio = {
 
-    getDetalle: (id)  => {
-        return productModel.buscarPorID(id);
+    buscarPorID: (id) => {
+        const productos = productoModelo.todos();
+        return productos.find(p => p.id == id);
     },
 
     getRelacionados: (producto) => {
-        return productoModelo.buscarCategoria(producto.categoria)
-                                                                .filter(p=> p.id != id)
-                                                                .sort(() => 0.5 - Math.random()) 
-                                                                .slice(0, 4);                                                                
+        return productoServicio.buscarCategoria(producto.categoria)
+            .filter(p=> p.id != producto.id)
+            .sort(() => 0.5 - Math.random()) 
+            .slice(0, 4);                                                                
     },
     
     buscarCategoria: (categoria) => {
