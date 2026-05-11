@@ -11,10 +11,19 @@
             <div class = "precioYCarrito">
                 <p class="productoPrecio"><%= producto.precio %> puntos</p>
                 
+                <% if (producto.stock > 0) { % 
                 <form action="/carrito/agregar" method="post">
                     <input type="hidden" name="idProducto" value="<%= producto.id %>">
                     <button>Agregar al Carrito</button>
                 </form>
+                <% } else { %> 
+                <div class="sin-stock-contenedor">
+                    <button class=""btn-deshabilitado" disabled>Sin Stock</button>
+                    <p class=""aviso-stock">Este producto no esta disponible por el momento </p>
+
+                </div>
+            <% } %>
+
             </div>
         </div>
     </div>
