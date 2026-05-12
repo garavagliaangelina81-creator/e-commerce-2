@@ -37,6 +37,8 @@ const rutasCarrito = require('./src/routes/rutasCarrito');
 app.use('/producto', rutasProducto);
 app.use('/carrito', rutasCarrito);
 
+app.use('/', rutasProducto);
+
 const PORT = 3000;
 
 app.set("view engine", "ejs");
@@ -45,6 +47,10 @@ app.set("view engine", "ejs");
 const rutasRegistro = require('./src/routes/rutasRegistro');
 //ruta de registro
 app.use('/', rutasRegistro);
+
+app.use('/login', (req, res) => {
+    res.render('pages/login');
+});
 
 //importar ruta de checkout
 const rutasCheckout = require('./src/routes/rutasCheckout');

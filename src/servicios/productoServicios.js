@@ -27,9 +27,8 @@ const productoServicio = {
     buscarPorNombre: (nombre) => {
         const todos = productoModelo.todos();
         return todos.filter(p => p.nombre.toLowerCase().includes(nombre.toLowerCase()));
-    }
-}
-module.exports = productoServicio;
+    },
+
 
 //funcion para elegir los 5 productos aleatorios, esto cumple con no usar APls ni base de datos
 getSugeridos: ( ) => {
@@ -37,7 +36,7 @@ getSugeridos: ( ) => {
     return todosLosproductos
         .sort(() => 0.5 - Math.random())
         .slice(0, 5);
-}
+},
 
 //us7
 getDestacados: () => {
@@ -48,3 +47,6 @@ getDestacados: () => {
     .sort(() => 0.5 - Math.random()) //mezclamos el orden
     .slice(0, 10); //y elegimos los primeros 10
 } 
+}
+
+module.exports = productoServicio;
