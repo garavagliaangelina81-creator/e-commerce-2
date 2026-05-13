@@ -1,5 +1,6 @@
 require('dotenv').config(); //lee el archivo .env y carga las variables de entorno en process.env
 const express = require("express");
+const expressLayouts = require('express-ejs-layouts');
 const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador
 const session = require('express-session'); //requiero el paquete de sesiones para usarlo en la app
 
@@ -21,6 +22,12 @@ app.use(express.json());
 const path = require('path');
 app.set("views", path.join(__dirname, "src/views"));
 
+
+app.set("view engine", "ejs");
+// 
+app.use(expressLayouts);
+app.set('layout', 'layouts/main')
+
 app.use(express.static("public"));
 
 
@@ -41,7 +48,6 @@ app.use('/', rutasProducto);
 
 const PORT = 3000;
 
-app.set("view engine", "ejs");
 
 //importar ruta de registro
 const rutasRegistro = require('./src/routes/rutasRegistro');
@@ -49,8 +55,8 @@ const rutasRegistro = require('./src/routes/rutasRegistro');
 app.use('/', rutasRegistro);
 
 app.use('/login', (req, res) => {
-    res.render('pages/login');
-});
+     res.render('pages/login', { layout: false });
+    });
 
 //importar ruta de checkout
 const rutasCheckout = require('./src/routes/rutasCheckout');
