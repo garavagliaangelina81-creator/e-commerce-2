@@ -13,17 +13,19 @@ const controladorProducto = {
         //Intentamos obtener los datos del servicio
         const sugeridos = productoServicio.getSugeridos() || []; 
         const destacados = productoServicio.getDestacados() || [];
+        const categoriasBarra = productoServicio.todasCategorias() || [];
 
         //renderizamos la página pasando siempre las variables (aunque estén vacías)
         res.render('pages/index', { 
             sugeridos, 
             destacados,
+            categoriasBarra,
             esBusqueda: false 
         });
     } catch (error) {
         console.error("Error en el index:", error);
         //Si algo falla, mandamos listas vacías para que la página no de error 500
-        res.render('pages/index', { sugeridos: [], destacados: [], esBusqueda: false });
+        res.render('pages/index', { sugeridos: [], destacados: [],categoriasBarra: [], esBusqueda: false });
     }
 
 },
@@ -47,6 +49,7 @@ const controladorProducto = {
         const resultados = productoServicio.buscarPorNombre(busquedaUsuario);
 
         const categoriasBarra = productoServicio.todasCategorias();
+
 
         if (resultados.length > 0){
             res.render('pages/index', {

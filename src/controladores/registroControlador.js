@@ -5,7 +5,7 @@ let listaUsuarios = [];
 
 const registroControlador = {
     mostrarRegistro: (req, res) => {
-        return res.render('pages/register'); 
+        return res.render('pages/register',{ layout: false });
     },
     procesarRegistro: (req, res) => {
         

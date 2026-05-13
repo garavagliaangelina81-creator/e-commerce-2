@@ -1,10 +1,19 @@
 <link rel="stylesheet" href="/css/categoria.css">
 
+<nav class="categoriasBarra">
 
-<nav class = "categoriasBarra">
-    <% categoriasBarra.forEach(categoria => { %>
-        <a href= "/categoria/<%= categoria %>" ><%= categoria %></a> <!--VER BIEN COMO ES LA RUTA PARA QUE RENDERICE EL INDEX-->
-    <% }); %>
+    <% if (typeof categoriasBarra !== 'undefined') { %>
+
+        <% categoriasBarra.forEach(categoria => { %>
+
+            <a href="/categoria/<%= categoria %>">
+                <%= categoria %>
+            </a>
+
+        <% }) %>
+
+    <% } %>
+
 </nav>
 
 <style>
