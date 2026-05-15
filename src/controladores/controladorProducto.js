@@ -36,7 +36,7 @@ const controladorProducto = {
         const producto = productoServicio.buscarPorID(id);
 
         //bonus, si no existe pág 404
-        if(!producto) return res.status(404).render('404');
+        if(!producto) return res.status(404).render('pages/404');
         
         const relacionados = productoServicio.getRelacionados(producto);
         const categoriasBarra = productoServicio.todasCategorias();

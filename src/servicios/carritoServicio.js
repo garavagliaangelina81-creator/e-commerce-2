@@ -1,7 +1,4 @@
-const productoModelo = require('../servicios/productoServicios');
-const error = require('../controladores/404Controlador');
 const productoServicio = require('../servicios/productoServicios');
-const { eliminar } = require('../controladores/carritoControlador');
 
 const carritoServicio = {
     agregarAlCarrito: (session, idProducto, cantidad = 1) => {
