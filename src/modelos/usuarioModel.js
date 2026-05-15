@@ -3,22 +3,22 @@ const path = require('path');
 
 const usuariosFilePath = path.join(__dirname, '../../data/usuarios.json');
 
-const registroModelo = {
+const usuarioModelo = {
     todos: () => {
         const jsonData = fs.readFileSync(usuariosFilePath, 'utf-8');
         return JSON.parse(jsonData);
     },
 
     buscarPorEmail: (email) => {
-        const usuarios = registroModelo.todos();
-        return usuarios.find(u => u.email === email);
+        const todos = usuarioModelo.todos();
+        return todos.find(u => u.email === email);
     },
 
     crear: (nuevoUsuario) => {
-        const usuarios = registroModelo.todos();
-        usuarios.push(nuevoUsuario);
-        fs.writeFileSync(usuariosFilePath, JSON.stringify(usuarios, null, ' '));
+        const todos = usuarioModelo.todos();
+        todos.push(nuevoUsuario);
+        fs.writeFileSync(usuariosFilePath, JSON.stringify(todos, null, ' '));
     }
 };
 
-module.exports = registroModelo;
+module.exports = usuarioModelo;

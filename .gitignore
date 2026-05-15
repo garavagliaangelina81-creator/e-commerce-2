@@ -2,5 +2,5 @@
 /notas.txt
 /diagrama.drawio
 /data/secreto.js
-.env
 /data/usuarios.json
+/.env

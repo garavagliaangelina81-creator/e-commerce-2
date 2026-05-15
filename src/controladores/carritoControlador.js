@@ -8,7 +8,7 @@ const carritoControlador = {
         
         //verificar
         const existe = productoModelo.todos().find(p => p.id == idProducto);
-        if(!existe) return res.status(404).render('404');   //ver si está bien
+        if(!existe) return res.status(404).render('pages/404');   //ver si está bien
 
         //si existe llamo al servicio para que se comunique con la session
         carritoServicio.agregarAlCarrito(req.session, idProducto);

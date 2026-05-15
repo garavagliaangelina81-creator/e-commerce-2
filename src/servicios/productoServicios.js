@@ -1,35 +1,26 @@
 const productoModelo = require('../modelos/productModel');
 
 const productoServicio = {
-
-    buscarPorID: (id) => {
-        //us17, funcion para validar y validar el id
-        normalized: (id) => {
+    //us17, funcion para validar el id, si no es numero devuelve null
+    normalized: (id) => {
             //convertir en numero
-            const parsedID = parsedInt(id);
+            const parsedID = parseInt(id);
             //id: no numerico(NaN), devolvemos null
             if (isNaN(parsedID)){
                 return null;
             }
             return parsedID;
-        }
-        
-        const productos = productoModelo.todos();
-        return productos.find(p => p.id == id);
     },
     buscarPorID: (id) => {
         const productos = productoModelo.todos();
-        //usamos === ´para comparar tipo y valor (ambos numeros)
-        return productos.find(p => p.id ===id );
+        return productos.find(p => p.id == id);
     },
-     
     getRelacionados: (producto) => {
         return productoServicio.buscarCategoria(producto.categoria)
-            .filter(p=> p.id != producto.id)
+            .filter(p => p.id != producto.id)
             .sort(() => 0.5 - Math.random()) 
             .slice(0, 4);                                                                
     },
-    
     buscarCategoria: (categoria) => {
         const productos = productoModelo.todos();
         return productos.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase());

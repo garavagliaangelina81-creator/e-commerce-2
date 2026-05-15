@@ -8,4 +8,8 @@ router.get('/register', registroControlador.mostrarRegistro);
 
 router.post('/register', validacionRegistro, registroControlador.procesarRegistro);
 
+router.get('/login', registroControlador.login);
+
+router.post('/login', registroControlador.procesoLogin);
+
 module.exports = router;

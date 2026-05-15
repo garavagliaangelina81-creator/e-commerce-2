@@ -41,9 +41,13 @@ const carritoServicio = {
 
     restar: (session, idProducto) => {
         const productoEnCarrito = session.cart.find(p => p.id == idProducto);
-        if(productoEnCarrito)
-        {
-            productoEnCarrito.cantidad -= 1;
+        if(productoEnCarrito){ 
+            if (productoEnCarrito.cantidad > 1) {
+                productoEnCarrito.cantidad -= 1;
+            } else {
+                // Si la cantidad es 1, eliminamos el producto del carrito
+                carritoServicio.eliminar(session, idProducto);
+            }
         }
     },
 
