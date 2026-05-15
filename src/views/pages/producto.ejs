@@ -10,7 +10,7 @@
             <div class = "precioYCarrito">
                 <p class="productoPrecio"><%= producto.precio %> puntos</p>
                 
-                <% if (producto.stock > 0) { % 
+                <% if (producto.stock > 0) { %> 
                 <form action="/carrito/agregar" method="post">
                     <input type="hidden" name="idProducto" value="<%= producto.id %>">
                     <button>Agregar al Carrito</button>

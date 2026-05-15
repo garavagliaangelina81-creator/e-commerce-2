@@ -1,9 +1,11 @@
+<link rel="stylesheet" href="/css/styles.css">
 
 <main>
     <section class="carrito">
         
+        <a class="volver" href="/">🡠 Volver</a>
+        
         <% if (productos.length != 0) { %>
-            
             <h1>Tu Carrito</h1>
 
             <% productos.forEach(producto => { %>
@@ -12,23 +14,32 @@
                         <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
                         <h2><%= producto.nombre %></h2>
                     </div>
-                    <div class="carrito-item.acciones">
-                        <a class = "boton-sumar" href ="/carrito/sumar/<%= producto.id %>">+</a>
-                        <span class="cantidad"><%= producto.cantidad * producto.precio %></span>
-                        <a class = "boton-restar" href ="/carrito/restar/<%= producto.id %>">-</a>
-
-                        <a class="boton-eliminar" href="/carrito/eliminar/<%= producto.id %>">Eliminar</a>
+                    <div class="carrito-item-acciones">
+                        <div class="modificador-cantidad">
+                            <a href ="/carrito/sumar/<%= producto.id %>">+</a>
+                            <span class="cantidad"><%= producto.cantidad %></span>
+                            <a href ="/carrito/restar/<%= producto.id %>">-</a>
+                        </div>
+                        <div class="precio-y-quitar">
+                            <span class="precio"><%= producto.precio * producto.cantidad %> puntos</span>
+                            <a class="boton-eliminar" href="/carrito/eliminar/<%= producto.id %>">🗑️</a>
+                        </div>
                     </div>
 
                 </article>
             <% }); %>
 
-            <div class="total">
-                <h2>Total: <%= total %> puntos</h2>
-            </div>
-
-            <div class="vaciar">
-                <a class="boton-vaciar" href="/carrito/vaciar">Vaciar Carrito</a>
+            <div class="carrito-footer">
+                <div class="resumen-caja">
+                    <div class="total-fila">
+                        <span class="total-etiqueta">Total a pagar:</span>
+                        <span class="total-valor"><%= total %> puntos</span>
+                    </div>
+                    
+                    <a href="/checkout" class="boton-finalizar">Finalizar Compra</a>
+                    
+                    <a class="link-vaciar" href="/carrito/vaciar">Vaciar Carrito</a>
+                </div>
             </div>
 
 
@@ -38,34 +49,152 @@
         
     </section>
 </main>
+</body>
 
 
 <style>
-.carrito {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
 
 .carrito h1 {
     text-align: center;
     margin-bottom: 30px;
 }
 
-.carrito-contenedor {
-    display: flex;
-    gap: 20px;
-    background-color: #1abc9c;
-    border-radius: 20px;
+.volver {
+    display: block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
 }
 
 .carrito-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.carrito-item-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.carrito-item img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.carrito-item-acciones {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    }
+
+
+.modificador-cantidad {
+    border: black solid 1px;
+    border-radius: 15px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 30px;
+}
+.modificador-cantidad a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    padding: 5px 10px;
+}
+
+.precio-y-quitar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.boton-eliminar {
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+}
+
+.carrito-footer {
+    display: flex;
+    justify-content: flex-end; /* lo lleva todo a la derecha */
+    margin-top: 30px;
+}
+
+/* caja blanca de resumen */
+.resumen-caja {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.total-fila {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #ecf0f1;
-    border-radius: 10px;
-    width: 100%;
+    border-bottom: 2px solid #ebebeb;
+    padding-bottom: 10px;
 }
+
+.total-etiqueta {
+    font-size: 18px;
+    color: #666;
+}
+
+.total-valor {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Botón principal de compra */
+.boton-finalizar {
+    background-color: #1abc9c;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.boton-finalizar:hover {
+    background-color: #16a085;
+}
+
+.link-vaciar {
+    text-align: center;
+    color: #ff4d4d;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.link-vaciar:hover {
+    text-decoration: underline;
+}
+
 </style>

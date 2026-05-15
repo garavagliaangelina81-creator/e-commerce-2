@@ -13,7 +13,7 @@
         "id": 2, 
         "nombre": "Hamburguesa completa", 
         "precio": 3000, 
-        "descripcion": "Hamburguesa de carne 100% vacuna de primera calidad con jamón, queso fundido, tomate fresco y lechuga manteca. Un clásico para compartir en todo momento que satisfará los paladares más exigentes. Preparada al momento con ingredientes seleccionados, esta hamburguesa es perfecta para una comida rápida pero de excelente calidad. Ideal para disfrutar con amigos y familia.", 
+        "descripcion": "Hamburguesa de carne 100% vacuna de primera calidad con jamón, queso fundido, tomate fresco y lechuga manteca. Un clásico para compartir en todo momento que satisfará los paladares más exigentes.", 
         "categoria": "Comidas", 
         "destacado": true,
         "imagen": "/img/hamburguesa.jpg",
