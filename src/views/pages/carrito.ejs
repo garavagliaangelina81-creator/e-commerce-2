@@ -3,8 +3,9 @@
 <main>
     <section class="carrito">
         
+        <a class="volver" href="/">🡠 Volver</a>
+        
         <% if (productos.length != 0) { %>
-            
             <h1>Tu Carrito</h1>
 
             <% productos.forEach(producto => { %>
@@ -28,12 +29,17 @@
                 </article>
             <% }); %>
 
-            <div class="total">
-                <h2>Total: <%= total %> puntos</h2>
-            </div>
-
-            <div class="vaciar">
-                <a class="boton-vaciar" href="/carrito/vaciar">Vaciar Carrito</a>
+            <div class="carrito-footer">
+                <div class="resumen-caja">
+                    <div class="total-fila">
+                        <span class="total-etiqueta">Total a pagar:</span>
+                        <span class="total-valor"><%= total %> puntos</span>
+                    </div>
+                    
+                    <a href="/checkout" class="boton-finalizar">Finalizar Compra</a>
+                    
+                    <a class="link-vaciar" href="/carrito/vaciar">Vaciar Carrito</a>
+                </div>
             </div>
 
 
@@ -53,7 +59,13 @@
     margin-bottom: 30px;
 }
 
-
+.volver {
+    display: block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+}
 
 .carrito-item {
     background-color: #fff;
@@ -114,12 +126,75 @@
 }
 
 .boton-eliminar {
-    margin-left: 20px;
+    text-decoration: none;
     color: black;
-    text-shadow: #fff 0px 0px 1px;
-
-
+    margin-left: 20px;
 }
 
+.carrito-footer {
+    display: flex;
+    justify-content: flex-end; /* lo lleva todo a la derecha */
+    margin-top: 30px;
+}
+
+/* caja blanca de resumen */
+.resumen-caja {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.total-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ebebeb;
+    padding-bottom: 10px;
+}
+
+.total-etiqueta {
+    font-size: 18px;
+    color: #666;
+}
+
+.total-valor {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Botón principal de compra */
+.boton-finalizar {
+    background-color: #1abc9c;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.boton-finalizar:hover {
+    background-color: #16a085;
+}
+
+.link-vaciar {
+    text-align: center;
+    color: #ff4d4d;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.link-vaciar:hover {
+    text-decoration: underline;
+}
 
 </style>

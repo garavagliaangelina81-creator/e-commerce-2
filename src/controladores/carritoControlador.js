@@ -1,6 +1,5 @@
 const productoModelo = require('../modelos/productModel');
 const carritoServicio = require('../servicios/carritoServicio');
-const controladorProducto = require('./controladorProducto');
 
 const carritoControlador = {
     agregar: (req, res) =>
