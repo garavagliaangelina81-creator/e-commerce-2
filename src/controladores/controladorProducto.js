@@ -2,12 +2,6 @@ const productoServicio = require('../servicios/productoServicios');
 const productoModelo = require('../modelos/productModel');
 
 const controladorProducto = { 
-    //inicio:
-    //index: (req, res) => {
-       // const sugeridos = productoServicio.getSugeridos(); //obetenemos los 5 productos sugeridos
-       // const destacados = productoServicio.getDestacados(); //obtenemos los 10 productos destacados
-
-       // res.render('pages/index', {sugeridos, destacados});
        index: (req, res) => {
     try {
         //Intentamos obtener los datos del servicio
@@ -32,17 +26,26 @@ const controladorProducto = {
 
     //para ver detalle
     detalle: (req, res) => {
-        const id = req.params.id;
-        const producto = productoServicio.buscarPorID(id);
+        //normalizamos el id
+        const idNormalizado = productoServicio.normalized(req.params.id);
 
         //bonus, si no existe pág 404
-        if(!producto) return res.status(404).render('pages/404');
+        if(idNormalizado === null){
+         return res.status(404).send("Solicitud incorrecta : El ID del producto debe ser numero");
+         
+         const producto = productoServicio.buscarPorID(idNormalizado); //buscamos el producto con id ya convertido en numero
+         
+         //id numero pero inexistente : error 404
+         if (!producto) {
+            return res.status(404).render('404');
+         }
+
         
         const relacionados = productoServicio.getRelacionados(producto);
         const categoriasBarra = productoServicio.todasCategorias();
         //enviamos el producto con los relacionados y las categorias a la vista
         res.render('pages/producto', {producto, relacionados, categoriasBarra});
-    },
+    }
     //US19: funcion de buscar en el header
     buscar: (req, res) => {
         const busquedaUsuario = req.query.consulta;
@@ -68,6 +71,7 @@ const controladorProducto = {
             })
         }
     }
+}
 };
 
 
