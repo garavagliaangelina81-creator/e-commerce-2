@@ -1,0 +1,102 @@
+.logo img {
+    height: 85px; 
+    margin-top: -15px; /* Estos márgenes negativos "engañan" al header para que no crezca */
+    margin-bottom: -15px;
+    margin-left: -15px;
+    cursor: pointer;
+}
+
+header {
+    background-color: #1abc9c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    padding: 15px 5%; /* Usa porcentajes a los lados para que se adapte mejor a pantallas grandes */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    /* position: sticky;    ver si lo usamos */
+    top: 0;
+    z-index: 1000; /* Asegura que siempre esté por encima de las imágenes */
+}
+
+#buscar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    padding: 5px 15px;
+    flex-grow: 1;
+    max-width: 500px;
+    margin: 0 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+#buscar input {
+    border: none;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 16px;
+    outline: none; 
+    background: transparent;
+    color: #333;
+}
+
+#buscar button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    transition: transform 0.2s;
+}
+
+#buscar button:hover {
+    transform: scale(1.15); /* Crece un poquito al pasar el mouse */
+}
+
+#headerBotones {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.carrito {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 20px;
+}
+
+.carrito img { 
+    /*  convierte cualquier icono negro a blanco puro */
+    filter: brightness(0) invert(1); 
+    height: 30px;
+    width: auto;
+}
+
+.login {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    transition: all 0.3s ease; /* Hace que el cambio de color sea suave */
+}
+
+#headerBotones a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente blanquito */
+    transform: translateY(-2px); /* da un "saltito" hacia arriba */
+}
+
+header img {
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+header img:hover {
+    transform: scale(1.05);
+}
