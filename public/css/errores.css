@@ -1,0 +1,44 @@
+.contenedor-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh; /* Ocupa el 75% del alto de la pantalla */
+    text-align: center;
+    flex-direction: column;
+}
+
+.pagina-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espacio uniforme entre la foto, el título y el botón */
+}
+
+.imagen-error {
+    width: 300px;
+    height: auto;
+}
+
+.pagina-error h1 {
+    color: #333;
+    font-size: 35px;
+    margin: 0;
+}
+
+.boton-volver {
+    background-color: #1abc9c;
+    color: white;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(26, 188, 156, 0.3);
+    transition: all 0.3s ease;
+}
+
+.boton-volver:hover {
+    background-color: #16a085;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(26, 188, 156, 0.4);
+}
