@@ -16,50 +16,8 @@ body {
     font-family: Arial, Helvetica;
 }
 
-/* header*/
 
-header {
-    background-color: #1abc9c;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;    
-    padding: 10px;
-}
-header img {
-    width: 80px;
-}
-
-#headerBotones {
-    display: flex;
-    gap: 15px;
-    margin-right: 20px;
-    align-items: center;
-}
-
-header form {
-    color: #595858;
-    border-radius: 10px;
-    padding: 10px;
-    flex-grow: 1;
-    max-width: 600px;
-    margin: 0 30px;
-    input {
-        border-radius: 20px;
-        width: 80%;
-        padding: 10px 15px;
-        font-size: 16px;
-        border: none;
-
-    }
-}
-
-header button {
-    background-color: #22957a00;
-    border-radius: 5px;
-    border-style: none;
-}
-
-/* botones */
+/* botones 
 
 button {
     background-color: #39a06b;
@@ -74,6 +32,7 @@ button {
 button:hover {
     background-color: #eac926;
 }
+    */
 
 main {
     margin: 10%;
