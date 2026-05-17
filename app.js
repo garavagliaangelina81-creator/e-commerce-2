@@ -6,6 +6,7 @@ const rutasRegistro = require('./src/routes/rutasRegistro');
 const rutasProducto = require('./src/routes/rutasProducto');
 const rutasCarrito = require('./src/routes/rutasCarrito');
 const rutasCheckout = require('./src/routes/rutasCheckout');
+const carritoCantidadMiddleware = require('./src/middlewares/carritoCantidad');
 const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador 404
 const middlewareError500 = require('./src/middlewares/error500');
 
@@ -35,6 +36,7 @@ app.set('layout', 'layouts/main')
 
 app.use(express.static("public"));
 
+app.use(carritoCantidadMiddleware);
 
 // Ruta de fallback: Si no se encuentra la imagen en /public/img/
 app.use('/img', (req, res) => {

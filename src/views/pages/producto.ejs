@@ -13,13 +13,12 @@
                 <% if (producto.stock > 0) { %> 
                 <form action="/carrito/agregar" method="post">
                     <input type="hidden" name="idProducto" value="<%= producto.id %>">
-                    <button>Agregar al Carrito</button>
+                    <button id="agregar-carrito">Agregar al carrito</button>
                 </form>
                 <% } else { %> 
                 <div class="sin-stock-contenedor">
-                    <button class=""btn-deshabilitado" disabled>Sin Stock</button>
-                    <p class=""aviso-stock">Este producto no esta disponible por el momento </p>
-
+                    <button class="btn-deshabilitado" disabled>Sin stock</button>
+                    <p class="aviso-stock">Este producto no está disponible por el momento</p>
                 </div>
             <% } %>
 
@@ -44,7 +43,7 @@
 
 <style>
     .tarjetaProducto {
-    background-color: #ebebeb;
+    background-color: #dedede;
     display: flex;
     gap: 20px;
     padding: 20px;
@@ -102,19 +101,41 @@ main img {
 }
 
 #agregar-carrito {
-    background-color: #eac926;
-    color: white;
+    background-color: #39a06b;
+    color: #ffffff;
+    padding: 12px;
     border: none;
-    padding: 10px 20px;
-    font-size: 1.5em;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
+}
+#agregar-carrito:hover {
+    background-color: #eac926;
 }
 
-form #agregar-carrito:hover {
-    background-color: #0022aa;
+.sin-stock-contenedor button {
+    display: block;
+    margin-bottom: 10px;
 }
 
+.aviso-stock {
+    margin: 0;
+}
+
+button {
+    background-color: #39a06b;
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #eac926;
+}
 
 
 
@@ -125,10 +146,7 @@ form #agregar-carrito:hover {
     gap: 10px;
 }
 
-
-
-
-    .productCard {
+.productCard {
         width: 200px;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -136,7 +154,7 @@ form #agregar-carrito:hover {
         text-align: center;
         margin: 10px;
         transition: box-shadow 0.3s ease;
-    }
+}
 
     .productCard:hover {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -156,6 +174,16 @@ form #agregar-carrito:hover {
     .productCard p {
         font-size: 1em;
         color: #555;
+    }
+    .puedeInteresar {
+        margin-top: 10%;
+        margin-bottom: 10%;
+        h2{
+            font-size: 2em;
+            color: #333333;
+            text-align: center;
+        }
+
     }
 
     

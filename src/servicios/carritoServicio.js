@@ -1,34 +1,37 @@
 const productoServicio = require('../servicios/productoServicios');
 
 const carritoServicio = {
-    agregarAlCarrito: (session, idProducto, cantidad = 1) => {
-
-        //si no existe el carrito en la session lo creamos
-        if(!session.cart)
-        {
+    inicializar: (session) => {
+        if (!session.cart) {
             session.cart = [];
         }
-
-        //verificamos si ya tiene el mimso producto en el carrito
-        const productoEnCarrito = session.cart.find(p => p.id == idProducto);
-
-        if(productoEnCarrito)
-        {
-            productoEnCarrito.cantidad += cantidad;
-        }
-        else
-        {
-            const producto = productoServicio.buscarPorID(idProducto);
-            if (producto) {
-                session.cart.push({ ...producto, cantidad });
+    },
+    agregarAlCarrito: (session, idProducto) => {
+        carritoServicio.inicializar(session);
+        
+        // Buscamos si el producto ya está en el carrito
+        const existe = session.cart.find(p => p.id == idProducto);
+        
+        if (existe) {
+            existe.cantidad += 1;
+        } else {
+            const productoOriginal = productoServicio.buscarPorID(parseInt(idProducto));
+            if (productoOriginal) {
+                session.cart.push({
+                    id: productoOriginal.id,
+                    nombre: productoOriginal.nombre,
+                    precio: productoOriginal.precio,
+                    imagen: productoOriginal.imagen,
+                    cantidad: 1
+                });
             }
         }
     },
 
     eliminar: (session, idProducto) => {
-        if(!session.cart) return;
-
-        session.cart = session.cart.filter(p => p.id != idProducto); //modifico la session cart sin ningun producto eliminado
+        if(session.cart){
+            session.cart = session.cart.filter(p => p.id != idProducto);
+        }
     },
 
     sumar: (session, idProducto) => {
@@ -63,6 +66,13 @@ const carritoServicio = {
         return session.cart.reduce((total, producto) => {
                 return total + (producto.precio * producto.cantidad);
         }, 0);
+    },
+
+    calcularCantidad: (session) => { // calcula la cantidad total de productos en el carrito
+        if (!session.cart || session.cart.length === 0) {
+            return 0;
+        }
+        return session.cart.reduce((cantidad, producto) => cantidad + producto.cantidad, 0);
     }
 }
 
