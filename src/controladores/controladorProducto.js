@@ -45,9 +45,11 @@ const controladorProducto = {
         const categoriasBarra = productoServicio.todasCategorias(); 
         const sugeridos = productoServicio.getSugeridos() || []; 
         const destacados = productoServicio.getDestacados() || [];
+        const todos = productoModelo.todos() || [];
 
 
         res.render('pages/index', { 
+                todos,
                 productos: productosFiltrados, 
                 categoriasBarra, 
                 sugeridos, 

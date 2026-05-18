@@ -30,7 +30,7 @@
                     <p><%= mensaje %></p>
                 </div>
             <% } %>
-            <div class="products-grid">
+            <div class="slider-container">
                 <% sugeridos.forEach(producto => { %>
                     <%- include('../partials/productCard', {producto}) %>
                 <% }) %>
@@ -41,7 +41,7 @@
     <% if (!locals.esBusqueda) { %>
         <section class="products-section highlighted">
             <h2>Los productos más pedidos</h2>
-            <div class="products-grid">
+            <div class="slider-container">
                 <% destacados.forEach(producto => { %>
                     <%- include('../partials/productCard', {producto}) %>
                 <% }) %>
@@ -58,3 +58,22 @@
         <%- include('../partials/categorias') %>
     <% } %>
 </main>
+
+<style>
+    .slider-container {
+        display: flex;
+        width: 100%;
+        height: 300px;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory; /* Para que los productos se ajusten al hacer scroll */
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .slider-item {
+        flex: 0 0 auto;
+        width: 300px;
+        object-fit: cover;
+        scroll-snap-align: center;
+    }
+</style>
