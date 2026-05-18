@@ -26,6 +26,18 @@ const controladorProducto = {
         }
         
     },
+
+    verCategoria: (req, res) => {
+        const categoria = req.params.categoria;
+        
+        const productosFiltrados = productoServicio.buscarCategoria(categoria);
+        const categoriasBarra = productoServicio.todasCategorias(); 
+        const sugeridos = productoServicio.getSugeridos() || []; 
+        const destacados = productoServicio.getDestacados() || [];
+
+
+        res.render('pages/index', { productos: productosFiltrados, categoriasBarra, sugeridos, destacados, esBusqueda: false });
+    },
     //para ver detalle
     detalle: (req, res, next) => {
         //normalizamos el id
