@@ -4,6 +4,7 @@ const productoModelo = require('../modelos/productModel');
 const controladorProducto = { 
     index: (req, res) => {
         try {
+            const todos = productoModelo.todos() || [];
             //us18: capturamos el criterio ordenamiento
             const criterioOrden = req.query.sort;
             //Intentamos obtener los datos del servicio
@@ -19,6 +20,7 @@ const controladorProducto = {
 
             //renderizamos la página pasando siempre las variables (aunque estén vacías)
             res.render('pages/index', { 
+                todos,
                 sugeridos, 
                 destacados,
                 categoriasBarra,
@@ -27,6 +29,7 @@ const controladorProducto = {
         } catch (error) {
             //Si algo falla, mandamos listas vacías para que la página no de error 500
             res.render('pages/index', { 
+                todos: [],
                 sugeridos: [], 
                 destacados: [],
                 categoriasBarra: [], 

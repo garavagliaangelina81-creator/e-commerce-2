@@ -47,6 +47,14 @@
                 <% }) %>
             </div>
         </section>
+
+        <section class="products-section">
+            <h2>Todos los productos</h2>
+            <div class="products-grid">
+                <% todos.forEach(producto => { %>
+                    <%- include('../partials/productCard', {producto}) %>
+                <% }) %>
+            </div>
         <%- include('../partials/categorias') %>
     <% } %>
 </main>
