@@ -4,10 +4,18 @@ const productoModelo = require('../modelos/productModel');
 const controladorProducto = { 
     index: (req, res) => {
         try {
+            //us18: capturamos el criterio ordenamiento
+            const criterioOrden = req.query.sort;
             //Intentamos obtener los datos del servicio
-            const sugeridos = productoServicio.getSugeridos() || []; 
-            const destacados = productoServicio.getDestacados() || [];
+            let sugeridos = productoServicio.getSugeridos() || []; 
+            let destacados = productoServicio.getDestacados() || [];
             const categoriasBarra = productoServicio.todasCategorias() || [];
+
+            //us18 Si el usuario elige ordenar, aplicamos la función del servicio
+            if (criterioOrden === 'asc' || criterioOrden === 'desc') {
+                sugeridos = productoServicio.ordenarPorPrecio(sugeridos, criterioOrden);
+                destacados = productoServicio.ordenarPorPrecio(destacados, criterioOrden);
+            }
 
             //renderizamos la página pasando siempre las variables (aunque estén vacías)
             res.render('pages/index', { 

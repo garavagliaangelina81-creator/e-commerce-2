@@ -53,7 +53,24 @@ getDestacados: () => {
     .filter(p => p.destacado === true) //filtramos ´por el "flag" destacado
     .sort(() => 0.5 - Math.random()) //mezclamos el orden
     .slice(0, 10); //y elegimos los primeros 10
-} 
+} , 
+//us18
+ordenarPorPrecio: (productos, criterio) => {
+        // Clonamos el array original con [...array] para no alterar el JSON base por accidente
+        const listaClonada = [...productos];
+
+        if (criterio === 'asc') {
+            // Ordena de Menor a Mayor precio
+            return listaClonada.sort((a, b) => a.precio - b.precio);
+        } else if (criterio === 'desc') {
+            // Ordena de Mayor a Menor precio
+            return listaClonada.sort((a, b) => b.precio - a.precio);
+        }
+
+        // Si el criterio no es correcto, devuelve la lista original sin cambios
+        return listaClonada;
+    }
+
 }
 
 module.exports = productoServicio;
