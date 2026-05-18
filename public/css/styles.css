@@ -15,12 +15,10 @@ body {
     background-color: #ebebeb;
     font-family: Arial, Helvetica;
 }
-
-
 main {
-    margin: 10%;
-    margin-top: 2%;
-    padding: 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 40px 20px 80px 20px; 
     background-color: transparent;
 }
 
@@ -144,31 +142,33 @@ main img {
 }
 
 .categories-nav {
-    background-color: #e0e0e0;
-    border-radius: 15px;
-    margin: 20px auto;
-    max-width: 1100px;
-    padding: 20px;
+    background-color: white;
+   border: 1px solid #e0e0e0;
+    border-radius: 50px; /* Mantiene la forma de óvalo limpia */
+    margin: 40px auto;   /* Más espacio arriba y abajo */
+    max-width: 800px;    /* Un poco más angosto para que quede estilizado */
+    padding: 12px 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02); /* Sombra muy suave */
 }
 
 .categories-nav ul {
     display: flex;
     justify-content: space-around;
     list-style: none;
+    align-items: center;
 }
 
 .categories-nav a {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.8em;
-    gap: 8px;
-    opacity: 0.8;
+    color: #333333; 
+    font-weight: bold;
+    font-size: 1em;
+    text-transform: uppercase; 
+    letter-spacing: 1px;       
+    transition: color 0.2s ease;
 }
 
 .categories-nav a:hover {
-    opacity: 1;
+    color: #39a088;
 }
 #hero {
     background-image: linear-gradient(#000000a8, #000000a8), url('../img/heroOfertas.jpg');
@@ -211,19 +211,24 @@ main img {
     gap: 10px;
 }
 /* PRODUCTOS */
-.products-grid {
+.products-grid, .productosGrid{
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
+    padding: 20px 0;
 }
 
 .product-card {
     background: white;
     border-radius: 20px;
-    padding: 15px;
+    padding: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
@@ -234,10 +239,12 @@ main img {
     box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-.productoImagen img {
-    width: 100%;
+.productoImagen img, .productoImagen img, .product-card img {
+    width: 100% !important;
+    max-width: 180px;    
+    height: 180px !important;
     border-radius: 15px;
-    aspect-ratio: 1 / 1;
+    object-fit: cover;
     object-fit: cover;
 }
 
@@ -245,11 +252,22 @@ main img {
     font-size: 0.9em;
     color: #333;
     margin: 10px 0;
+    font-weight: bold;
+    min-height: 44px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.product-price {
-    font-weight: bold;
-    color: #000;
+.product-price, .product-card {
+   font-size: 1.1em !important;
+    font-weight: 800 !important; 
+    color: #1abc9c !important;  
+    margin-top: 8px;
+    background-color: #e8f8f5;   
+    padding: 4px 12px;
+    border-radius: 20px;    
+    display: inline-block;
 }
 
 hr {
