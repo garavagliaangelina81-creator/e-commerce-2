@@ -44,7 +44,14 @@ const controladorProducto = {
         const destacados = productoServicio.getDestacados() || [];
 
 
-        res.render('pages/index', { productos: productosFiltrados, categoriasBarra, sugeridos, destacados, esBusqueda: false });
+        res.render('pages/index', { 
+                productos: productosFiltrados, 
+                categoriasBarra, 
+                sugeridos, 
+                destacados, 
+                esBusqueda: false, 
+                esCategoria: true, 
+                categoriaActual: categoria });
     },
     //para ver detalle
     detalle: (req, res, next) => {

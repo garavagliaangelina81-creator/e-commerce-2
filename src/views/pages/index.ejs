@@ -1,15 +1,28 @@
 <main class="home-main">
     <% if (!locals.esBusqueda) { %>
-        <%- include('../partials/categorias') %> <br>
-    
-
+        
+        
         <section id="hero">
             <div class="contenedor-hero">
                 <h2>Ofertas de temporada</h2>
                 <button>Ver más</button>
             </div>
         </section>
-    <% } %>
+        <%- include('../partials/categorias') %> <br>
+        <% } %>
+        
+        <% if (locals.esCategoria) { %>
+            <section class="products-section">
+                <h2><%= categoriaActual %></h2>
+
+                <div class="products-grid">
+                    <% productos.forEach(producto => { %>
+                        <%- include('../partials/productCard', {producto}) %>
+                    <% }) %>
+                </div>
+            </section>
+        <% } %>
+
         <section class="products-section">
             <h2><%= locals.esBusqueda ? 'Resultados de tu búsqueda' : 'Te puede interesar' %></h2>
             <% if (locals.mensaje) { %>
