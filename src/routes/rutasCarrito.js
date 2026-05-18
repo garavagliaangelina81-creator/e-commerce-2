@@ -5,6 +5,8 @@ const router = express.Router();
 const carritoControlador = require('../controladores/carritoControlador');
 const carritoServicio = require('../servicios/carritoServicio');
 
+router.get('/', carritoControlador.mostrar);
+
 router.get('/', carritoControlador.verCarrito);
 
 router.post('/agregar', carritoControlador.agregar);

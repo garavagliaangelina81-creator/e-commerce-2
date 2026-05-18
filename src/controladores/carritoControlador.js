@@ -8,7 +8,7 @@ const carritoControlador = {
         
         //verificar
         const existe = productoModelo.todos().find(p => p.id == idProducto);
-        if(!existe) return res.status(404).render('pages/404');   //ver si está bien
+        if (!existe) return res.status(404).render('pages/404');
 
         //si existe llamo al servicio para que se comunique con la session
         carritoServicio.agregarAlCarrito(req.session, idProducto);
@@ -47,7 +47,17 @@ const carritoControlador = {
     vaciar: (req, res) => {
         carritoServicio.vaciar(req.session);
         res.redirect('/carrito');
+    },
+    mostrar: (req, res) => {
+    
+    if (!req.session.cart) {
+        req.session.cart = [];
     }
+    const productos = req.session.cart;
+    const total = carritoServicio.calcularTotal(req.session);
+
+    res.render('pages/carrito', { productos, total });
+}
 }
 
 module.exports = carritoControlador;

@@ -1,14 +1,14 @@
-
-    </head>
-    <body>
-        <header>
-            <a href="/"><img src="/img/Logo.png"></a>
-            <form id="buscar" action="/producto/buscar" method="get">
-                <input type="text" name="consulta" id="buscar" placeholder="   Buscar..." required>
-                <button type="submit">🔍</button>
-            </form>
-            <div id="headerBotones">    
-                <a href="/carrito"><button><img src="/img/carrito.png" alt="carrito en header"></button></a>
-                <a href="/login">Iniciar sesión</a>
-            </div>
-        </header>
+<header>
+    <a class="logo" href="/"><img src="/img/Logo.png"></a>
+    <form id="buscar" action="/producto/buscar" method="get">
+        <input type="text" name="consulta" id="buscar" placeholder="   Buscar..." required>
+        <button type="submit">🔍</button>
+    </form>
+    <div id="headerBotones">    
+        <a class="carritoHeader" href="/carrito">
+            <img src="/img/carrito.png" alt="carrito en header">
+            <span class="carrito-count"><%= carritoCantidad %></span>
+        </a>
+        <a class="login" href="/login">Iniciar sesión</a>
+    </div>
+</header>

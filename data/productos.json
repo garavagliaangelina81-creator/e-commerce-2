@@ -31,7 +31,7 @@
     },
     {
         "id": 4, 
-        "nombre": "Wrap de ensalada caesar", 
+        "nombre": "Wrap de ensalada césar", 
         "precio": 1800, 
         "descripcion": "El wrap de ensalada César es una opción práctica y sabrosa que envuelve la clásica ensalada en una tortilla de harina integral o blanca. Combina lechuga romana crujiente, pollo asado tierno, queso parmesano rallado y aderezo César cremoso artesanal, acompañado de croutones para aportar textura. Es una opción de comida rápida, portátil y versátil, perfecta para llevar. Ideal para quienes buscan una alternativa saludable sin sacrificar el sabor.",
         "destacado": true,

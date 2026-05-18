@@ -8,6 +8,8 @@ const carritoControlador = require('../controladores/carritoControlador');
 //ruta para el inicio
 router.get('/', controladorProducto.index);
 
+router.get('/categoria/:categoria', controladorProducto.verCategoria);
+
 //US19: ruta para el buscador en el header (va antes del id porque express "piensa" que buscar es id)
 router.get('/buscar', controladorProducto.buscar);
 
