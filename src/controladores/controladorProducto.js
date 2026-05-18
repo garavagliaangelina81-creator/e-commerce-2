@@ -24,6 +24,7 @@ const controladorProducto = {
                 categoriasBarra: [], 
                 esBusqueda: false });
         }
+        
     },
 
     verCategoria: (req, res) => {

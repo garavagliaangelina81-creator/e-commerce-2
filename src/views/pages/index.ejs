@@ -1,16 +1,13 @@
-<link rel="stylesheet" href="/css/style.css">
-
 <main class="home-main">
     <% if (!locals.esBusqueda) { %>
-        <%- include('../partials/categorias') %>
+        <%- include('../partials/categorias') %> <br>
+    
 
-        <section class="hero-container">
-        <article class="hero-card hero-offer">
-            <div class="hero-text">
+        <section id="hero">
+            <div class="contenedor-hero">
                 <h2>Ofertas de temporada</h2>
-                <button>Ver mas</button>
+                <button>Ver más</button>
             </div>
-        </article>
         </section>
     <% } %>
         <section class="products-section">
@@ -30,7 +27,7 @@
     
     <% if (!locals.esBusqueda) { %>
         <section class="products-section highlighted">
-            <h2>Los productos mas pedidos</h2>
+            <h2>Los productos más pedidos</h2>
             <div class="products-grid">
                 <% destacados.forEach(producto => { %>
                     <%- include('../partials/productCard', {producto}) %>

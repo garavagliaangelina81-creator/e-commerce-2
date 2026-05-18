@@ -1,12 +1,10 @@
-<link rel="stylesheet" href="/css/styles.css">
-
 <main>
     <section class="carrito">
         
         <a class="volver" href="/">🡠 Volver</a>
         
         <% if (productos.length != 0) { %>
-            <h1>Tu Carrito</h1>
+            <h1>Tu carrito</h1>
 
             <% productos.forEach(producto => { %>
                 <article class= "carrito-item">
@@ -36,9 +34,9 @@
                         <span class="total-valor"><%= total %> puntos</span>
                     </div>
                     
-                    <a href="/checkout" class="boton-finalizar">Finalizar Compra</a>
+                    <a href="/checkout" class="boton-finalizar">Finalizar compra</a>
                     
-                    <a class="link-vaciar" href="/carrito/vaciar">Vaciar Carrito</a>
+                    <a class="link-vaciar" href="/carrito/vaciar">Vaciar carrito</a>
                 </div>
             </div>
 
@@ -49,4 +47,3 @@
         
     </section>
 </main>
-</body>
