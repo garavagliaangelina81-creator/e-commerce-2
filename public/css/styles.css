@@ -15,6 +15,7 @@ body {
     background-color: #ebebeb;
     font-family: Arial, Helvetica;
     min-height: 100vh;
+    overflow-x: hidden;
 
 }
 main {
@@ -22,15 +23,18 @@ main {
     max-width: 1200px;
     padding: 40px 20px 80px 20px; 
     background-color: transparent;
+    box-sizing: border-box;
 }
 
 
 .productosGrid {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 25px;
+    padding: 20px 5%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 a {

@@ -1,13 +1,13 @@
 <main class="home-main">
+
     <% if (!locals.esBusqueda) { %>
-        
-        
         <section id="hero">
             <div class="contenedor-hero">
                 <h2>Ofertas de temporada</h2>
                 <button>Ver más</button>
             </div>
         </section>
+
         <%- include('../partials/categorias') %> <br>
         <% } %>
         
@@ -25,6 +25,7 @@
 
         <section class="products-section">
             <h2><%= locals.esBusqueda ? 'Resultados de tu búsqueda' : 'Te puede interesar' %></h2>
+
             <% if (locals.mensaje) { %>
                 <div class="no-results">
                     <p><%= mensaje %></p>
@@ -34,11 +35,10 @@
                 <% sugeridos.forEach(producto => { %>
                     <%- include('../partials/productCard', {producto}) %>
                 <% }) %>
-    
             </div>
         </section>
     
-    <% if (!locals.esBusqueda) { %>
+    <% if (!locals.esBusqueda && !locals.esCategoria) { %>
         <section class="products-section highlighted">
             <h2>Los productos más pedidos</h2>
             <div class="slider-container">
@@ -55,6 +55,8 @@
                     <%- include('../partials/productCard', {producto}) %>
                 <% }) %>
             </div>
+        </section>
+
         <%- include('../partials/categorias') %>
     <% } %>
 </main>
@@ -62,18 +64,21 @@
 <style>
     .slider-container {
         display: flex;
-        width: 100%;
-        height: 300px;
-        overflow-x: scroll;
+        gap: 20px;
+        padding: 15px 5%;
+
+        overflow-x: auto;
         scroll-snap-type: x mandatory; /* Para que los productos se ajusten al hacer scroll */
-        margin-left: 5%;
-        margin-right: 5%;
+        scroll-behavior: smooth;
+    
+        scrollbar-width: none; /* para firefox */
+        -ms-overflow-style: none;  /* para IE y Edge */
     }
 
     .slider-item {
         flex: 0 0 auto;
         width: 300px;
         object-fit: cover;
-        scroll-snap-align: center;
+        scroll-snap-align: start;
     }
 </style>
