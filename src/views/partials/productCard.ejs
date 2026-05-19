@@ -1,10 +1,14 @@
 <!-- Molde para los productos -->
 <!-- Tener en cuenta cuando llame a la tarjeta que sea bajo el nombre producto-->
 
-<a class="slider-item" href = "/producto/<%= producto.id %>">
-    <article class="productCard">
-        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
-        <h2><%= producto.nombre %></h2>
-        <p><%= producto.precio %> puntos</p>
+<a class="slider-item" href="/producto/<%= producto.id %>">
+    <article class="product-card">
+        <div class="productoImagen">
+            <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+        </div>
+        <div class="product-info">
+            <h3><%= producto.nombre %></h3>
+            <span class="product-price"><%= producto.precio %> puntos</span>
+        </div>
     </article>
 </a>
