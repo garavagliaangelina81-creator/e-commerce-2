@@ -1,17 +1,28 @@
 <link rel="stylesheet" href="/css/categoria.css">
 
-<nav class="categoriasBarra">
+<section class="meli-categorias-seccion">
+    <div class="meli-categorias-header">
+        <h2>Categorías</h2>
+        <a href="#" class="meli-link-cat">Mostrar todas las categorías</a>
+    </div>
 
+    <div class="meli-categorias-grid">
     <% if (typeof categoriasBarra !== 'undefined') { %>
 
         <% categoriasBarra.forEach(categoria => { %>
+        <a href="/categoria/<%= categoria %>" class="meli-categoria-tarjeta">
+                    
+                    <div class="meli-cat-foto-box">
+                        <img src="/img/<%= categoria.toLowerCase() %>.png" alt="<%= categoria %>" onerror="this.src='/img/default-cat.png'">
+                    </div>
+                    
+                    <div class="meli-cat-texto-box">
+                        <span><%= categoria %></span>
+                    </div>
+                    
+                </a>
 
-            <a href="/categoria/<%= categoria %>">
-                <%= categoria %>
-            </a>
-
-        <% }) %>
-
-    <% } %>
-
-  </nav>
+            <% }) %>
+        <% } %>
+    </div>
+</section>

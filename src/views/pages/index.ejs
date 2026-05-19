@@ -62,23 +62,41 @@
 </main>
 
 <style>
-    .slider-container {
+    /*
+       configuracion de los carruceles (Sugeridos y Destacados)
+     */
+      .slider-container {
         display: flex;
         gap: 20px;
-        padding: 15px 5%;
-
+        padding: 15px 5px;
         overflow-x: auto;
-        scroll-snap-type: x mandatory; /* Para que los productos se ajusten al hacer scroll */
         scroll-behavior: smooth;
-    
-        scrollbar-width: none; /* para firefox */
-        -ms-overflow-style: none;  /* para IE y Edge */
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+    .slider-container::-webkit-scrollbar {
+        height: 5px; 
+        display: block; 
     }
 
-    .slider-item {
-        flex: 0 0 auto;
-        width: 300px;
-        object-fit: cover;
-        scroll-snap-align: start;
+    .slider-container::-webkit-scrollbar-track {
+        background: transparent; 
     }
+
+    .slider-container::-webkit-scrollbar-thumb {
+        background: #dcdcdc; 
+        border-radius: 10px; 
+    }
+
+    /* 4. Efecto por si pasan el mouse por arriba de la barrita */
+    .slider-container::-webkit-scrollbar-thumb:hover {
+        background: #c1c1c1; /* Se oscurece apenas un poquito al tocarla */
+    }
+
+    /* Para que Firefox también la muestre fina y gris */
+    .slider-container {
+        scrollbar-width: thin;
+        scrollbar-color: #dcdcdc transparent;
+    }
+
 </style>
