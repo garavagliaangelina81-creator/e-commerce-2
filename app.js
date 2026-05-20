@@ -10,8 +10,10 @@ const carritoCantidadMiddleware = require('./src/middlewares/carritoCantidad');
 const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador 404
 const middlewareError500 = require('./src/middlewares/error500');
 
+require('./src/db/database'); //para ejecutar el codigo de la base de datos y crearlas
 
 const app = express();
+
 const PORT = 3000;
 
 app.use(session({
