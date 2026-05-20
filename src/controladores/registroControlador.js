@@ -1,5 +1,4 @@
 const { validationResult } = require('express-validator');
-const usuarioModelo = require('../modelos/usuarioModel');
 
 let listaUsuarios = [];
 
@@ -16,7 +15,7 @@ const registroControlador = {
                     oldData: req.body // oldData se usa para que no se pierda lo que ya escribio el usuario
                 });
             }
-            let usuarioExiste = usuarioModelo.buscarPorEmail(req.body.email);
+            let usuarioExiste = listaUsuarios.find(user => user.email === req.body.email);
             //si el usuario ya esta registrado manda un error avisando al usuario
             if(usuarioExiste) {
                 return res.render('pages/register', {
@@ -33,7 +32,7 @@ const registroControlador = {
                 email: req.body.email, 
                 password: req.body.password
             };
-            usuarioModelo.crear(nuevoUsuario);
+            listaUsuarios.push(nuevoUsuario);
             res.redirect('/login');
     },
     login: (req, res) => {
@@ -48,7 +47,7 @@ const registroControlador = {
                 layout: false
             });
         }
-        const usuarioALoguear = usuarioModelo.buscarPorEmail(req.body.email); 
+        const usuarioALoguear = listaUsuarios.find(user => user.email === req.body.email);
 
         if (usuarioALoguear && usuarioALoguear.password === req.body.password) {
             req.session.usuarioLogueado = usuarioALoguear;
