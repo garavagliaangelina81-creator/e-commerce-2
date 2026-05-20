@@ -106,6 +106,12 @@ header {
     transition: all 0.3s ease; /* Hace que el cambio de color sea suave */
 }
 
+.login img {
+    filter: brightness(0) invert(1); 
+    height: 30px;
+    width: auto;
+}
+
 #headerBotones a:hover {
     background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente blanquito */
     transform: translateY(-2px); /* da un "saltito" hacia arriba */
@@ -119,4 +125,43 @@ header img {
 
 header img:hover {
     transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px; /* Achicamos los márgenes laterales */
+        gap: 10px; 
+    }
+
+    .logo img {
+        height: 60px; 
+        margin-left: 5%;
+    }
+
+    /* El buscador se vuelve más compacto pero sigue visible */
+    form #buscar {
+        padding: 2px 10px;
+    }
+    
+    form #buscar input {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    /* Juntamos los íconos de la derecha */
+    #headerBotones {
+        gap: 5px; 
+    }
+
+    .carritoHeader img, .sesion img{ 
+        height: 30px; 
+    }
+
+    /* ajustamos la burbuja del número para que no se vea desproporcionada */
+    .carrito-count {
+        font-size: 10px;
+        padding: 2px 5px;
+        top: -4px;
+        right: -4px;
+    }
 }

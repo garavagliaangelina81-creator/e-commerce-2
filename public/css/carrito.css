@@ -1,12 +1,15 @@
-.main-carrito{
+.main-carrito {
     margin: 0 auto;
     max-width: 1000px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: 70vh;
+    width: 100%; 
+    flex-grow: 1;     
 }
+
 .carrito {
     width: 100%;
     background-color: transparent;
@@ -14,8 +17,11 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    min-height: 52vh;
+    
+    /* Hacemos que la sección interna también se estire */
+    flex-grow: 1; 
 }
+
 .carrito h1 {
     font-size: 34px;
     margin-bottom: 25px;
@@ -39,7 +45,6 @@
     height: 100px;
     object-fit: cover;
     border-radius: 20px;
-    object-fit: contain;
 }
 .carrito-item-info {
     display: flex;
@@ -159,4 +164,67 @@
 }
 .link-vaciar:hover {
     text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+    
+    .carrito {
+        padding: 10px;
+    }
+
+    .carrito-item {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        padding: 20px 15px;
+        text-align: center;
+        align-items: center;
+    }
+
+        .carrito-item-info {
+        flex-direction: column;
+        margin-left: 0; /* Quitamos el margen que empujaba hacia la derecha */
+        gap: 10px;
+        width: 80%; 
+    }
+    
+    .carrito-item img {
+        height: 100px;
+        object-fit: cover;
+        border-radius: 20px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+    .carrito-item-acciones {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .modificador-cantidad {
+        margin-right: 0;
+        width: auto; 
+        justify-content: center;
+        gap: 20px; /* Separación extra entre + y - para facilitar el toque con el dedo */
+    }
+
+    .precio-y-quitar {
+        width: 100%;
+        justify-content: space-around; /* Reparte el espacio entre precio y tachito */
+        margin-top: 10px;
+    }
+
+    .boton-eliminar {
+        margin-left: 0;
+    }
+
+    .carrito-footer {
+        justify-content: center;
+    }
+
+    .resumen-caja {
+        max-width: 100%; /* Permite que ocupe el ancho total del celular */
+        margin-top: 15px;
+    }
 }
