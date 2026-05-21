@@ -29,7 +29,7 @@ const productoServicio = {
 
     todasCategorias: () => {
         const categorias = productoModelo.todasCategorias();
-        return categorias.map(c => c.nombre); 
+        return categorias.map(c => c.nombre_categoria); 
     },
 
     buscarPorNombre: (nombre) => {

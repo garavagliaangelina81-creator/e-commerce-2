@@ -35,7 +35,7 @@ const productoModelo = {
     },
 
     todasCategorias: () => {
-        return db.prepare('SELECT * FROM categorias').all(); 
+        return db.prepare('SELECT  * FROM categorias').all(); 
     },
 
     ordenarPorPrecio: (criterio = 'asc') => {
