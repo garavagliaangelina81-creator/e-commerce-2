@@ -1,24 +1,27 @@
 const productoServicio = require('../servicios/productoServicios');
-const productoModelo = require('../modelos/productModel');
 
 const controladorProducto = { 
     index: (req, res) => {
         try {
-            const todos = productoModelo.todos() || [];
-            //us18: capturamos el criterio ordenamiento
+            // us18: capturamos el criterio ordenamiento de la URL (?sort=asc)
             const criterioOrden = req.query.sort;
-            //Intentamos obtener los datos del servicio
-            let sugeridos = productoServicio.getSugeridos() || []; 
-            let destacados = productoServicio.getDestacados() || [];
-            const categoriasBarra = productoServicio.todasCategorias() || [];
+            
+            let todos = [];
 
-            //us18 Si el usuario elige ordenar, aplicamos la función del servicio
+            // us18: Si el usuario elige ordenar, le pedimos al servicio la lista ordenada por SQL
             if (criterioOrden === 'asc' || criterioOrden === 'desc') {
-                sugeridos = productoServicio.ordenarPorPrecio(sugeridos, criterioOrden);
-                destacados = productoServicio.ordenarPorPrecio(destacados, criterioOrden);
+                todos = productoServicio.ordenarPorPrecio(criterioOrden);
+            } else {
+                // Si no hay orden, traemos todos normalmente a través del SERVICIO
+                todos = productoServicio.obtenerTodos() || [];
             }
 
-            //renderizamos la página pasando siempre las variables (aunque estén vacías)
+            // Intentamos obtener el resto de los datos del servicio
+            const sugeridos = productoServicio.getSugeridos() || []; 
+            const destacados = productoServicio.getDestacados() || [];
+            const categoriasBarra = productoServicio.todasCategorias() || [];
+
+            // renderizamos la página pasando siempre las variables (aunque estén vacías)
             res.render('pages/index', { 
                 todos,
                 sugeridos, 
@@ -27,15 +30,16 @@ const controladorProducto = {
                 esBusqueda: false 
             });
         } catch (error) {
-            //Si algo falla, mandamos listas vacías para que la página no de error 500
+            console.error("Error en index:", error);
+            // Si algo falla, mandamos listas vacías para que la página no de error 500
             res.render('pages/index', { 
                 todos: [],
                 sugeridos: [], 
                 destacados: [],
                 categoriasBarra: [], 
-                esBusqueda: false });
+                esBusqueda: false 
+            });
         }
-        
     },
 
     verCategoria: (req, res) => {
@@ -45,8 +49,8 @@ const controladorProducto = {
         const categoriasBarra = productoServicio.todasCategorias(); 
         const sugeridos = productoServicio.getSugeridos() || []; 
         const destacados = productoServicio.getDestacados() || [];
-        const todos = productoModelo.todos() || [];
-
+        
+        const todos = productoServicio.obtenerTodos() || [];
 
         res.render('pages/index', { 
                 todos,
@@ -56,38 +60,41 @@ const controladorProducto = {
                 destacados, 
                 esBusqueda: false, 
                 esCategoria: true, 
-                categoriaActual: categoria });
+                categoriaActual: categoria 
+        });
     },
-    //para ver detalle
+
+    // para ver detalle
     detalle: (req, res, next) => {
-        //normalizamos el id
+        // normalizamos el id
         const idNormalizado = productoServicio.normalized(req.params.id);
 
-        //bonus, si no existe pág 404
+        // bonus, si no es número, pasamos al siguiente middleware
         if(idNormalizado === null){
-        return next();
+            return next();
         }
-        const producto = productoServicio.buscarPorID(idNormalizado); //buscamos el producto con id ya convertido en numero
         
-         //id numero pero inexistente : error 404
+        const producto = productoServicio.buscarPorID(idNormalizado); 
+        
+        // id numero pero inexistente : error 404
         if (!producto) {
             return res.status(404).render('pages/404');
         }
 
         const relacionados = productoServicio.getRelacionados(producto);
         const categoriasBarra = productoServicio.todasCategorias();
-        //enviamos el producto con los relacionados y las categorias a la vista
+        
         res.render('pages/producto', {
             producto, 
             relacionados, 
             categoriasBarra
         });
     },
-    //US19: funcion de buscar en el header
+
+    // US19: funcion de buscar en el header
     buscar: (req, res) => {
         const busquedaUsuario = req.query.consulta;
         const resultados = productoServicio.buscarPorNombre(busquedaUsuario);
-
         const categoriasBarra = productoServicio.todasCategorias();
 
         if (resultados.length > 0){
@@ -104,7 +111,7 @@ const controladorProducto = {
                 destacados: [],
                 esBusqueda: true,
                 mensaje: 'No se encontraron productos que coincidan con tu búsqueda'
-            })
+            });
         }
     }
 };
