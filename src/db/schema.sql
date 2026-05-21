@@ -4,16 +4,16 @@ CREATE TABLE IF NOT EXISTS productos (
     nombre TEXT NOT NULL,
     precio REAL NOT NULL,
     descripcion TEXT,
-    categoria_id TEXT,
+    categoria_id INTEGER,
     imagen TEXT,
     stock INTEGER DEFAULT 0,
-    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+    FOREIGN KEY (categoria_id) REFERENCES categorias(categoria_id)
 );
 
 -- Tabla de categorías
 CREATE TABLE IF NOT EXISTS categorias (
-    id TEXT PRIMARY KEY,
-    nombre TEXT NOT NULL
+    categoria_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre_categoria TEXT NOT NULL
 );
 
 -- Tabla de usuarios

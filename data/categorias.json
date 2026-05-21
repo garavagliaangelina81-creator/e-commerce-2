@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "nombre_categoria": "Bebidas"
+    },
+    {
+        "id": 2,
+        "nombre_categoria": "Comidas"
+    },
+    {
+        "id": 3,
+        "nombre_categoria": "Cocteles"
+    },
+    {
+        "id": 4,
+        "nombre_categoria": "Postres"
+    }
+]

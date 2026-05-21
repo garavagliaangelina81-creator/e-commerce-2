@@ -75,7 +75,6 @@ const controladorProducto = {
         }
         
         const producto = productoServicio.buscarPorID(idNormalizado); 
-        
         // id numero pero inexistente : error 404
         if (!producto) {
             return res.status(404).render('pages/404');
