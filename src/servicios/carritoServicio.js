@@ -61,11 +61,13 @@ const carritoServicio = {
             if (productoOriginal){ 
                 productoEnCarrito.precio = productoOriginal.precio;
             }
+            if (productoEnCarrito.cantidad > 1) { 
                 productoEnCarrito.cantidad -= 1;
             } else {
                 // Si la cantidad es 1, eliminamos el producto del carrito
                 carritoServicio.eliminar(session, idProducto);
             }
+        }
     },
 
     vaciar: (session) => {
