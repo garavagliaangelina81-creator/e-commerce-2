@@ -18,10 +18,12 @@ CREATE TABLE IF NOT EXISTS categorias (
 
 -- Tabla de usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
-    email TEXT PRIMARY KEY,
-    contraseña TEXT NOT NULL
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,                 
+    creado_en DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabla de pedidos 
