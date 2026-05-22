@@ -103,6 +103,16 @@ a {
     transform: translateY(-2px);
 }
 
+@media (max-width: 900px) {
+    .ofertas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .oferta-card__image {
+        height: 260px;
+    }
+}
+
 /* GRILLA Y TARJETAS DE PRODUCTOS */
 .products-grid {
     display: flex;

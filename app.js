@@ -40,6 +40,10 @@ app.use(express.static("public"));
 
 app.use(carritoCantidadMiddleware);
 
+app.get('/ofertas', (req, res) => {
+    res.render('pages/ofertas');
+});
+
 // Ruta de fallback: Si no se encuentra la imagen en /public/img/
 app.use('/img', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/img/fallback.jpg'));

@@ -4,39 +4,41 @@
         <section id="hero">
             <div class="contenedor-hero">
                 <h2>Ofertas de temporada</h2>
-                <button>Ver más</button>
+                <a href="/ofertas">
+                    <button>Ver más</button>
+                </a>
             </div>
         </section>
 
         <%- include('../partials/categorias') %> <br>
-        <% } %>
+    <% } %>
         
-        <% if (locals.esCategoria) { %>
-            <section class="products-section">
-                <h2><%= categoriaActual %></h2>
-
-                <div class="products-grid">
-                    <% productos.forEach(producto => { %>
-                        <%- include('../partials/productCard', {producto}) %>
-                    <% }) %>
-                </div>
-            </section>
-        <% } %>
-
+    <% if (locals.esCategoria) { %>
         <section class="products-section">
-            <h2><%= locals.esBusqueda ? 'Resultados de tu búsqueda' : 'Te puede interesar' %></h2>
+            <h2><%= categoriaActual %></h2>
 
-            <% if (locals.mensaje) { %>
-                <div class="no-results">
-                    <p><%= mensaje %></p>
-                </div>
-            <% } %>
-            <div class="slider-container">
-                <% sugeridos.forEach(producto => { %>
+            <div class="products-grid">
+                <% productos.forEach(producto => { %>
                     <%- include('../partials/productCard', {producto}) %>
                 <% }) %>
             </div>
         </section>
+    <% } %>
+
+    <section class="products-section">
+        <h2><%= locals.esBusqueda ? 'Resultados de tu búsqueda' : 'Te puede interesar' %></h2>
+
+        <% if (locals.mensaje) { %>
+            <div class="no-results">
+                <p><%= mensaje %></p>
+            </div>
+        <% } %>
+        <div class="slider-container">
+            <% sugeridos.forEach(producto => { %>
+                <%- include('../partials/productCard', {producto}) %>
+            <% }) %>
+        </div>
+    </section>
     
     <% if (!locals.esBusqueda && !locals.esCategoria) { %>
         <section class="products-section highlighted">
@@ -125,5 +127,5 @@
         }
     }
 </style>
-    
+
 

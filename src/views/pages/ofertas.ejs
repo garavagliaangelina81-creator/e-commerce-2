@@ -1,0 +1,143 @@
+<section class="ofertas-page">
+    <h1 class="ofertas">¡Aprovechá nuestras ofertas de temporada!</h1>
+
+    <div class="ofertas-grid">
+        <article class="oferta-card">
+            <img src="img/coctelesOfertas.png" alt="Oferta de cocteles" class="oferta-card__image">
+            <div class="oferta-card__content">
+                <span class="oferta-badge">2x1</span>
+                <h2>Cocteles</h2>
+                <p>Disfrutá sabores premium con descuentos especiales en la selección de cocteles.</p>
+            </div>
+        </article>
+
+        <article class="oferta-card">
+            <img src="img/hamburguesasOfertas.jpg" alt="Oferta de hamburguesas" class="oferta-card__image">
+            <div class="oferta-card__content">
+                <span class="oferta-badge">15% off</span>
+                <h2>Hamburguesas</h2>
+                <p>Jugosas opciones con ingredientes frescos y precios irresistibles para compartir.</p>
+            </div>
+        </article>
+
+        <article class="oferta-card">
+            <img src="img/postresOfertas.jpg" alt="Oferta de postres" class="oferta-card__image">
+            <div class="oferta-card__content">
+                <span class="oferta-badge">30% off</span>
+                <h2>Postres</h2>
+                <p>Terminá tu pedido con un dulce que haga la diferencia en cada mesa.</p>
+            </div>
+        </article>
+    </div>
+
+    <div class="ofertas-actions">
+        <a href="/" class="ofertas-buy-btn">COMPRAR</a>
+    </div>
+</section>
+<style>
+    .ofertas-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+
+.ofertas {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+
+.ofertas-header h1 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+.ofertas-copy {
+    color: #4f4f4f;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.ofertas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.ofertas-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.ofertas-buy-btn {
+    background-color: #39a06b;
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ofertas-buy-btn:hover {
+    background-color: #eac926;
+    color: #333;
+    transform: translateY(-2px);
+}
+
+.oferta-card {
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid #ececec;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.oferta-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.oferta-card__image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.oferta-card__content {
+    padding: 20px;
+}
+
+.oferta-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fef3c7;
+    color: #92400e;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+.oferta-card__content h2 {
+    font-size: 1.2rem;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.oferta-card__content p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.98rem;
+}
+</style>
