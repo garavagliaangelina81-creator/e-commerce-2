@@ -50,7 +50,7 @@
 
         <section class="products-section">
             <h2>Todos los productos</h2>
-            <div class="products-grid">
+            <div class="products-grid-filas">
                 <% todos.forEach(producto => { %>
                     <%- include('../partials/productCard', {producto}) %>
                 <% }) %>
@@ -98,5 +98,32 @@
         scrollbar-width: thin;
         scrollbar-color: #dcdcdc transparent;
     }
+   
 
+    /*se muestran exactamente 4 productos por fila */
+    .products-grid-filas {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px; 
+        padding: 20px 5px;
+        width: 100%;
+    }
+
+    .products-grid-filas .slider-item {
+        min-width: unset !important; 
+        max-width: unset !important; 
+        width: 100%;
+    }
+    @media (max-width: 850px) {
+        .products-grid-filas {
+            grid-template-columns: repeat(2, 1fr); 
+        }
+    }
+    @media (max-width: 480px) {
+        .products-grid-filas {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
+    
+
