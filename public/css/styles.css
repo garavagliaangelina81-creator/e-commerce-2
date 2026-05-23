@@ -14,6 +14,10 @@ body {
     font-family: Arial, Helvetica;
     min-height: 100vh;
     overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    
 }
 
 main {
@@ -21,6 +25,7 @@ main {
     padding-bottom: 80px; 
     box-sizing: border-box;
     flex-grow: 1;
+   
 }
 
 * {
