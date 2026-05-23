@@ -14,9 +14,10 @@
                     </div>
                     <div class="carrito-item-acciones">
                         <div class="modificador-cantidad">
-                            <a href ="/carrito/sumar/<%= producto.id %>">+</a>
-                            <span class="cantidad"><%= producto.cantidad %></span>
                             <a href ="/carrito/restar/<%= producto.id %>">-</a>
+                           <span class="cantidad"><%= producto.cantidad %></span>
+                             <a href ="/carrito/sumar/<%= producto.id %>">+</a>
+                        
                         </div>
                         <div class="precio-y-quitar">
                             <span class="precio"><%= producto.precio * producto.cantidad %> puntos</span>

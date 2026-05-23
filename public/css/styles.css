@@ -1,6 +1,6 @@
 :root {
-    --dark-bg: #333;
-    --verde-agua: #1abc9c;
+    --dark-bg: #4E342E;
+    --verde-agua: #4E342E;
 }
 
 *{
@@ -14,8 +14,8 @@ body {
     font-family: Arial, Helvetica;
     min-height: 100vh;
     overflow-x: hidden;
-
 }
+
 main {
     width: 100%;
     padding-bottom: 80px; 
@@ -30,7 +30,7 @@ main {
 }
 
 body {
-    background-color: #ebebeb; /* Fondo gris claro clásico de e-commerce */
+    background-color: #ebebeb; 
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -49,7 +49,7 @@ a {
 .products-section h2 {
     font-size: 1.8em;
     margin-bottom: 30px;
-    color: #333333;
+    color: #4E342E;
     text-align: center;
 }
 
@@ -57,17 +57,14 @@ a {
     background-image: linear-gradient(#000000a8, #000000a8), url('../img/heroOfertas.jpg');
     background-size: cover;
     background-position: center;
-    
-    height: 420px;         /* Subí un toque el largo para que tenga más impacto */
-    width: 100%;          /* OBLIGATORIO: Ocupa el 100% del ancho del navegador */
-    
+    height: 420px;         
+    width: 100%;          
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    border-radius: 0;     /* Le sacamos los bordes redondeados para que pegue perfecto en los bordes de la pantalla */
-    margin: 0 0 40px 0;   /* Sacamos el auto para que no se centre, se pega arriba y deja margen abajo */
+    border-radius: 0;     
+    margin: 0 0 40px 0;   
 }
 
 #hero .contenedor-hero {
@@ -79,7 +76,7 @@ a {
 
 #hero h2 {
     color: white;
-    font-size: 36px;       /* Un cachito más grande el título */
+    font-size: 36px;       
     font-weight: bold;
     text-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
@@ -97,9 +94,9 @@ a {
 }
 
 #hero button:hover {
-    background-color: #eac926;
-    border-color: #eac926;
-    color: #333;
+    background-color: #FFF59D;
+    border-color: #FFF59D;
+    color: #4E342E;
     transform: translateY(-2px);
 }
 
@@ -117,80 +114,75 @@ a {
 .products-grid {
     display: flex;
     gap: 16px;
-    overflow-x: auto; /* Permite arrastrar de costado si hay muchos productos */
+    overflow-x: auto; 
     padding: 20px 5px;
     scroll-behavior: smooth;
     width: 100%;
 }
 
-/* Oculta la barra de scroll abajo para que quede súper premium */
 .products-grid::-webkit-scrollbar {
     height: 6px;
 }
 .products-grid::-webkit-scrollbar-thumb {
-    background: #dbdbdb;
+    background: #4E342E;
     border-radius: 4px;
 }
 
-/* Forzamos a que las tarjetas mantengan un ancho fijo adentro del carrusel */
 .slider-item {
     text-decoration: none;
     color: inherit;
     display: block;
-    min-width: 210px; /* Evita que las tarjetas se aplasten */
+    min-width: 210px; 
     max-width: 210px;
 }
 
-/* Enlace contenedor de la tarjeta */
 .slider-item {
     text-decoration: none;
     color: inherit;
     display: block;
 }
 .products-grid::-webkit-scrollbar-thumb {
-    background: #dbdbdb;
+    background: #4E342E;
     border-radius: 10px;
 }
-  .products-grid::-webkit-scrollbar-thumb:hover {
-    background: #c1c1c1; /* Se oscurece un poco al pasar el mouse */
+.products-grid::-webkit-scrollbar-thumb:hover {
+    background: #795548; 
 }
 .products-grid {
     scrollbar-width: thin;
-    scrollbar-color: #dbdbdb transparent;
+    scrollbar-color: #4E342E transparent;
 }
 
-/* Forzamos a que las tarjetas mantengan un ancho fijo adentro del carrusel */
 .slider-item {
     text-decoration: none;
     color: inherit;
     display: block;
-    min-width: 250px; /* Lo subí a 250px para que iguale al index que armamos antes */
+    min-width: 250px; 
     max-width: 250px;
-    flex: 0 0 auto;   /* Evita que flexbox aplaste la tarjeta */
+    flex: 0 0 auto;   
 }
 
-/* La tarjeta blanca contenedora */
 .product-card {
     background: #ffffff;
     border: 1px solid #ededed;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    box-shadow: 0 2px 6px rgba(78, 52, 46, 0.03);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    height: 100%; /* Obliga a que todas midan lo mismo de alto */
+    height: 100%; 
     cursor: pointer;
 }
 
 .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 15px rgba(78, 52, 46, 0.1);
+    border-color: rgba(78, 52, 46, 0.2);
 }
 
-/* Contenedor fijo para las imágenes de los productos */
 .productoImagen {
     width: 100%;
     height: 160px;
@@ -203,11 +195,10 @@ a {
 .productoImagen img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* Evita que las botellas o comidas se deformen o recorten */
+    object-fit: contain; 
     border-radius: 4px;
 }
 
-/* Información interna de la tarjeta */
 .product-info {
     display: flex;
     flex-direction: column;
@@ -218,31 +209,28 @@ a {
 
 .product-info h3 {
     font-size: 1em;
-    color: #333333;
+    color: #4E342E;
     margin: 0;
     font-weight: bold;
-    min-height: 44px; /* Reserva espacio para nombres de 2 líneas y alinea los precios */
+    min-height: 44px; 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* El Badge de los puntos corregido */
 .product-price {
     font-size: 0.95em;
     font-weight: 800;
-    color: #1abc9c;
-    background-color: #e8f8f5;
+    color: #ffffff;
+    background-color: #4E342E;
     padding: 6px 14px;
     border-radius: 20px;
     display: inline-block;
+    box-shadow: 0 2px 5px rgba(78, 52, 46, 0.2);
 }
 
-/*  VISTA DETALLE DE PRODUCTO Y OTROS COMPONENTES */
-
-/* Botón agregar al carrito en el Detalle */
 #agregar-carrito {
-    background-color: #3483fa; /* Cambiado a azul Mercado Libre para mejor contraste */
+    background-color: #4E342E; 
     color: white;
     border: none;
     padding: 12px 24px;
@@ -250,11 +238,12 @@ a {
     font-weight: bold;
     cursor: pointer;
     border-radius: 6px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #agregar-carrito:hover {
-    background-color: #2968c8;
+    background-color: #FFF59D;
+    color: #4E342E;
 }
 
 .alerta-exito {
@@ -283,7 +272,7 @@ a {
 }
 
 .checkout-buttons button {
-    background-color: #39a06b;
+    background-color: #4E342E;
     color: #ffffff;
     padding: 12px 24px;
     border: none;
@@ -291,23 +280,40 @@ a {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .checkout-buttons button:hover {
-    background-color: #eac926;
-    color: #333;
+    background-color: #FFF59D;
+    color: #4E342E;
 }
-/* FOOTER */
-footer {
-    background-color: #39a088;
-    color: white;
-    padding: 20px 40px;
 
+footer {
+    background-color: #FFF59D; 
+    color: #4E342E; 
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight: 600;
+    border-top: 2px solid rgba(78, 52, 46, 0.1); 
+    box-shadow: 0 -4px 10px rgba(78, 52, 46, 0.04);
+}
+
+footer a {
+    color: #4E342E; 
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #795548; 
+    text-decoration: underline;
 }
 
 footer section:last-child {
     text-align: right;
+    font-size: 0.9rem;
+    color: #4E342E;
+    opacity: 0.9;
 }

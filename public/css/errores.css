@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 75vh; /* Ocupa el 75% del alto de la pantalla */
+    min-height: 75vh; 
     text-align: center;
     flex-direction: column;
 }
@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Espacio uniforme entre la foto, el título y el botón */
+    gap: 15px; 
 }
 
 .imagen-error {
@@ -20,25 +20,26 @@
 }
 
 .pagina-error h1 {
-    color: #333;
+    color: #4E342E;
     font-size: 35px;
     margin: 0;
 }
 
 .boton-volver {
-    background-color: #1abc9c;
+    background-color: #4E342E;
     color: white;
     text-decoration: none;
     padding: 15px 35px;
     border-radius: 30px;
     font-size: 18px;
     font-weight: bold;
-    box-shadow: 0 4px 10px rgba(26, 188, 156, 0.3);
+    box-shadow: 0 4px 10px rgba(78, 52, 46, 0.15);
     transition: all 0.3s ease;
 }
 
 .boton-volver:hover {
-    background-color: #16a085;
+    background-color: #FFF59D;
+    color: #4E342E;
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(26, 188, 156, 0.4);
+    box-shadow: 0 6px 15px rgba(78, 52, 46, 0.2);
 }

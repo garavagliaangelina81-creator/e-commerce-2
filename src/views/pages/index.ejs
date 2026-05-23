@@ -64,9 +64,6 @@
 </main>
 
 <style>
-    /*
-       configuracion de los carruceles (Sugeridos y Destacados)
-     */
       .slider-container {
         display: flex;
         gap: 20px;
@@ -90,19 +87,14 @@
         border-radius: 10px; 
     }
 
-    /* 4. Efecto por si pasan el mouse por arriba de la barrita */
     .slider-container::-webkit-scrollbar-thumb:hover {
-        background: #c1c1c1; /* Se oscurece apenas un poquito al tocarla */
+        background: #c1c1c1; 
     }
 
-    /* Para que Firefox también la muestre fina y gris */
     .slider-container {
         scrollbar-width: thin;
         scrollbar-color: #dcdcdc transparent;
     }
-   
-
-    /*se muestran exactamente 4 productos por fila */
     .products-grid-filas {
         display: grid;
         grid-template-columns: repeat(4, 1fr);

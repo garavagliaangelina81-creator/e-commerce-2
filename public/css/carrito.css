@@ -1,3 +1,10 @@
+:root {
+    --marron-oscuro: #4E342E;
+    --amarillo-pastel: #FFF59D;
+    --gris-oscuro: #333333;
+    --gris-suave: #666666;
+}
+
 .main-carrito {
     margin: 0 auto;
     max-width: 1000px;
@@ -17,18 +24,17 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    
-    /* Hacemos que la sección interna también se estire */
     flex-grow: 1; 
 }
 
 .carrito h1 {
     font-size: 34px;
     margin-bottom: 25px;
-    font-weight: 600;
-    color: #333;
+    font-weight: 700;
+    color: var(--marron-oscuro);
     align-self: center;
 }
+
 .carrito-item {
     background-color: #fff;
     border-radius: 20px;
@@ -37,15 +43,17 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    
+    box-shadow: 0 4px 12px rgba(78, 52, 46, 0.05); 
+    border: 1px solid #f5f5f5;
 }
+
 .carrito-item img {
     width: 80px;
     height: 100px;
     object-fit: cover;
     border-radius: 20px;
 }
+
 .carrito-item-info {
     display: flex;
     align-items: center;
@@ -53,42 +61,52 @@
     margin-left: 20px;
     gap: 16px;
 }
+
 .carrito-item-info h2 {
     margin: 0;
     font-size: 1.5em;
-    color: #333333;
+    color: var(--gris-oscuro);
 }
+
 .carrito-item-info p {
     margin: 5px 0;
-    color: #666666;
+    color: var(--gris-suave);
 }
+
 .volver {
     text-decoration: none;    
     display: flex;
     justify-content: flex-start;
     margin-bottom: 20px;
-    color: #333333;
+    color: var(--marron-oscuro);
     font-size: 1.2em;
-
+    font-weight: 600;
+    transition: color 0.2s;
 }
+
+.volver:hover {
+    opacity: 0.8;
+}
+
 .carrito-item-acciones {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    }
+}
 
 .precio-y-quitar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: black;
+    color: var(--gris-oscuro);
     font-size: 20px;
     font-weight: bold;
 }
+
 .modificador-cantidad {
     size: 18px;
-    border: black solid 1px;
+    border: var(--marron-oscuro) solid 2px;
     border-radius: 15px;
     padding: 5px 10px;
     display: flex;
@@ -96,34 +114,48 @@
     justify-content: space-between;
     margin-right: 30px;
 }
+
 .modificador-cantidad a {
     text-decoration: none;
-    color: black;
+    color: var(--marron-oscuro);
     font-size: 18px;
     padding: 5px 10px;
+    font-weight: bold;
+}
+
+.modificador-cantidad a:hover {
+    color: #795548; 
 }
 .boton-eliminar {
     text-decoration: none;
-    color: black;
+    color: #ff4d4d; 
     margin-left: 20px;
+    transition: transform 0.2s;
 }
+
+.boton-eliminar:hover {
+    transform: scale(1.15);
+}
+
 .carrito-footer {
     display: flex;
-    justify-content: flex-end; /* lo lleva todo a la derecha */
+    justify-content: flex-end; 
     margin-top: 30px;
 }
-/* caja blanca de resumen */
+
 .resumen-caja {
     background-color: #fff;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(78, 52, 46, 0.08);
     width: 100%;
     max-width: 350px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    border: 1px solid #f5f5f5;
 }
+
 .total-fila {
     display: flex;
     justify-content: space-between;
@@ -131,30 +163,36 @@
     border-bottom: 2px solid #ebebeb;
     padding-bottom: 10px;
 }
+
 .total-etiqueta {
     font-size: 18px;
-    color: #666;
+    color: var(--gris-suave);
 }
+
 .total-valor {
     font-size: 24px;
     font-weight: bold;
-    color: #000;
+    color: var(--marron-oscuro);
 }
 
-/* Botón principal de compra */
 .boton-finalizar {
-    background-color: #1abc9c;
+    background-color: var(--marron-oscuro);
     color: white;
     text-align: center;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 14px;
+    border-radius: 25px; 
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.2s;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(78, 52, 46, 0.2);
 }
 .boton-finalizar:hover {
-    background-color: #16a085;
+    background-color: var(--amarillo-pastel);
+    color: var(--marron-oscuro);
+    box-shadow: 0 4px 12px rgba(78, 52, 46, 0.15);
 }
+
 .link-vaciar {
     text-align: center;
     color: #ff4d4d;
@@ -162,9 +200,11 @@
     font-size: 14px;
     font-weight: 500;
 }
+
 .link-vaciar:hover {
     text-decoration: underline;
 }
+
 
 
 @media (max-width: 768px) {
@@ -206,12 +246,12 @@
         margin-right: 0;
         width: auto; 
         justify-content: center;
-        gap: 20px; /* Separación extra entre + y - para facilitar el toque con el dedo */
+        gap: 20px; 
     }
 
     .precio-y-quitar {
         width: 100%;
-        justify-content: space-around; /* Reparte el espacio entre precio y tachito */
+        justify-content: space-around; 
         margin-top: 10px;
     }
 
@@ -224,7 +264,7 @@
     }
 
     .resumen-caja {
-        max-width: 100%; /* Permite que ocupe el ancho total del celular */
+        max-width: 100%; 
         margin-top: 15px;
     }
 }
