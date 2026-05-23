@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="/css/categoria.css">
-
 <section class="meli-categorias-seccion">
     <div class="meli-categorias-header">
         <h2>Categorías</h2>
@@ -10,14 +9,14 @@
     <% if (typeof categoriasBarra !== 'undefined') { %>
 
         <% categoriasBarra.forEach(categoria => { %>
-        <a href="/categoria/<%= categoria %>" class="meli-categoria-tarjeta">
+        <a href="/categoria/<%= categoria.categoria_id %>" class="meli-categoria-tarjeta">
                     
                     <div class="meli-cat-foto-box">
-                        <img src="/img/<%= categoria%>.png" alt="<%= categoria %>" onerror="this.src='/img/fallback.jpg'">
+                        <img src="/img/<%= categoria.nombre_categoria %>.png" alt="<%= categoria.nombre_categoria %>" onerror="this.src='/img/fallback.jpg'">
                     </div>
                     
                     <div class="meli-cat-texto-box">
-                        <span><%= categoria %></span>
+                        <span><%= categoria.nombre_categoria %></span>
                     </div>
                     
                 </a>

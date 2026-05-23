@@ -42,26 +42,30 @@ const controladorProducto = {
         }
     },
 
-    verCategoria: (req, res) => {
-        const categoria = req.params.categoria;
-        
-        const productosFiltrados = productoServicio.buscarCategoria(categoria);
-        const categoriasBarra = productoServicio.todasCategorias(); 
-        const sugeridos = productoServicio.getSugeridos() || []; 
-        const destacados = productoServicio.getDestacados() || [];
-        
-        const todos = productoServicio.obtenerTodos() || [];
+verCategoria: (req, res) => {
+    const categoriaId = parseInt(req.params.categoria);
+    
+    const productosFiltrados = productoServicio.buscarCategoria(categoriaId);
+    
+    const categoriasBarra = productoServicio.todasCategorias(); 
+    const sugeridos = productoServicio.getSugeridos() || []; 
+    const destacados = productoServicio.getDestacados() || [];
+    const todos = productoServicio.obtenerTodos() || [];
 
-        res.render('pages/index', { 
-                todos,
-                productos: productosFiltrados, 
-                categoriasBarra, 
-                sugeridos, 
-                destacados, 
-                esBusqueda: false, 
-                esCategoria: true, 
-                categoriaActual: categoria 
-        });
+    
+    const categoriaEncontrada = categoriasBarra.find(c => c.categoria_id === categoriaId);
+    const nombreCategoriaActual = categoriaEncontrada ? categoriaEncontrada.nombre_categoria : "Categoría";
+
+    res.render('pages/index', { 
+            todos,
+            productos: productosFiltrados, 
+            categoriasBarra, 
+            sugeridos, 
+            destacados, 
+            esBusqueda: false, 
+            esCategoria: true, 
+            categoriaActual: nombreCategoriaActual 
+    });
     },
 
     // para ver detalle
@@ -75,7 +79,6 @@ const controladorProducto = {
         }
         
         const producto = productoServicio.buscarPorID(idNormalizado); 
-        // id numero pero inexistente : error 404
         if (!producto) {
             return res.status(404).render('pages/404');
         }
@@ -90,7 +93,6 @@ const controladorProducto = {
         });
     },
 
-    // US19: funcion de buscar en el header
     buscar: (req, res) => {
         const busquedaUsuario = req.query.consulta;
         const resultados = productoServicio.buscarPorNombre(busquedaUsuario);

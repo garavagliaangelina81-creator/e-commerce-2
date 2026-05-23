@@ -26,12 +26,9 @@ const productoServicio = {
     buscarCategoria: (categoria) => {
         return productoModelo.buscarCategoria(categoria);
     },
-
-    todasCategorias: () => {
-        const categorias = productoModelo.todasCategorias();
-        return categorias.map(c => c.nombre_categoria); 
-    },
-
+todasCategorias: () => {
+    return productoModelo.todasCategorias() || []; 
+},
     buscarPorNombre: (nombre) => {
         return productoModelo.buscarPorNombre(nombre);
     },
