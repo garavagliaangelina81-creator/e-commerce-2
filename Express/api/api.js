@@ -1,0 +1,15 @@
+const productoServicio = require('../servicios/productoServicios');
+
+function controladorApi() {
+    return {
+        obtenerTodos: (req, res) => {
+            productoServicio.obtenerTodos()
+                .then(productos => {
+                    res.json(productos);
+                })
+                .catch(error => {
+                    res.status(500).json({ error: error.message });
+                });
+        }
+    };
+}
