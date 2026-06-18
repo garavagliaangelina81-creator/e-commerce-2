@@ -5,7 +5,6 @@ function App() {
 
   return (
     <>
-    <RouterProvider router={router} />
     <div>
       <h1>Welcome to our e-commerce dashboard!</h1>
       <p>Explore our features and manage your store efficiently.</p>
