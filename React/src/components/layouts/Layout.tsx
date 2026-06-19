@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router'; //IMPORTAR OUTLET DESPUES
 import Home from '../../pages/home/Home';
+import Header from "./Header/Header";
 
 
 
@@ -39,12 +40,17 @@ export default function Layout() { //estructura general de la UI
                 </aside>
 
                 {/* Main area */}
+                <div className="flex-1 flex flex-col">
+                    <Header/>
+
                 <main className="flex-1 overflow-y-auto p-6 pt-4 w-full">
                     <Outlet /> {/*sirve para poner la "pantalla" de las secciones que estan en el sidebar*/}
                     
                 </main>
             </div>
+            </div>
         </> 
 
     );
-}
+
+    }
