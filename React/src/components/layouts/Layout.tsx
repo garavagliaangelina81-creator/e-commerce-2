@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router'; 
+import NavBar from '../NavLink/NavBar'
 
 
 
@@ -32,7 +33,6 @@ export default function Layout() { //estructura general de la UI
                     <Outlet /> {/*sirve para poner la "pantalla" de las secciones que estan en el sidebar*/}
                     
                 </main>
-            </div>
             </div>
         </> 
     );
