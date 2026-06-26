@@ -1,0 +1,325 @@
+:root {
+    --dark-bg: #4E342E;
+    --verde-agua: #4E342E;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ebebeb;
+    font-family: Arial, Helvetica;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    
+}
+
+main {
+    width: 100%;
+    padding-bottom: 80px; 
+    box-sizing: border-box;
+    flex-grow: 1;
+   
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #ebebeb; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/*SECCIONES PRINCIPALES Y HERO*/
+.products-section {
+    margin: 60px auto;
+    max-width: 1100px;
+    padding: 0 20px;
+}
+
+.products-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    color: #4E342E;
+    text-align: center;
+}
+
+#hero {
+    background-image: linear-gradient(#000000a8, #000000a8), url('../img/heroOfertas.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px;         
+    width: 100%;          
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;     
+    margin: 0 0 40px 0;   
+}
+
+#hero .contenedor-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#hero h2 {
+    color: white;
+    font-size: 36px;       
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+#hero button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#hero button:hover {
+    background-color: #FFF59D;
+    border-color: #FFF59D;
+    color: #4E342E;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .ofertas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .oferta-card__image {
+        height: 260px;
+    }
+}
+
+/* GRILLA Y TARJETAS DE PRODUCTOS */
+.products-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto; 
+    padding: 20px 5px;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+.products-grid::-webkit-scrollbar {
+    height: 6px;
+}
+.products-grid::-webkit-scrollbar-thumb {
+    background: #4E342E;
+    border-radius: 4px;
+}
+
+.slider-item {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    min-width: 210px; 
+    max-width: 210px;
+}
+
+.slider-item {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.products-grid::-webkit-scrollbar-thumb {
+    background: #4E342E;
+    border-radius: 10px;
+}
+.products-grid::-webkit-scrollbar-thumb:hover {
+    background: #795548; 
+}
+.products-grid {
+    scrollbar-width: thin;
+    scrollbar-color: #4E342E transparent;
+}
+
+.slider-item {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    min-width: 250px; 
+    max-width: 250px;
+    flex: 0 0 auto;   
+}
+
+.product-card {
+    background: #ffffff;
+    border: 1px solid #ededed;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(78, 52, 46, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%; 
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(78, 52, 46, 0.1);
+    border-color: rgba(78, 52, 46, 0.2);
+}
+
+.productoImagen {
+    width: 100%;
+    height: 210px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.productoImagen img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; /* Llena el espacio sin deformarse (recorta los sobrantes) */
+    border-radius: 4px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.product-info h3 {
+    font-size: 1em;
+    color: #4E342E;
+    margin: 0;
+    font-weight: bold;
+    min-height: 44px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-price {
+    font-size: 0.95em;
+    font-weight: 800;
+    color: #ffffff;
+    background-color: #4E342E;
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(78, 52, 46, 0.2);
+}
+
+#agregar-carrito {
+    background-color: #4E342E; 
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#agregar-carrito:hover {
+    background-color: #FFF59D;
+    color: #4E342E;
+}
+
+.alerta-exito {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+}
+
+.contenedor-checkout { 
+    max-width: 800px; 
+    margin: 40px auto;
+    padding: 40px; 
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.checkout-buttons {
+    display: flex; 
+    gap: 20px; 
+    justify-content: center; 
+    margin-top: 30px;
+}
+
+.checkout-buttons button {
+    background-color: #4E342E;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.checkout-buttons button:hover {
+    background-color: #FFF59D;
+    color: #4E342E;
+}
+
+footer {
+    background-color: #FFF59D; 
+    color: #4E342E; 
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    border-top: 2px solid rgba(78, 52, 46, 0.1); 
+    box-shadow: 0 -4px 10px rgba(78, 52, 46, 0.04);
+}
+
+footer a {
+    color: #4E342E; 
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #795548; 
+    text-decoration: underline;
+}
+
+footer section:last-child {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #4E342E;
+    opacity: 0.9;
+}

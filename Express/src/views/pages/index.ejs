@@ -1,6 +1,9 @@
+<link rel="stylesheet" href="/css/index.css">
+
 <main class="home-main">
 
-    <% if (!locals.esBusqueda) { %>
+    <!-- Cuando mostrar el HERO -->
+    <% if (!locals.esBusqueda && !locals.esCategoria) { %>
         <section id="hero">
             <div class="contenedor-hero">
                 <h2>Ofertas de temporada</h2>
@@ -13,11 +16,12 @@
         <%- include('../partials/categorias') %> <br>
     <% } %>
         
+    <!-- mostrar productos por categoría -->
     <% if (locals.esCategoria) { %>
         <section class="products-section">
             <h2><%= categoriaActual %></h2>
 
-            <div class="products-grid">
+            <div class="products-grid-filas" id="grilla-todos-productos">
                 <% productos.forEach(producto => { %>
                     <%- include('../partials/productCard', {producto}) %>
                 <% }) %>
@@ -50,74 +54,45 @@
             </div>
         </section>
 
-        <section class="products-section">
+    <section class="products-section">
             <h2>Todos los productos</h2>
-            <div class="products-grid-filas">
-                <% todos.forEach(producto => { %>
-                    <%- include('../partials/productCard', {producto}) %>
+            <div class="products-grid-filas" id="grilla-todos-productos">
+                <% todos.forEach((producto, index) => { %>
+                    <div class="item-producto <%= index >= 8 ? 'oculto' : '' %>">
+                        <%- include('../partials/productCard', {producto}) %>
+                    </div>
                 <% }) %>
             </div>
+
+            <% if (todos.length > 8) { %>
+                <div class="contenedor-ver-mas">
+                    <button id="btn-ver-mas" class="btn-secundario">Ver más productos</button>
+                </div>
+            <% } %>
         </section>
 
         <%- include('../partials/categorias') %>
     <% } %>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnVerMas = document.getElementById('btn-ver-mas');
+        if (btnVerMas) {
+            btnVerMas.addEventListener('click', () => {
+                // Buscamos todos los productos que están ocultos
+                const productosOcultos = document.querySelectorAll('#grilla-todos-productos .oculto');
+                
+                // Les quitamos la clase oculto para que aparezcan
+                productosOcultos.forEach(producto => {
+                    producto.classList.remove('oculto');
+                });
+                
+                // Ocultamos el botón porque ya mostramos todo
+                btnVerMas.style.display = 'none';
+            });
+        }
+    });
+</script>
+
 </main>
-
-<style>
-      .slider-container {
-        display: flex;
-        gap: 20px;
-        padding: 15px 5px;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        width: 100%;
-    }
-    .slider-container::-webkit-scrollbar {
-        height: 5px; 
-        display: block; 
-    }
-
-    .slider-container::-webkit-scrollbar-track {
-        background: transparent; 
-    }
-
-    .slider-container::-webkit-scrollbar-thumb {
-        background: #dcdcdc; 
-        border-radius: 10px; 
-    }
-
-    .slider-container::-webkit-scrollbar-thumb:hover {
-        background: #c1c1c1; 
-    }
-
-    .slider-container {
-        scrollbar-width: thin;
-        scrollbar-color: #dcdcdc transparent;
-    }
-    .products-grid-filas {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px; 
-        padding: 20px 5px;
-        width: 100%;
-    }
-
-    .products-grid-filas .slider-item {
-        min-width: unset !important; 
-        max-width: unset !important; 
-        width: 100%;
-    }
-    @media (max-width: 850px) {
-        .products-grid-filas {
-            grid-template-columns: repeat(2, 1fr); 
-        }
-    }
-    @media (max-width: 480px) {
-        .products-grid-filas {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
-
-
