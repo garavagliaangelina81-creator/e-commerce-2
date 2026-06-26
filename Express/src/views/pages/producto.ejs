@@ -1,41 +1,68 @@
 <link rel="stylesheet" href="/css/producto.css">
 <main class="main-producto">
 
-    <div class = "tarjetaProducto">
-        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
-        <div class ="producto-info">
-            <h1 class = "productoNombre"><%= producto.nombre %></h1>
+    <nav class="breadcrumb">
+        <a href="/">Inicio</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-actual"><%= producto.nombre %></span>
+    </nav>
+
+    <div class="tarjetaProducto">
+
+        <div class="producto-imagen-wrapper">
+            <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+            <% if (producto.stock === 0) { %>
+                <div class="badge-agotado">Agotado</div>
+            <% } %>
+        </div>
+
+        <div class="producto-info">
+
+            <div class="producto-header">
+                <h1 class="productoNombre"><%= producto.nombre %></h1>
+                <% if (producto.stock > 0) { %>
+                    <span class="stock-badge en-stock">✓ En stock</span>
+                <% } else { %>
+                    <span class="stock-badge sin-stock-badge">Sin stock</span>
+                <% } %>
+            </div>
+
             <p class="productoDescripcion"><%= producto.descripcion %></p>
 
-            <div class = "precioYCarrito">
-                <p class="productoPrecio"><%= producto.precio %> puntos</p>
-                
-                <% if (producto.stock > 0) { %> 
-                <form action="/carrito/agregar" method="post">
-                    <input type="hidden" name="idProducto" value="<%= producto.id %>">
-                    <button id="agregar-carrito">Agregar al carrito</button>
-                </form>
-                <% } else { %> 
-                <div class="sin-stock-contenedor">
-                    <button class="btn-deshabilitado" disabled>Sin stock</button>
-                    <p class="aviso-stock">Este producto no está disponible por el momento</p>
-                </div>
-            <% } %>
+            <div class="precio-divider"></div>
 
+            <div class="producto-precio-section">
+                <p class="productoPrecio">
+                    <%= producto.precio %>
+                    <span class="precio-moneda">puntos</span>
+                </p>
             </div>
+
+            <div class="producto-cta">
+                <% if (producto.stock > 0) { %>
+                    <form action="/carrito/agregar" method="post">
+                        <input type="hidden" name="idProducto" value="<%= producto.id %>">
+                        <button id="agregar-carrito" type="submit">Agregar al carrito</button>
+                    </form>
+                <% } else { %>
+                    <div class="sin-stock-contenedor">
+                        <button class="btn-deshabilitado" disabled>Sin stock</button>
+                        <p class="aviso-stock">⚠ Este producto no está disponible por el momento</p>
+                    </div>
+                <% } %>
+            </div>
+
         </div>
     </div>
 
-<div class="puedeInteresar">
-    
-    <h2>Productos Relacionados</h2>
+    <section class="puedeInteresar">
+        <h2>Productos Relacionados</h2>
+        <div class="slider-container">
+            <% relacionados.forEach(prod => { %>
+                <%- include('../partials/productCard', { producto: prod }) %>
+            <% }); %>
+        </div>
+    </section>
 
-    <div class="slider-container">
-        <% relacionados.forEach(producto => { %>
-        <%- include('../partials/productCard', { producto }) %>
-        <% }); %>
-    </div>
-    
-</div>
 </main>
 <%- include('../partials/categorias') %>
