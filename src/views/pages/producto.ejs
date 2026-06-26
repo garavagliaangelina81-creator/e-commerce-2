@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="/css/producto.css">
+<main class="main-producto">
+
+    <div class = "tarjetaProducto">
+        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+        <div class ="producto-info">
+            <h1 class = "productoNombre"><%= producto.nombre %></h1>
+            <p class="productoDescripcion"><%= producto.descripcion %></p>
+
+            <div class = "precioYCarrito">
+                <p class="productoPrecio"><%= producto.precio %> puntos</p>
+                
+                <% if (producto.stock > 0) { %> 
+                <form action="/carrito/agregar" method="post">
+                    <input type="hidden" name="idProducto" value="<%= producto.id %>">
+                    <button id="agregar-carrito">Agregar al carrito</button>
+                </form>
+                <% } else { %> 
+                <div class="sin-stock-contenedor">
+                    <button class="btn-deshabilitado" disabled>Sin stock</button>
+                    <p class="aviso-stock">Este producto no está disponible por el momento</p>
+                </div>
+            <% } %>
+
+            </div>
+        </div>
+    </div>
+
+<div class="puedeInteresar">
+    
+    <h2>Productos Relacionados</h2>
+
+    <div class="slider-container">
+        <% relacionados.forEach(producto => { %>
+        <%- include('../partials/productCard', { producto }) %>
+        <% }); %>
+    </div>
+    
+</div>
+</main>
+<%- include('../partials/categorias') %>

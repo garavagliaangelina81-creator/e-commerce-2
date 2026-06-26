@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="/css/categoria.css">
+<section class="meli-categorias-seccion">
+    <div class="meli-categorias-header">
+        <h2>Categorías</h2>
+        <a href="#" class="meli-link-cat">Mostrar todas las categorías</a>
+    </div>
+
+    <div class="meli-categorias-grid">
+    <% if (typeof categoriasBarra !== 'undefined') { %>
+
+        <% categoriasBarra.forEach(categoria => { %>
+        <a href="/categoria/<%= categoria.categoria_id %>" class="meli-categoria-tarjeta">
+                    
+                    <div class="meli-cat-foto-box">
+                        <img src="/img/<%= categoria.nombre_categoria %>.png" alt="<%= categoria.nombre_categoria %>" onerror="this.src='/img/fallback.jpg'">
+                    </div>
+                    
+                    <div class="meli-cat-texto-box">
+                        <span><%= categoria.nombre_categoria %></span>
+                    </div>
+                    
+                </a>
+
+            <% }) %>
+        <% } %>
+    </div>
+</section>

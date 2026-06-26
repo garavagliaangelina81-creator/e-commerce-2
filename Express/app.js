@@ -1,7 +1,11 @@
-require('dotenv').config(); //lee el archivo .env y carga las variables de entorno en process.env
+require('dotenv').config(); 
+require('./src/db/database'); //para ejecutar el codigo de la base de datos y crearlas
+
 const express = require("express");
+const cors = require('cors'); 
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session'); //requiero el paquete de sesiones para usarlo en la app
+
 const rutasRegistro = require('./src/routes/rutasRegistro');
 const rutasProducto = require('./src/routes/rutasProducto');
 const rutasCarrito = require('./src/routes/rutasCarrito');
@@ -10,14 +14,13 @@ const carritoCantidadMiddleware = require('./src/middlewares/carritoCantidad');
 const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador 404
 const middlewareError500 = require('./src/middlewares/error500');
 
-require('./src/db/database'); //para ejecutar el codigo de la base de datos y crearlas
-
 const app = express();
+app.use(cors());
 
 const PORT = 3000;
 
 app.use(session({
-    secret: process.env.SESSION_SECRET, //accede a la clave secreta del archivo .env
+    secret: process.env.SESSION_SECRET || 'clavesecreta', 
     resave: false,
     saveUninitialized: false,
     cookie: { httpOnly: true }
@@ -36,7 +39,8 @@ app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set('layout', 'layouts/main')
 
-app.use(express.static("public"));
+//app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(carritoCantidadMiddleware);
 

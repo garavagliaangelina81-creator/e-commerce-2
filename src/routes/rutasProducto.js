@@ -4,8 +4,7 @@ const router = express.Router();
 // Importar el controlador
 const controladorProducto = require('../controladores/controladorProducto');
 const carritoControlador = require('../controladores/carritoControlador');
-//reat pida datos en JSON
-router.get('/api/productos', controladorProducto.obtenerTodosApi);
+
 //ruta para el inicio
 router.get('/', controladorProducto.index);
 

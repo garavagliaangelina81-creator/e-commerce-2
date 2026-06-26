@@ -1,7 +1,7 @@
 const productoServicio = require('../servicios/productoServicios');
 
 const controladorProducto = { 
-    index: (req, res) => {
+    index: async (req, res) => {
         try {
             // us18: capturamos el criterio ordenamiento de la URL (?sort=asc)
             const criterioOrden = req.query.sort;
@@ -13,6 +13,7 @@ const controladorProducto = {
                 todos = productoServicio.ordenarPorPrecio(criterioOrden);
             } else {
                 // Si no hay orden, traemos todos normalmente a través del SERVICIO
+                const resultado = await productoServicio.obtenertodos(1,100) || { productos: []};
                 todos = productoServicio.obtenerTodos() || [];
             }
 
@@ -42,15 +43,14 @@ const controladorProducto = {
         }
     },
 
-verCategoria: (req, res) => {
+verCategoria: async (req, res) => {
     const categoriaId = parseInt(req.params.categoria);
     
     const productosFiltrados = productoServicio.buscarCategoria(categoriaId);
-    
     const categoriasBarra = productoServicio.todasCategorias(); 
     const sugeridos = productoServicio.getSugeridos() || []; 
     const destacados = productoServicio.getDestacados() || [];
-    const todos = productoServicio.obtenerTodos() || [];
+    const resultadoTodos = await productoServicio.obtenerTodos(1,100) ||{ productos: []};
 
     
     const categoriaEncontrada = categoriasBarra.find(c => c.categoria_id === categoriaId);
@@ -113,6 +113,27 @@ verCategoria: (req, res) => {
                 esBusqueda: true,
                 mensaje: 'No se encontraron productos que coincidan con tu búsqueda'
             });
+        }
+    },
+    //metodo para react(api json)
+    obtenerTodosApi: async (req, res) => {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 8;
+
+            const resultado = await productoServicio.obtenerTodos(page, limit);
+
+            res.json({
+                data: resultado.productos,
+                paginacion: {
+                    totalProductos: resultado.total,
+                    page: page,
+                    limit: limit
+                }
+            });
+        } catch (error) {
+            console.error("Error en obtenerTodosApi:", error);
+            res.status(500).json({ error: "Error interno del servidor al procesar los productos" });
         }
     }
 };

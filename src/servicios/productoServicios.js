@@ -1,8 +1,8 @@
 const productoModelo = require('../modelos/productModel');
 
 const productoServicio = {
-    obtenerTodos: (page, limit) => {
-        return productoModelo.todos(page, limit);
+    obtenerTodos: () => {
+        return productoModelo.todos();
     },
     // us17, funcion para validar el id, si no es numero devuelve null
     normalized: (id) => {

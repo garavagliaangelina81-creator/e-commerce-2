@@ -4,8 +4,31 @@
 const db = require('../db/database.js');
 
 const productoModelo = {
-    todos: () => {
-        return db.prepare('SELECT * FROM productos').all(); //.all() para obtener un array de datos
+    todos: async(page, limit) => {
+        const offset = (page - 1) * limit;
+    try{
+        //traemos solo los productos de esta pagina y traducimos las columnas para reat
+       const productos = db.prepare(`
+                SELECT
+                    id, 
+                    nombre AS name,
+                    precio AS price,
+                    descripcion,
+                    categoria_id,
+                    imagen, 
+                    stock
+                FROM productos
+                LIMIT ? OFFSET ?
+            `).all(limit, offset);
+            
+    const totalRow = db.prepare('SELECT COUNT(*) AS total FROM productos').get();
+    return {
+        productos,
+        total: totalRow ? totalRow.total : 0
+    };
+    } catch (error) {
+        throw new Error('Error al obtener los productos: ' + error.message);
+    }
     },
 
     buscarPorId: (id) => {
