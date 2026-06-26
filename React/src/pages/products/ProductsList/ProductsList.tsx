@@ -1,47 +1,37 @@
-// Estos son tus datos falsos temporales hasta que conecten la base de datos
-const productosDePrueba = [
-    { id: 1, nombre: 'Mousse de chocolate', precio: 1500, stock: 10, categoria: 'Postres' },
-    { id: 2, nombre: 'Hamburguesa Completa', precio: 3500, stock: 5, categoria: 'Comidas' },
+import { Link } from "react-router";
+
+const productos = [
+    { id: 1, nombre: "Producto 1" },
+    { id: 2, nombre: "Producto 2" },
+    { id: 3, nombre: "Producto 3" },
 ];
 
 export default function ProductsList() {
     return (
-        <div className="text-white">
-            {/* Encabezado */}
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">Lista de productos</h1>
-                {/* Este botón servirá después para la US8/10 */}
-                <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
-                    + Agregar Producto
-                </button>
-            </div>
+        <main className="min-h-full bg-slate-900 text-slate-100">
+            <section className="mx-auto flex w-full max-w-5xl flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-950/40 p-4 shadow-2xl shadow-black/20 sm:p-6">
+                <header className="border-b border-slate-800 pb-4">
+                    <h2 className="text-2xl font-semibold tracking-tight text-yellow-100">Productos</h2>
+                </header>
 
-            {/* Contenedor de la Tabla */}
-            <div className="bg-slate-800 rounded-lg shadow-md overflow-hidden">
-                <table className="w-full text-left border-collapse">
-                    <thead>
-                    <tr className="bg-slate-900 border-b border-slate-700">
-                        <th className="p-4">ID</th>
-                        <th className="p-4">Nombre</th>
-                        <th className="p-4">Categoría</th>
-                        <th className="p-4">Precio</th>
-                        <th className="p-4">Stock</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {/* El .map() recorre el array y dibuja una fila (tr) por cada producto */}
-                        {productosDePrueba.map((producto) => (
-                            <tr key={producto.id} className="border-b border-slate-700 hover:bg-slate-750">
-                                <td className="p-4">#{producto.id}</td>
-                                <td className="p-4">{producto.nombre}</td>
-                                <td className="p-4">{producto.categoria}</td>
-                                <td className="p-4 text-green-400">${producto.precio}</td>
-                                <td className="p-4">{producto.stock}</td>
-                            </tr>
-                        ))}
-                    </tbody>  
-                </table>
-            </div>
-        </div>
+                <div className="grid gap-3">
+                    {productos.map((producto) => (
+                        <article
+                            key={producto.id}
+                            className="flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-800/80 px-4 py-4 shadow-lg shadow-black/20 backdrop-blur-sm"
+                        >
+                            <span className="text-lg font-medium text-yellow-100">{producto.nombre}</span>
+
+                            <Link
+                                to={`/products/${producto.id}`}
+                                className="rounded-full bg-yellow-100 px-4 py-1.5 text-sm font-medium text-slate-900 transition hover:bg-slate-950 hover:text-yellow-100"
+                            >
+                                Ver producto
+                            </Link>
+                        </article>
+                    ))}
+                </div>
+            </section>
+        </main>
     );
 }

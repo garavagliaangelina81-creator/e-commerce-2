@@ -10,22 +10,6 @@ body {
 }
 
 /* botones */
-
-button {
-    background-color: #4E342E;
-    color: #ffffff;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-button:hover {
-    background-color: #FFF59D;
-    color: #4E342E;
-}
 a {
     color: #5D4037;
     text-decoration: none;
@@ -34,39 +18,45 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 90vh; 
+    min-height: 80vh; 
     padding: 20px;
     background-color: #f7f7f7; 
 }
-.ingreso-card {
+.checkout-card {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(78, 52, 46, 0.08);
     padding: 30px;
-    max-width: 500px;
+    max-width: 800px;
     width: 100%;
     border: 1px solid rgba(78, 52, 46, 0.05);
     display: flex;
     flex-direction: column;
 }
-.ingreso-card h1 {
+.checkout-card h2 {
     font-size: 24px;
     margin-bottom: 20px;
     color: #4E342E;
     text-align: center;
 }
-.ingreso-card form {
+.checkout-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #4E342E;
+    text-align: start;
+}
+.checkout-card form {
     display: flex;
     flex-direction: column;
     text-align: left; 
 }
-.ingreso-card label {
+.checkout-card label {
     font-size: 14px;
     margin-bottom: 5px;
     font-weight: bold;
     color: #5D4037;
 }
-.ingreso-card input {
+.checkout-card input {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
@@ -76,37 +66,40 @@ a {
     font-size: 16px;
     color: #333333;
 }
-.ingreso-card input:focus {
+.checkout-card input:focus {
     outline: none;
     border-color: #4E342E;
 }
-.ingreso-card button {
+.checkout-card button {
     background-color: #4E342E; 
     color: #ffffff;
-    padding: 12px;
+    padding: 10px 14px;
     border: none;
     border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
+    display: inline-block;
+    width: fit-content;
+    align-self: center;
 }
-.ingreso-card button:hover {
+.checkout-card button:hover {
     background-color: #FFF59D;
     color: #4E342E;
 }
-.ingreso-card p {
+.checkout-card p {
     margin-top: 20px;
     font-size: 14px;
     color: #5D4037;
     text-align: center;
 }
-.ingreso-card a {
+.checkout-card a {
     color: #4E342E;
     text-decoration: none;
     font-weight: bold;
 }
-.ingreso-card a:hover {
+.checkout-card a:hover {
     text-decoration: underline;
 }
 .volver {
@@ -117,4 +110,7 @@ a {
     color: #4E342E;
     font-size: 1.2em;
     font-weight: 600;
+}
+.seccion-checkout {
+    padding: 9px;
 }

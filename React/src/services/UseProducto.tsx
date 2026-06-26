@@ -1,3 +1,4 @@
+/*
 import { API_URL } from '../const/api';
 import { useState } from "react";
 import { useEffect } from 'react';
@@ -18,6 +19,15 @@ async function fetchProductos() {
 
 
 
+// VER UNA LISTA DE PRODUCTOS
+
+// VER LOS DETALLES DE UN PRODUCTO
+
+// REGISTRAR UN NUEVO PRODUCTO
+
+// MODIFICAR UN PRODUCTO 
+
+// ELIMINAR UN PRODUCTO
 
 // esto es un hook ya que devuelve un elemento en vez de una vista
 export default function UseProductos() {
@@ -35,4 +45,4 @@ export default function UseProductos() {
         status: "success",
         refetch: () => {}
     };
-}
+} */
