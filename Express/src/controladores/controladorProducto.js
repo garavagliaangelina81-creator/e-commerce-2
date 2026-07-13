@@ -13,8 +13,9 @@ const controladorProducto = {
                 todos = productoServicio.ordenarPorPrecio(criterioOrden);
             } else {
                 // Si no hay orden, traemos todos normalmente a través del SERVICIO
-                const resultado = await productoServicio.obtenertodos(1,100) || { productos: []};
-                todos = productoServicio.obtenerTodos() || [];
+                const resultado = await productoServicio.obtenerTodos(1,100) || { productos: [] };
+                // `obtenerTodos` devuelve { productos, total }
+                todos = resultado.productos || [];
             }
 
             // Intentamos obtener el resto de los datos del servicio
@@ -53,10 +54,12 @@ verCategoria: async (req, res) => {
     const resultadoTodos = await productoServicio.obtenerTodos(1,100) ||{ productos: []};
 
     
-    const categoriaEncontrada = categoriasBarra.find(c => c.categoria_id === categoriaId);
-    const nombreCategoriaActual = categoriaEncontrada ? categoriaEncontrada.nombre_categoria : "Categoría";
+        const categoriaEncontrada = categoriasBarra.find(c => c.categoria_id === categoriaId);
+        const nombreCategoriaActual = categoriaEncontrada ? categoriaEncontrada.nombre_categoria : "Categoría";
 
-    res.render('pages/index', { 
+        const todos = resultadoTodos.productos || [];
+
+        res.render('pages/index', { 
             todos,
             productos: productosFiltrados, 
             categoriasBarra, 
