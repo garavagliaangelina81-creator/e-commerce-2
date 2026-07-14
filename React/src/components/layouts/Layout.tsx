@@ -11,25 +11,25 @@ export default function Layout() { //estructura general de la UI
 
     return (
         <>
-            <div className="flex h-screen bg-slate-900 overflow-hidden relative"> {/*contenedor principal con flexbox para organizar el layout */}
+            <div className=" flex h-screen bg-gray-200 dark:bg-slate-900 overflow-hidden relative"> {/*contenedor principal con flexbox para organizar el layout */}
                 
                 {/*boton para abrir la barra lateral en dispositivos pequeños*/}
-                <button className="lg:hidden absolute top-5 left-5 z-20 p-3 rounded-sm bg-yellow-100 px-4 py-1.5 text-s font-medium text-slate-900 transition hover:bg-slate-950 hover:text-yellow-100 " onClick={() => setIsSidebarOpen(true)}>
+                <button className="lg:hidden absolute top-5 left-5 z-20 p-3 rounded-sm bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 px-4 py-1.5 text-s font-medium dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100 " onClick={() => setIsSidebarOpen(true)}>
                     ☰ 
                 </button>
                 
                 {/* fondo transparente para cuando el menu esta abierto en dispositivos moviles*/}
-                {isSidebarOpen && <div className="fixed inset-0 bg-slate-900 opacity-50 z-10 lg:hidden" onClick={() => setIsSidebarOpen(false)}></div>}
+                {isSidebarOpen && <div className="fixed inset-0 bg-amber-100 dark:bg-slate-900 opacity-50 z-10 lg:hidden" onClick={() => setIsSidebarOpen(false)}></div>}
                 
                 {/* Sidebar Agregué justify-between para separar el menú del perfil */} 
-                <aside className={`fixed inset-y-0 left-0 z-30 w-64 bg-slate-950 text-yellow-100 flex flex-col justify-between transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:block`}>
+                <aside className={`fixed inset-y-0 left-0 z-30 w-64 bg-amber-200 text-amber-950 dark:bg-slate-950 dark:text-yellow-100 flex flex-col justify-between transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:block`}>
                     
                     <NavBar setIsSidebarOpen={setIsSidebarOpen} />
 
                 </aside>
 
                 {/* Main area */}
-                <main className="flex-1 overflow-y-auto px-4 pt-20 pb-6 sm:px-6 lg:px-8 w-full">
+                <main className="flex-1 flex flex-col overflow-y-auto px-4 pt-6 pb-6 sm:px-6 lg:px-8 w-full">
                     <Outlet /> {/*sirve para poner la "pantalla" de las secciones que estan en el sidebar*/}
                     
                 </main>

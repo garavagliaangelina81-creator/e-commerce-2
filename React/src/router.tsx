@@ -44,7 +44,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: '*', //para indicar que esta ruta se va a mostrar cuando no se encuentre ninguna de las rutas anteriores
-                element: <img src="/404.png" alt="404" className='mx-auto block w-full max-w-100 h-auto'/>,
+                element: (
+                    <picture className='mx-auto block w-full max-w-100 h-auto'>
+                        <source media='(prefers-color-scheme: light)' srcSet='/404Claro.png' />
+                        <source media='(prefers-color-scheme: dark)' srcSet='/404Oscuro.png' />
+                        <img src='/404Oscuro.png' alt='404' className='mx-auto block w-full max-w-100 h-auto' />
+                    </picture>
+                ),
             }
         ]           
     }
