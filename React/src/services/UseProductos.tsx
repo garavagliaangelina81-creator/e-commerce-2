@@ -94,55 +94,59 @@ export function useProductoById(id: number | null) {
     };
 }
 
-
-
-
-
-/*
-import { API_URL } from '../const/api';
-import { useState } from "react";
-import { useEffect } from 'react';
-import { Products } from '../types/products';
-import { SourceTextModule } from 'vm';
-
-//defino fuera de la funcionel como vca a hacer el fetch, es afuera O dentro del use effect, si lo definimos dentro de la funcion, cuando la funcion va a cambiar de estado, realiza un renderizando y la func fetcch se vuelve a generar y puede hacer un bucle
-
-async function fetchProductos() {
+// REGISTRAR UN NUEVO PRODUCTO
+    // usamos Omit id ya que nuestra base de datos en Express usa un id autoincrementable
+    // recibimos FormData en lugar de un objeto normal para poder pasar unaimagen al backend
+export async function crearProductoConImagen(formData: FormData) {
     try {
-        const response = await fetch(`${API_URL}/productos`) //ver bien que ruta tengo que poner
-        return response;
-    }catch (error) {
-        console.log( error );
-        return [];
+        const response = await fetch(`${API_URL}/productos`, {
+            method: 'POST',
+            body: formData, 
+        });
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log("Error al crear el producto:", error);
+        return null;
     }
 }
 
+// ACTUALIZAR UN PRODUCTO
+    // usamos partial por si queremos actualizar solo algunos campos del producto
+export async function actualizarProducto(id: number, productoActualizado: Partial<Products>) {
+    try {
+        const response = await fetch(`${API_URL}/productos/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productoActualizado)
+        });
 
-
-// VER UNA LISTA DE PRODUCTOS
-
-// VER LOS DETALLES DE UN PRODUCTO
-
-// REGISTRAR UN NUEVO PRODUCTO
-
-// MODIFICAR UN PRODUCTO 
+        const data = await response.json();
+        return data;    
+    } catch (error) {
+        console.log("Error actualizando producto: ", error);
+        return null;
+    }
+}
 
 // ELIMINAR UN PRODUCTO
-
-// esto es un hook ya que devuelve un elemento en vez de una vista
-export default function UseProductos() {
-
-    const [productos, setProductos] = useState<Products[]>([]);
-    const [status, useStatus] = useState
-
-
-    useEffect(() => {
-        fetchProductos().then((data) => setProductos(data));
-    }, []); //[] es sin dependencias, solamente se ejecuta en el montaje
-
-    return {
-        data: productos,
-        status: "success",
-        refetch: () => {}
-    };
-} */
+export async function eliminarProducto(id: number) {
+    try {
+        const response = await fetch(`${API_URL}/productos/${id}`, {
+            method: 'DELETE'
+        });
+        
+        // En las peticiones DELETE, muchas veces el servidor no devuelve un JSON,
+        // sino que simplemente responde con un código de éxito (200 o 204).
+        if (response.ok) {
+            return true; // Retornamos verdadero si se borró con éxito
+        }
+        return false;
+    } catch (error) {
+        console.log("Error al eliminar el producto:", error);
+        return false;
+    }
+}

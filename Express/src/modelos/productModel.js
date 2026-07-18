@@ -69,6 +69,41 @@ const productoModelo = {
             
         return db.prepare(query).all();
     },
+
+    //Para crear un nuevo producto
+    crearProducto: (nuevoProducto) => {
+        const { nombre, precio, descripcion, categoria_id, imagen, stock } = nuevoProducto;
+        const stmt = db.prepare(`
+            INSERT INTO productos (nombre, precio, descripcion, categoria_id, imagen, stock)
+            VALUES (?, ?, ?, ?, ?, ?)
+        `);
+        const info = stmt.run(nombre, precio, descripcion, categoria_id, imagen, stock);
+        return { id: info.lastInsertRowid, ...nuevoProducto };
+    },
+
+    // modificar un producto
+    actualizar: (id, productoActualizado) => {
+        const { nombre, precio, descripcion, categoria_id, imagen, stock } = productoActualizado;
+        const stmt = db.prepare(`
+            UPDATE productos 
+            SET nombre = ?, precio = ?, descripcion = ?, categoria_id = ?, imagen = ?, stock = ?
+            WHERE id = ?
+        `);
+        // Ejecutamos el update pasando los nuevos valores y finalmente el id
+        const info = stmt.run(nombre, precio, descripcion, categoria_id, imagen, stock, id);
+        
+        // Retornamos true si se modificó al menos una fila
+        return info.changes > 0;
+    },
+
+    // eliminar un producto
+    eliminar: (id) => {
+        const stmt = db.prepare(`DELETE FROM productos WHERE id = ?`);
+        const info = stmt.run(id);
+        
+        // Retornamos true si se eliminó correctamente
+        return info.changes > 0;
+    }
 };
 
 module.exports = productoModelo;
