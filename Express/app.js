@@ -10,6 +10,7 @@ const rutasRegistro = require('./src/routes/rutasRegistro');
 const rutasProducto = require('./src/routes/rutasProducto');
 const rutasCarrito = require('./src/routes/rutasCarrito');
 const rutasCheckout = require('./src/routes/rutasCheckout');
+const routerApi = require('./api/routerApi');
 const carritoCantidadMiddleware = require('./src/middlewares/carritoCantidad');
 const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador 404
 const middlewareError500 = require('./src/middlewares/error500');
@@ -39,7 +40,9 @@ app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set('layout', 'layouts/main')
 
-//app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/api', routerApi);
 
 app.use(carritoCantidadMiddleware);
 
@@ -63,7 +66,6 @@ app.use('/', rutasCheckout);
 app.use('/producto', rutasProducto);
 
 app.use('/', rutasProducto);
-
 
 // El middleware de error siempre va último para evitar problemas
 app.use(middlewareError500);

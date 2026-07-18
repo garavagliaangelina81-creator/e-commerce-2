@@ -6,11 +6,11 @@ const carritoControlador = {
     {
         const idProducto = req.body.idProducto;
         
-        //verificar
-        const existe = productoModelo.todos().find(p => p.id == idProducto);
+        // Verificar que el producto existe en la base de datos
+        const existe = productoModelo.buscarPorId(parseInt(idProducto, 10));
         if (!existe) return res.status(404).render('pages/404');
 
-        //si existe llamo al servicio para que se comunique con la session
+        // Si existe, llamo al servicio para que se comunique con la session
         carritoServicio.agregarAlCarrito(req.session, idProducto);
 
         res.redirect('/carrito');

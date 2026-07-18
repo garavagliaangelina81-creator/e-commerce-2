@@ -6,22 +6,28 @@ export default function NavBar({ setIsSidebarOpen }: { setIsSidebarOpen: (value:
     const linkClasses = ({ isActive }: { isActive: boolean }) => 
         `w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3 ${
             isActive 
-                ? 'bg-slate-800 text-yellow-100 font-bold' 
-                : 'text-gray-400 hover:bg-slate-800 hover:text-yellow-100'
+                ? 'bg-amber-100 text-amber-950 dark:bg-slate-800 dark:text-yellow-100 font-bold' 
+                : 'bg-amber-200 text-amber-950 dark:bg-slate-800 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-yellow-100'
+
+
         }`;
 
         return (
-            <>
+            <div className="flex flex-col h-full">
                                 {/* CONTENEDOR SUPERIOR (Logo y Menú principal) */}
                     <div>
 
-                        <div className="p-6 text-2xl font-bold border-b border-slate-700 flex justify-between items-center">
+                        <div className="p-6 text-2xl font-bold border-b border-amber-950 dark:border-slate-700 flex items-center justify-between">
                             <span className="flex items-center gap-2">
-                                <img src="/logo.png" alt="Logo de Antojitos" className="h-15 w-15 object-contain" />
+                                <picture>
+                                    <source media="(prefers-color-scheme: light)" srcSet="/logoClaro.png" />
+                                    <source media="(prefers-color-scheme: dark)" srcSet="/logo.png" />
+                                    <img src="/logoOscuro.png" alt="Logo de Antojitos" className="h-15 w-15 object-contain" />
+                                </picture>
                                 <span>ANTOJITOS</span>
                             </span>
                             {/* Botón para cerrar la X en telefonos */}
-                            <button className="lg:hidden text-base text-yellow-100 hover:text-white" onClick={() => setIsSidebarOpen(false)}>
+                            <button className="p-1.5 lg:hidden text-base text-amber-950 hover:text-amber-900 dark:text-yellow-100 dark:hover:text-white" onClick={() => setIsSidebarOpen(false)}>
                             ✕
                             </button>
                             
@@ -36,13 +42,14 @@ export default function NavBar({ setIsSidebarOpen }: { setIsSidebarOpen: (value:
                     </div>
 
                     {/*  CONTENEDOR INFERIOR (Perfil al fondo) */}
-                    <div className="p-4 border-t border-slate-800">
+                    <div className="mt-auto p-4 border-t border-slate-800 flex flex-col gap-3">
                         <NavLink to="/profile" className={linkClasses} onClick={() => setIsSidebarOpen(false)}>
                             👤 Perfil
                         </NavLink>
+
                     </div>
 
-            </>
+            </div>
         )
 
 }

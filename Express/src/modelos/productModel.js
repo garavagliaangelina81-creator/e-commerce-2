@@ -7,12 +7,12 @@ const productoModelo = {
     todos: async(page, limit) => {
         const offset = (page - 1) * limit;
     try{
-        //traemos solo los productos de esta pagina y traducimos las columnas para reat
-       const productos = db.prepare(`
+        //traemos solo los productos de esta pagina y traducimos las columnas para react
+        const productos = db.prepare(`
                 SELECT
                     id, 
-                    nombre AS name,
-                    precio AS price,
+                    nombre,
+                    precio,
                     descripcion,
                     categoria_id,
                     imagen, 

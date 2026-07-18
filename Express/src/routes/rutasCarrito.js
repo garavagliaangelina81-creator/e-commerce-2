@@ -7,8 +7,6 @@ const carritoServicio = require('../servicios/carritoServicio');
 
 router.get('/', carritoControlador.mostrar);
 
-router.get('/', carritoControlador.verCarrito);
-
 router.post('/agregar', carritoControlador.agregar);
 
 router.get('/sumar/:id', carritoControlador.sumar);
