@@ -9,7 +9,7 @@ async function fetchProductos() {
     try {
         const response = await fetch(`${API_URL}/productos`);
         
-        //Convertimos la respuesta a JSON
+       // Convertimos la respuesta a JSON
         const respuestaApi = await response.json();
         
         //Verificamos si la propiedad 'data' existe y si realmente es un arreglo.
@@ -22,15 +22,17 @@ async function fetchProductos() {
         return [];
     } catch (error) {
         console.log("Error fetching products:", error);
-        return [];
-    }
+       return [];
+   }
 }
-
-//función para obtener la información de un producto en especifico
+// Función para obtener la información de un producto en específico
 async function fetchProductoById(id: number) {
     try {
         const response = await fetch(`${API_URL}/productos/${id}`);
         const data = await response.json();
+
+        console.log("DETALLE PRODUCTO:", data);
+
         return data;
     } catch (error) {
         console.log("Error fetching product by ID:", error);

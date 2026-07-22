@@ -12,7 +12,7 @@ const multer = require('multer');
 const path = require('path');
 
 // -- Configuramos dónde y cómo se guardan las imágenes
-const storage = multer.diskUrl({
+const storage = multer.diskStorage({
     destination: function (req, file, cb) {
     
         cb(null, 'public/img'); 
@@ -49,7 +49,30 @@ apiRouter.get('/productos', async (req, res) => { // devuelve un json con los pr
             totalProductos: resultado.total
         }
     });
+
 });
+apiRouter.get('/productos/:id', async (req, res) => {
+    try {
+        const id = parseInt(req.params.id, 10);
+
+        if (Number.isNaN(id) || id < 1) {
+            return res.status(400).json({ error: 'El ID debe ser un número válido' });
+        }
+
+        const producto = productoModelo.buscarPorId(id);
+
+        if (!producto) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+
+        res.json(producto);
+
+    } catch (error) {
+        console.error("Error obteniendo producto:", error);
+        res.status(500).json({ error: 'Hubo un problema al obtener el producto' });
+    }
+});
+
 
 //Agregamos 'upload.single('imagen')' como middleware.
 apiRouter.post('/productos', upload.single('imagen'), async (req, res) => {
