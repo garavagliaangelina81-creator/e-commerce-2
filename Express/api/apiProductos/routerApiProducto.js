@@ -1,8 +1,8 @@
 const express = require('express');
-const productoServicio = require('../src/servicios/productoServicios');
-const productoModelo = require('../src/modelos/productModel');
+const productoServicio = require('../../src/servicios/productoServicios');
+const productoModelo = require('../../src/modelos/productModel');
 
-const apiRouter = express.Router();
+const apiRouterProducto = express.Router();
 
 /*como la ruta POST trae una imagen, necesitamos hacer:
  Usamos una librería "multer" que "atrapa" la imagen, 
@@ -27,12 +27,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-apiRouter.get('/status', async (req, res) => {
+apiRouterProducto.get('/statusProducto', async (req, res) => {
     const resultado = await productoServicio.obtenerTodos(1, 100);
     res.json({ data: resultado.productos, count: resultado.total });
 }); // devuelve un json con todos los productos y la cantidad total de ellos
 
-apiRouter.get('/productos', async (req, res) => { // devuelve un json con los productos paginados y su cantidad total
+apiRouterProducto.get('/productos', async (req, res) => { // devuelve un json con los productos paginados y su cantidad total
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 8;
 
@@ -51,7 +51,7 @@ apiRouter.get('/productos', async (req, res) => { // devuelve un json con los pr
     });
 
 });
-apiRouter.get('/productos/:id', async (req, res) => {
+apiRouterProducto.get('/productos/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id, 10);
 
@@ -75,7 +75,7 @@ apiRouter.get('/productos/:id', async (req, res) => {
 
 
 //Agregamos 'upload.single('imagen')' como middleware.
-apiRouter.post('/productos', upload.single('imagen'), async (req, res) => {
+apiRouterProducto.post('/productos', upload.single('imagen'), async (req, res) => {
     try {
         const nuevoProducto = req.body; 
         
@@ -94,7 +94,7 @@ apiRouter.post('/productos', upload.single('imagen'), async (req, res) => {
 });
 
 // para modificar el producto
-apiRouter.put('/productos/:id', async (req, res) => {
+apiRouterProducto.put('/productos/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id, 10);
         const datosActualizados = req.body;
@@ -119,7 +119,7 @@ apiRouter.put('/productos/:id', async (req, res) => {
 });
 
 
-apiRouter.delete('/productos/:id', async (req, res) => {
+apiRouterProducto.delete('/productos/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id, 10);
 
@@ -138,4 +138,4 @@ apiRouter.delete('/productos/:id', async (req, res) => {
     }
 });
 
-module.exports = apiRouter;
+module.exports = apiRouterProducto;

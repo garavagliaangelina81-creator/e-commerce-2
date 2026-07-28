@@ -1,6 +1,6 @@
 const productoServicio = require('../servicios/productoServicios');
 
-function controladorApi() {
+function controladorApiProducto() {
     return {
         obtenerTodos: (req, res) => {
             const page = parseInt(req.query.page) || 1;
