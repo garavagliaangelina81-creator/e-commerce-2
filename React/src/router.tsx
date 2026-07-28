@@ -5,6 +5,8 @@ import ProductView from './pages/products/ProductView/ProductView';
 import ProductsNew from './pages/products/ProductsNew/ProductsNew';
 import CategoriesList from './pages/categories/CategoriesList/CategoriesList';
 import CategoryView from './pages/categories/CategoryView/CategoryView';
+import CategoriesNew from './pages/categories/CategoriesNew/CategoriesNew';
+import CategoriesEdit from './pages/categories/CategoriesEdit/CategoriesEdit';
 import Layout from './components/layouts/Layout';
 import Home from './pages/home/Home';
 
@@ -39,8 +41,16 @@ export const router = createBrowserRouter([
                 element: <CategoriesList />,
             },
             {
-                path: 'categoryView',
+                path: 'categorias/:id',
                 element: <CategoryView />,
+            },
+            {
+                path: 'categorias/new',
+                element: <CategoriesNew />,
+            },
+            {
+                path: 'categorias/editar/:id',
+                element: <CategoriesEdit />,
             },
             {
                 path: '*', //para indicar que esta ruta se va a mostrar cuando no se encuentre ninguna de las rutas anteriores

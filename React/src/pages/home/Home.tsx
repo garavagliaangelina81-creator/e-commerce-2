@@ -18,9 +18,6 @@ export default function Home() {
                                     Ver listado
                                 </button>
                             </Link>
-                            <button className="rounded-full bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100 px-4 py-1.5 text-s font-medium ">
-                                Agregar producto
-                            </button>
                         </div>
                     </article>
 
@@ -30,12 +27,11 @@ export default function Home() {
                         </div>
 
                         <div className="flex flex-wrap items-center gap-2">
-                            <button className="rounded-full bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 px-4 py-1.5 text-s font-medium dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100">
-                                Ver listado
-                            </button>
-                            <button className="rounded-full bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 px-4 py-1.5 text-s font-medium dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100">
-                                Agregar categoria
-                            </button>
+                            <Link to="/categoriesList">
+                                <button className="rounded-full bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 px-4 py-1.5 text-s font-medium dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100">
+                                    Ver listado
+                                </button>
+                            </Link>
                         </div>
                     </article>
                 </div>
