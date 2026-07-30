@@ -79,26 +79,44 @@ const controladorApiProducto = {
         }
     },
 
-    // ACTUALIZAR UN PRODUCTO EXISTENTE
+    // ACTUALIZAR UN PRODUCTO EXISTENTE (PUT)
     actualizar: async (req, res) => {
         try {
             const id = parseInt(req.params.id, 10);
-            const datosActualizados = req.body;
 
             if (Number.isNaN(id) || id < 1) {
                 return res.status(400).json({ error: 'El ID debe ser un número válido' });
             }
 
-            const resultado = await productoModelo.actualizar(id, datosActualizados);
+            console.log(`---> Intentando actualizar producto #${id}`);
+            console.log("Datos recibidos en req.body:", req.body);
+            console.log("Archivo recibido en req.file:", req.file || "Ninguno");
+
+            const datosActualizados = {
+                nombre: req.body.nombre || "",
+                descripcion: req.body.descripcion || "",
+                precio: Number(req.body.precio) || 0,
+                stock: Number(req.body.stock) || 0,
+                categoria_id: Number(req.body.categoria_id) || null,
+                imagen: req.body.imagen || ""
+            };
+
+            // Si subió una foto física nueva, reemplazamos la ruta
+            if (req.file) {
+                datosActualizados.imagen = `/img/${req.file.filename}`;
+            }
+
+            const resultado = await productoServicio.actualizar(id, datosActualizados);
             
             if (!resultado) {
-                return res.status(404).json({ error: 'Producto no encontrado' });
+                return res.status(404).json({ error: 'Producto no encontrado en la base de datos' });
             }
             
-            res.json(resultado);
+            res.json({ success: true, message: "Producto actualizado", data: resultado });
         } catch (error) {
-            console.error("Error al actualizar producto:", error);
-            res.status(500).json({ error: 'Hubo un problema al actualizar el producto' });
+            // DIAGNÓSTICO: Imprimimos el error exacto en la terminal del servidor
+            console.error("ERROR CRÍTICO AL ACTUALIZAR:", error.message);
+            res.status(500).json({ error: error.message });
         }
     },
 

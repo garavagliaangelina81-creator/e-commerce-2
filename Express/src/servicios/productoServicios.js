@@ -4,12 +4,10 @@ const productoServicio = {
     obtenerTodos: (page, limit) => {
         return productoModelo.todos(page, limit);
     },
-    // us17, funcion para validar el id, si no es numero devuelve null
+
     normalized: (id) => {
-        // convertir en numero
         const parsedID = parseInt(id);
-        // id: no numerico(NaN), devolvemos null
-        if (isNaN(parsedID)){
+        if (isNaN(parsedID)) {
             return null;
         }
         return parsedID;
@@ -20,32 +18,44 @@ const productoServicio = {
     },
 
     getRelacionados: (producto) => {
-        return productoModelo.getRelacionados(producto);                                                      
+        return productoModelo.getRelacionados(producto);                                                                             
     },
 
     buscarCategoria: (categoria) => {
         return productoModelo.buscarCategoria(categoria);
     },
+
     todasCategorias: () => {
-    return productoModelo.todasCategorias() || []; 
+        return productoModelo.todasCategorias() || []; 
     },
+
     buscarPorNombre: (nombre) => {
         return productoModelo.buscarPorNombre(nombre);
     },
 
-    // funcion para elegir los 4 productos aleatorios sugeridos
     getSugeridos: () => {
         return productoModelo.getSugeridos();
     },
 
-    // us7
     getDestacados: () => {
         return productoModelo.getDestacados();
     },
 
     ordenarPorPrecio: (criterio) => {
-        // Recibe 'asc' o 'desc' y se lo pasa directo al modelo
         return productoModelo.ordenarPorPrecio(criterio);
+    },
+
+    // MÉTODOS CRUD COMPLEMENTARIOS:
+    crearProducto: (nuevoProducto) => {
+        return productoModelo.crearProducto(nuevoProducto);
+    },
+
+    actualizar: (id, datosActualizados) => {
+        return productoModelo.actualizar(id, datosActualizados);
+    },
+
+    eliminar: (id) => {
+        return productoModelo.eliminar(id);
     }
 };
 

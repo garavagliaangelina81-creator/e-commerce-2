@@ -27,7 +27,7 @@ apiRouterProducto.get('/productos/:id', controladorApiProducto.obtenerPorId);
 // En la ruta POST insertamos el middleware upload.single('imagen') antes del controlador
 apiRouterProducto.post('/productos', upload.single('imagen'), controladorApiProducto.crear);
 
-apiRouterProducto.put('/productos/:id', controladorApiProducto.actualizar);
+apiRouterProducto.put('/productos/:id', upload.single('imagen'), controladorApiProducto.actualizar);
 apiRouterProducto.delete('/productos/:id', controladorApiProducto.eliminar);
 
 module.exports = apiRouterProducto;
