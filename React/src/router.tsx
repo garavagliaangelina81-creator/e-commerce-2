@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router';
 import AboutPage from './pages/about/AboutPage';
 import ProductsList from './pages/products/ProductsList/ProductsList';
-import ProductView from './pages/products/ProductView/ProductEdit';
+import ProductView from './pages/products/ProductView/ProductView';
+import ProductEdit from './pages/products/ProductEdit/ProductEdit';
 import ProductsNew from './pages/products/ProductsNew/ProductsNew';
 import CategoriesList from './pages/categories/CategoriesList/CategoriesList';
 import CategoryView from './pages/categories/CategoryView/CategoryView';
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
             {
                 path: 'products/:id',
                 element: <ProductView />,
+            },
+            {
+                path: 'products/editar/:id',
+                element: <ProductEdit />,
             },
             {
                 path: 'products/new',
