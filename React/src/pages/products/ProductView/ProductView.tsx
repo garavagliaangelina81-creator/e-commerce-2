@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router";
 import { useProductoPorId } from "../../../hooks/useProductos"; 
-import { eliminarProducto } from "../../../services/ProductosService"; 
+import { eliminarProducto } from "../../../services/ProductosService"; // Importamos el servicio
 
 export default function ProductView() {
     const { id } = useParams();
@@ -17,7 +17,6 @@ export default function ProductView() {
         if (confirmar) {
             const exito = await eliminarProducto(producto.id);
             if (exito) {
-                // Si se borró bien, lo mandamos a la lista
                 navigate("/products");
             } else {
                 alert("Hubo un error al intentar eliminar el producto.");
@@ -32,7 +31,7 @@ export default function ProductView() {
     if (status === "error" || !producto) {
         return (
             <div className="flex flex-col items-center justify-center p-10 space-y-4">
-                <p className="text-red-600 dark:text-red-400 font-semibold text-lg">No se encontró el producto o hubo un error.</p>
+                <p className="text-red-600 dark:text-red-400 font-semibold text-lg">No se encontro el producto o hubo un error</p>
                 <Link
                     to="/products"
                     className="rounded-full px-5 py-2 text-sm font-medium bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-slate-700 dark:text-white transition dark:hover:bg-slate-600"

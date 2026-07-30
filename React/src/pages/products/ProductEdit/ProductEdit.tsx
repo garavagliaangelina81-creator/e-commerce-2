@@ -3,7 +3,6 @@ import { eliminarProducto } from "../../../services/ProductosService";
 import { useProductoPorId } from "../../../hooks/useProductos";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../../const/api"; 
-import { Link } from "react-router";
 
 export default function ProductEdit() {
     const { id } = useParams();
@@ -19,7 +18,7 @@ export default function ProductEdit() {
         precio: 0,
         descripcion: "",
         imagen: "",
-        categoria_id: 0, // Agregado al estado inicial
+        categoria_id: 0, 
     });
     
     const [errores, setErrores] = useState({ nombre: "" });
@@ -68,21 +67,6 @@ export default function ProductEdit() {
             ...prev,
             imagen: "",
         }));
-    };
-
-    const handleCancelar = () => {
-        if (producto) {
-            setFormulario({
-                ...producto,
-                nombre: producto.nombre || "",
-                stock: Number(producto.stock) || 0,
-                precio: Number(producto.precio) || 0,
-                descripcion: producto.descripcion || "",
-                imagen: producto.imagen || "",
-                categoria_id: Number(producto.categoria_id) || 0,
-            });
-            setErrores({ nombre: "" });
-        }
     };
 
     const handleGuardar = async (e: React.FormEvent) => {

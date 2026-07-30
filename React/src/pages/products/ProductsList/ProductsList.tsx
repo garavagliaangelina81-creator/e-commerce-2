@@ -11,8 +11,9 @@ export default function ProductsList() {
     }
 
     if (status === "error") {
-        return <p className="p-10 text-center text-red-500">Error al cargar los productos.</p>;
+        return <p className="p-10 text-center text-red-500">Error al cargar los productos</p>;
     }
+    
     const productosFiltrados = productos?.filter((producto) =>
         producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
     );
@@ -23,7 +24,7 @@ export default function ProductsList() {
                 
                 <header className="flex items-center justify-between border-b border-amber-950 dark:border-slate-800 pb-4">
                     <h2 className="text-2xl font-semibold tracking-tight text-amber-950 dark:text-yellow-100">Productos</h2>
-                    <Link to="/new" className="rounded-full px-4 py-1.5 text-sm font-medium bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100">
+                    <Link to="/products/new" className="rounded-full px-4 py-1.5 text-sm font-medium bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100">
                         Agregar producto
                     </Link>
                 </header>
@@ -49,7 +50,10 @@ export default function ProductsList() {
                                     {producto.nombre}
                                 </span>
 
-                                <Link to={`/products/${producto.id}`} className="rounded-full px-4 py-1.5 text-sm font-medium bg-amber-200 text-amber-95 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100">
+                                <Link
+                                    to={`/products/${producto.id}`}
+                                    className="rounded-full px-4 py-1.5 text-sm font-medium bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100"
+                                >
                                     Ver producto
                                 </Link>
                             </article>
