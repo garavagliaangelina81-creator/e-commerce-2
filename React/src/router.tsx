@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import AboutPage from './pages/about/AboutPage';
 import ProductsList from './pages/products/ProductsList/ProductsList';
-import ProductView from './pages/products/ProductView/ProductView';
+import ProductView from './pages/products/ProductView/ProductEdit';
 import ProductsNew from './pages/products/ProductsNew/ProductsNew';
 import CategoriesList from './pages/categories/CategoriesList/CategoriesList';
 import CategoryView from './pages/categories/CategoryView/CategoryView';

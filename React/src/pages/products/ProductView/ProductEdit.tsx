@@ -3,47 +3,51 @@ import { eliminarProducto, useProductoById } from "../../../services/UseProducto
 import { useState, useEffect } from "react";
 import { API_URL } from "../../../const/api"; 
 
-export default function ProductView() {
+export default function ProductEdit() {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    //Obtenemos el producto actual desde el backend
     const { data: producto, status } = useProductoById(
         id ? Number(id) : null
     );
 
+    //Estado del formulario (sin campos de URL externa)
     const [formulario, setFormulario] = useState({
         nombre: "",
         stock: 0,
         precio: 0,
         descripcion: "",
-        imagen: "",
+        imagenActual: "", // Guarda la ruta que ya está en SQLite (ej: "/img/foto.jpg")
+        categoria_id: ""
     });
     
+    // Estado exclusivo para el archivo físico que elija de su computadora
+    const [imagenFile, setImagenFile] = useState<File | null>(null);
     const [errores, setErrores] = useState({ nombre: "" });
 
-    //cargar datos del producto recibido
+    //Cuando llega la data del backend, rellenamos el formulario
     useEffect(() => {
         if (producto) {
             setFormulario({
-                ...producto,
                 nombre: producto.nombre || "",
                 stock: Number(producto.stock) || 0,
                 precio: Number(producto.precio) || 0,
                 descripcion: producto.descripcion || "",
-                imagen: producto.imagen || "",
+                imagenActual: producto.imagen || "",
+                categoria_id: String(producto.categoria_id || "")
             });
+            setImagenFile(null);
         }
     }, [producto]);
 
-    //eliminar Producto
+    // Lógica para eliminar producto
     async function handleEliminar() {
         if (!id) return;
-
         const confirmado = window.confirm(`¿Seguro que querés eliminar el producto #${id}?`);
         if (!confirmado) return;
 
         const eliminado = await eliminarProducto(Number(id));
-
         if (eliminado) {
             alert("Producto eliminado correctamente");
             navigate("/products");
@@ -52,36 +56,19 @@ export default function ProductView() {
         }
     }
 
-    const handleStockChange = (delta) => {
+    const handleStockChange = (delta: number) => {
         setFormulario((prev) => ({
             ...prev,
             stock: Math.max(0, (prev.stock || 0) + delta),
         }));
     };
 
-    
-    const handleRemoverImagen = () => {
-        setFormulario((prev) => ({
-            ...prev,
-            imagen: "",
-        }));
-    };
-
     const handleCancelar = () => {
-        if (producto) {
-            setFormulario({
-                ...producto,
-                nombre: producto.nombre || "",
-                stock: Number(producto.stock) || 0,
-                precio: Number(producto.precio) || 0,
-                descripcion: producto.descripcion || "",
-                imagen: producto.imagen || "",
-            });
-            setErrores({ nombre: "" });
-        }
+        navigate("/products");
     };
 
-    const handleGuardar = async (e) => {
+    // ENVÍO DEL FORMULARIO CON FORMDATA
+   const handleGuardar = async (e: React.FormEvent) => {
         e.preventDefault();
         setErrores({ nombre: "" });
 
@@ -90,24 +77,39 @@ export default function ProductView() {
             return;
         }
 
-        const bodyPayload = {
-            ...formulario,
-            precio: Number(formulario.precio) || 0,
-            stock: Number(formulario.stock) || 0,
-        };
+        const formData = new FormData();
+        formData.append("nombre", formulario.nombre);
+        formData.append("precio", String(Number(formulario.precio) || 0));
+        formData.append("stock", String(Number(formulario.stock) || 0));
+        formData.append("descripcion", formulario.descripcion || "");
+        formData.append("categoria_id", String(Number(formulario.categoria_id) || 1));
+        formData.append("imagen", formulario.imagenActual || "");
+
+        if (imagenFile) {
+            formData.append("imagen", imagenFile);
+        }
 
         try {
             const baseUrl = API_URL || "http://localhost:3000";
-            const response = await fetch(`${baseUrl}/api/productos/${id}`, {
+            const response = await fetch(`${baseUrl}/productos/${id}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(bodyPayload),
+                body: formData,
             });
 
             if (response.ok) {
                 alert("Producto actualizado correctamente");
+                navigate("/products");
             } else {
-                alert("Error al guardar los cambios");
+                const errorTexto = await response.text();
+                console.error("Respuesta de error del servidor:", errorTexto);
+                
+                // Intentamos leer como JSON, si falla mostramos el texto crudo
+                try {
+                    const errorJson = JSON.parse(errorTexto);
+                    alert(`Error al guardar: ${errorJson.error || "Revisa la consola"}`);
+                } catch {
+                    alert(`Error del servidor (Código ${response.status}). Revisa la consola.`);
+                }
             }
         } catch (error) {
             console.error("Error guardando cambios:", error);
@@ -123,15 +125,19 @@ export default function ProductView() {
         return <h2 className="text-white p-5">No se encontró el producto</h2>;
     }
 
+    // Determinamos qué imagen mostrar en la vista previa
+    const urlVistaPrevia = imagenFile 
+        ? URL.createObjectURL(imagenFile) 
+        : formulario.imagenActual.startsWith("http")
+        ? formulario.imagenActual
+        : `http://localhost:3000${formulario.imagenActual}`;
+
     return (
         <div className="p-5 w-full text-white">
-            
-            {/* ENCABEZADO */}
             <header className="flex items-center justify-between mb-6 w-full">
                 <h1 className="text-2xl font-semibold text-white">
-                    Productos &gt; #{producto.id}
+                    Editar Producto &gt; #{producto.id}
                 </h1>
-
                 <button
                     type="button"
                     onClick={handleEliminar}
@@ -142,15 +148,11 @@ export default function ProductView() {
             </header>
 
             <article className="rounded-xl border border-slate-800 bg-slate-800 p-6 shadow-xl space-y-5 w-full">
-                
-                {formulario.imagen ? (
+                {/* VISTA PREVIA DE LA IMAGEN */}
+                {formulario.imagenActual || imagenFile ? (
                     <div className="relative w-60 h-60 rounded-xl overflow-hidden mb-4 border border-slate-700">
                         <img
-                            src={
-                                formulario.imagen.startsWith("http")
-                                    ? formulario.imagen
-                                    : `http://localhost:3000${formulario.imagen}`
-                            }
+                            src={urlVistaPrevia}
                             alt={formulario.nombre || "Producto"}
                             className="w-full h-full object-cover"
                         />
@@ -162,33 +164,23 @@ export default function ProductView() {
                 )}
 
                 <form onSubmit={handleGuardar} className="space-y-4 w-full">
-                    
-                
+                    {/* INPUT EXCLUSIVO PARA ARCHIVO DE IMAGEN */}
                     <div>
                         <label className="block mb-2 font-medium text-sm text-slate-300">
-                            URL de la Imagen
+                            Cambiar Imagen del Producto (Solo archivos locales)
                         </label>
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={formulario.imagen || ""}
-                                onChange={(e) =>
-                                    setFormulario({ ...formulario, imagen: e.target.value })
+                        <input 
+                            type="file" 
+                            accept="image/*"
+                            onChange={(e) => {
+                                if (e.target.files && e.target.files.length > 0) {
+                                    setImagenFile(e.target.files[0]);
                                 }
-                                className="w-full rounded-lg border border-slate-600 bg-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-100"
-                                placeholder="/img/ejemplo.jpg o https://..."
-                            />
-                            {formulario.imagen && (
-                                <button
-                                    type="button"
-                                    onClick={handleRemoverImagen}
-                                    className="px-4 py-2 bg-red-600/80 hover:bg-red-600 text-xs font-semibold rounded-lg whitespace-nowrap cursor-pointer transition"
-                                >
-                                    Remover Imagen
-                                </button>
-                            )}
-                        </div>
+                            }}
+                            className="w-full text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-100 file:text-slate-900 hover:file:bg-yellow-200 cursor-pointer bg-slate-700 rounded-lg p-2 border border-slate-600"
+                        />
                     </div>
+
                     <div>
                         <label className="block mb-2 font-medium text-sm text-slate-300">
                             Nombre *
@@ -211,8 +203,6 @@ export default function ProductView() {
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        
-    
                         <div>
                             <label className="block mb-2 font-medium text-sm text-slate-300">
                                 Stock
@@ -264,11 +254,6 @@ export default function ProductView() {
                         </div>
                     </div>
 
-                    <p className="text-slate-300">
-                        <strong>Categoría / Tienda:</strong>{" "}
-                        {producto.categoriaId || producto?.["tienda"] || "General"}
-                    </p>
-
                     <div>
                         <label className="block mb-2 font-medium text-sm text-slate-300">
                             Descripción
@@ -301,9 +286,7 @@ export default function ProductView() {
                             Guardar
                         </button>
                     </div>
-
                 </form>
-
             </article>
         </div>
     );
