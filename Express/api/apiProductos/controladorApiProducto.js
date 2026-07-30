@@ -1,28 +1,123 @@
-const productoServicio = require('../servicios/productoServicios');
+const productoServicio = require('../../src/servicios/productoServicios');
+const productoModelo = require('../../src/modelos/productModel');
 
-function controladorApiProducto() {
-    return {
-        obtenerTodos: (req, res) => {
-            const page = parseInt(req.query.page) || 1;
-            const limit = parseInt(req.query.limit) || 8            
-            if (Number.isNaN(page) || page < 1) {
-                return res.status(400).json({ error: 'page debe ser entero mayor o igual a 1' });
-            };
-            productoServicio.obtenerTodos(page, limit) // responde con un JSON que contiene los productos y la informacion de paginacion
-                .then(resultado => {
-                    res.json({ 
-                        data: resultado.productos,
-                        paginacion: {
-                            paginaActual: page,
-                            limitePorPagina: limit,
-                            totalProductos: resultado.total
-                        }
-                    });
-                })
-                .catch(error => {
-                    res.status(500).json({ error: error.message });
-                });
+const controladorApiProducto = {
+    // STATUS GENERAL DE PRODUCTOS
+    statusProducto: async (req, res) => {
+        try {
+            const resultado = await productoServicio.obtenerTodos(1, 100);
+            res.json({ data: resultado.productos, count: resultado.total });
+        } catch (error) {
+            console.error("Error obteniendo status de productos:", error);
+            res.status(500).json({ error: 'Hubo un problema al obtener el status de productos' });
         }
-    };
-}
-module.exports = controladorApi;
+    },
+
+    // OBTENER TODOS LOS PRODUCTOS (PAGINADO)
+    obtenerTodos: async (req, res) => {
+        try {
+            const page = parseInt(req.query.page, 10) || 1;
+            const limit = parseInt(req.query.limit, 10) || 8;
+
+            if (Number.isNaN(page) || page < 1 || Number.isNaN(limit) || limit < 1) {
+                return res.status(400).json({ error: 'page y limit deben ser enteros mayores o iguales a 1' });
+            }
+
+            const resultado = await productoServicio.obtenerTodos(page, limit);
+            res.json({
+                data: resultado.productos,
+                paginacion: {
+                    paginaActual: page,
+                    limitePorPagina: limit,
+                    totalProductos: resultado.total
+                }
+            });
+        } catch (error) {
+            console.error("Error obteniendo productos:", error);
+            res.status(500).json({ error: 'Hubo un problema al obtener los productos' });
+        }
+    },
+
+    // OBTENER PRODUCTO POR ID
+    obtenerPorId: async (req, res) => {
+        try {
+            const id = parseInt(req.params.id, 10);
+
+            if (Number.isNaN(id) || id < 1) {
+                return res.status(400).json({ error: 'El ID debe ser un número válido' });
+            }
+
+            // Usamos await en caso de que buscarPorId sea asíncrono
+            const producto = await productoModelo.buscarPorId(id);
+
+            if (!producto) {
+                return res.status(404).json({ error: 'Producto no encontrado' });
+            }
+
+            res.json(producto);
+        } catch (error) {
+            console.error("Error obteniendo producto:", error);
+            res.status(500).json({ error: 'Hubo un problema al obtener el producto' });
+        }
+    },
+
+    // CREAR UN NUEVO PRODUCTO
+    crear: async (req, res) => {
+        try {
+            const nuevoProducto = req.body; 
+            
+            // Si el middleware de multer adjuntó una imagen, asignamos la ruta del archivo
+            if (req.file) {
+                nuevoProducto.imagen = `/img/${req.file.filename}`;
+            }
+
+            const resultado = await productoModelo.crearProducto(nuevoProducto);
+            res.status(201).json(resultado);
+        } catch (error) {
+            console.error("Error al crear producto:", error);
+            res.status(500).json({ error: 'Hubo un problema al crear el producto' });
+        }
+    },
+
+    // ACTUALIZAR UN PRODUCTO EXISTENTE
+    actualizar: async (req, res) => {
+        try {
+            const id = parseInt(req.params.id, 10);
+            const datosActualizados = req.body;
+
+            if (Number.isNaN(id) || id < 1) {
+                return res.status(400).json({ error: 'El ID debe ser un número válido' });
+            }
+
+            const resultado = await productoModelo.actualizar(id, datosActualizados);
+            
+            if (!resultado) {
+                return res.status(404).json({ error: 'Producto no encontrado' });
+            }
+            
+            res.json(resultado);
+        } catch (error) {
+            console.error("Error al actualizar producto:", error);
+            res.status(500).json({ error: 'Hubo un problema al actualizar el producto' });
+        }
+    },
+
+    // ELIMINAR UN PRODUCTO
+    eliminar: async (req, res) => {
+        try {
+            const id = parseInt(req.params.id, 10);
+
+            if (Number.isNaN(id) || id < 1) {
+                return res.status(400).json({ error: 'El ID debe ser un número válido' });
+            }
+
+            await productoModelo.eliminar(id);
+            res.status(204).send(); 
+        } catch (error) {
+            console.error("Error al eliminar producto:", error);
+            res.status(500).json({ error: 'Hubo un problema al eliminar el producto' });
+        }
+    }
+};
+
+module.exports = controladorApiProducto;
