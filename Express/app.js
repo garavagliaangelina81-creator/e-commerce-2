@@ -10,7 +10,8 @@ const rutasRegistro = require('./src/routes/rutasRegistro');
 const rutasProducto = require('./src/routes/rutasProducto');
 const rutasCarrito = require('./src/routes/rutasCarrito');
 const rutasCheckout = require('./src/routes/rutasCheckout');
-const routerApi = require('./api/routerApi');
+const routerApiProducto = require('./api/apiProductos/routerApiProducto');
+const routerApiCategoria = require('./api/apiCategorias/routerApiCategoria')
 const carritoCantidadMiddleware = require('./src/middlewares/carritoCantidad');
 const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador 404
 const middlewareError500 = require('./src/middlewares/error500');
@@ -42,7 +43,8 @@ app.set('layout', 'layouts/main')
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', routerApi);
+app.use('/api', routerApiProducto);
+app.use('/api', routerApiCategoria);
 
 app.use(carritoCantidadMiddleware);
 
