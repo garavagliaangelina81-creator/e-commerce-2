@@ -1,310 +1,146 @@
-import { useNavigate, useParams } from "react-router";
-import { eliminarProducto, useProductoById } from "../../../services/UseProductos";
-import { useState, useEffect } from "react";
-import { API_URL } from "../../../const/api"; 
+import { useParams, Link, useNavigate } from "react-router";
+import { useProductoPorId } from "../../../hooks/useProductos"; 
+import { eliminarProducto } from "../../../services/ProductosService"; 
 
 export default function ProductView() {
     const { id } = useParams();
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
 
-    const { data: producto, status } = useProductoById(
-        id ? Number(id) : null
-    );
+    const { data: producto, status } = useProductoPorId(id ? Number(id) : null);
 
-    const [formulario, setFormulario] = useState({
-        nombre: "",
-        stock: 0,
-        precio: 0,
-        descripcion: "",
-        imagen: "",
-    });
-    
-    const [errores, setErrores] = useState({ nombre: "" });
 
-    //cargar datos del producto recibido
-    useEffect(() => {
-        if (producto) {
-            setFormulario({
-                ...producto,
-                nombre: producto.nombre || "",
-                stock: Number(producto.stock) || 0,
-                precio: Number(producto.precio) || 0,
-                descripcion: producto.descripcion || "",
-                imagen: producto.imagen || "",
-            });
-        }
-    }, [producto]);
-
-    //eliminar Producto
-    async function handleEliminar() {
-        if (!id) return;
-
-        const confirmado = window.confirm(`¿Seguro que querés eliminar el producto #${id}?`);
-        if (!confirmado) return;
-
-        const eliminado = await eliminarProducto(Number(id));
-
-        if (eliminado) {
-            alert("Producto eliminado correctamente");
-            navigate("/products");
-        } else {
-            alert("Error al eliminar el producto");
-        }
-    }
-
-    const handleStockChange = (delta) => {
-        setFormulario((prev) => ({
-            ...prev,
-            stock: Math.max(0, (prev.stock || 0) + delta),
-        }));
-    };
-
-    
-    const handleRemoverImagen = () => {
-        setFormulario((prev) => ({
-            ...prev,
-            imagen: "",
-        }));
-    };
-
-    const handleCancelar = () => {
-        if (producto) {
-            setFormulario({
-                ...producto,
-                nombre: producto.nombre || "",
-                stock: Number(producto.stock) || 0,
-                precio: Number(producto.precio) || 0,
-                descripcion: producto.descripcion || "",
-                imagen: producto.imagen || "",
-            });
-            setErrores({ nombre: "" });
-        }
-    };
-
-    const handleGuardar = async (e) => {
-        e.preventDefault();
-        setErrores({ nombre: "" });
-
-        if (!formulario.nombre || !formulario.nombre.trim()) {
-            setErrores({ nombre: "El nombre es requerido." });
-            return;
-        }
-
-        const bodyPayload = {
-            ...formulario,
-            precio: Number(formulario.precio) || 0,
-            stock: Number(formulario.stock) || 0,
-        };
-
-        try {
-            const baseUrl = API_URL || "http://localhost:3000";
-            const response = await fetch(`${baseUrl}/api/productos/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(bodyPayload),
-            });
-
-            if (response.ok) {
-                alert("Producto actualizado correctamente");
+    const handleDelete = async () => {
+        if (!producto) return;
+        
+        const confirmar = window.confirm(`¿Estás seguro de que querés eliminar "${producto.nombre}"?`);
+        
+        if (confirmar) {
+            const exito = await eliminarProducto(producto.id);
+            if (exito) {
+                // Si se borró bien, lo mandamos a la lista
+                navigate("/products");
             } else {
-                alert("Error al guardar los cambios");
+                alert("Hubo un error al intentar eliminar el producto.");
             }
-        } catch (error) {
-            console.error("Error guardando cambios:", error);
-            alert("Error de conexión al guardar los cambios");
         }
     };
 
     if (status === "loading") {
-        return <h2 className="text-white p-5">Cargando producto...</h2>;
+        return <p className="p-10 text-center text-amber-950 dark:text-amber-200 font-medium">Cargando detalles del producto...</p>;
     }
 
-    if (!producto) {
-        return <h2 className="text-white p-5">No se encontró el producto</h2>;
+    if (status === "error" || !producto) {
+        return (
+            <div className="flex flex-col items-center justify-center p-10 space-y-4">
+                <p className="text-red-600 dark:text-red-400 font-semibold text-lg">No se encontró el producto o hubo un error.</p>
+                <Link
+                    to="/products"
+                    className="rounded-full px-5 py-2 text-sm font-medium bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-slate-700 dark:text-white transition dark:hover:bg-slate-600"
+                >
+                    Volver a la lista
+                </Link>
+            </div>
+        );
     }
 
     return (
-        <div className="p-5 w-full text-white">
-            
-            {/* ENCABEZADO */}
-            <header className="flex items-center justify-between mb-6 w-full">
-                <h1 className="text-2xl font-semibold text-white">
-                    Productos &gt; #{producto.id}
-                </h1>
-
-                <button
-                    type="button"
-                    onClick={handleEliminar}
-                    className="rounded-full bg-yellow-100 px-5 py-2 text-sm font-semibold text-slate-900 transition hover:bg-red-500 hover:text-white cursor-pointer"
-                >
-                    Eliminar
-                </button>
-            </header>
-
-            <article className="rounded-xl border border-slate-800 bg-slate-800 p-6 shadow-xl space-y-5 w-full">
+        <main className="min-h-full mt-4 bg-gray-200 p-4 text-amber-950 dark:bg-slate-900 dark:text-slate-100 sm:p-6">
+            <section className="mx-auto flex w-full max-w-4xl flex-col gap-4 rounded-2xl border-gray-200 bg-gray-200 p-4 dark:border-slate-950 dark:bg-slate-950/40 sm:p-6">
                 
-                {formulario.imagen ? (
-                    <div className="relative w-60 h-60 rounded-xl overflow-hidden mb-4 border border-slate-700">
-                        <img
-                            src={
-                                formulario.imagen.startsWith("http")
-                                    ? formulario.imagen
-                                    : `http://localhost:3000${formulario.imagen}`
-                            }
-                            alt={formulario.nombre || "Producto"}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                ) : (
-                    <div className="w-60 h-60 rounded-xl border border-dashed border-slate-600 flex items-center justify-center text-slate-400 mb-4">
-                        Sin Imagen
-                    </div>
-                )}
+                <header className="flex items-center justify-between border-b border-amber-950 dark:border-slate-800 pb-4 w-full">
+                    <h1 className="text-2xl font-semibold tracking-tight text-amber-950 dark:text-yellow-100">
+                        Detalles del producto &gt; #{producto.id}
+                    </h1>
 
-                <form onSubmit={handleGuardar} className="space-y-4 w-full">
+                    <Link
+                        to="/products"
+                        className="rounded-full px-4 py-1.5 text-sm font-medium bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100"
+                    >
+                        Volver a la lista
+                    </Link>
+                </header>
+
+                <article className="flex flex-col md:flex-row gap-8 rounded-xl border border-amber-950 bg-amber-100 px-6 py-8 dark:border-slate-800 dark:bg-slate-800/80">
                     
-                
-                    <div>
-                        <label className="block mb-2 font-medium text-sm text-slate-300">
-                            URL de la Imagen
-                        </label>
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={formulario.imagen || ""}
-                                onChange={(e) =>
-                                    setFormulario({ ...formulario, imagen: e.target.value })
-                                }
-                                className="w-full rounded-lg border border-slate-600 bg-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-100"
-                                placeholder="/img/ejemplo.jpg o https://..."
-                            />
-                            {formulario.imagen && (
-                                <button
-                                    type="button"
-                                    onClick={handleRemoverImagen}
-                                    className="px-4 py-2 bg-red-600/80 hover:bg-red-600 text-xs font-semibold rounded-lg whitespace-nowrap cursor-pointer transition"
-                                >
-                                    Remover Imagen
-                                </button>
-                            )}
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block mb-2 font-medium text-sm text-slate-300">
-                            Nombre *
-                        </label>
-                        <input
-                            type="text"
-                            value={formulario.nombre || ""}
-                            onChange={(e) =>
-                                setFormulario({ ...formulario, nombre: e.target.value })
-                            }
-                            className="w-full rounded-lg border border-slate-600 bg-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-100"
-                        />
-                        {errores?.nombre ? (
-                            <p className="text-red-400 text-xs mt-1">{errores.nombre}</p>
-                        ) : null}
-                    </div>
-
-                    <p className="text-slate-300">
-                        <strong>Identificador:</strong> #{producto.id}
-                    </p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        
-    
-                        <div>
-                            <label className="block mb-2 font-medium text-sm text-slate-300">
-                                Stock
-                            </label>
-                            <div className="flex items-center gap-2">
-                                <button
-                                    type="button"
-                                    onClick={() => handleStockChange(-1)}
-                                    className="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-lg font-bold border border-slate-600 cursor-pointer"
-                                >
-                                    ➖
-                                </button>
-                                <input
-                                    type="number"
-                                    value={formulario.stock ?? 0}
-                                    onChange={(e) =>
-                                        setFormulario({
-                                            ...formulario,
-                                            stock: Number(e.target.value),
-                                        })
+                    <div className="shrink-0 flex justify-center">
+                        {producto.imagen ? (
+                            <div className="relative w-full md:w-80 h-80 rounded-xl overflow-hidden border border-amber-900/30 dark:border-slate-700 shadow-lg">
+                                <img
+                                    src={
+                                        producto.imagen.startsWith("http")
+                                            ? producto.imagen
+                                            : `http://localhost:3000${producto.imagen}`
                                     }
-                                    className="w-full text-center rounded-lg border border-slate-600 bg-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-100"
+                                    alt={producto.nombre}
+                                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                                 />
-                                <button
-                                    type="button"
-                                    onClick={() => handleStockChange(1)}
-                                    className="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-lg font-bold border border-slate-600 cursor-pointer"
-                                >
-                                    ➕
-                                </button>
+                            </div>
+                        ) : (
+                            <div className="w-full md:w-80 h-80 rounded-xl border-2 border-dashed border-amber-900/40 flex flex-col items-center justify-center text-amber-900/60 dark:border-slate-600 dark:text-slate-400 bg-white/50 dark:bg-slate-800/50">
+                                <span className="text-4xl mb-2">📦</span>
+                                <span>Sin Imagen</span>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="flex flex-col flex-1 space-y-5">
+                        
+                        <div>
+                            <h2 className="text-3xl font-bold text-amber-950 dark:text-yellow-100 leading-tight">
+                                {producto.nombre}
+                            </h2>
+                            <div className="mt-2 inline-block rounded-md bg-amber-200/50 px-3 py-1 text-xs font-semibold text-amber-900 dark:bg-slate-700 dark:text-slate-300">
+                                Categoría ID: {producto.categoria_id}
                             </div>
                         </div>
 
-                        <div>
-                            <label className="block mb-2 font-medium text-sm text-slate-300">
-                                Precio ($)
-                            </label>
-                            <input
-                                type="number"
-                                value={formulario.precio ?? 0}
-                                onChange={(e) =>
-                                    setFormulario({
-                                        ...formulario,
-                                        precio: Number(e.target.value),
-                                    })
-                                }
-                                className="w-full rounded-lg border border-slate-600 bg-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-100"
-                            />
+                        <div className="flex flex-wrap gap-6 items-end">
+                            <div>
+                                <p className="text-sm font-medium text-amber-900/70 dark:text-slate-400 mb-1">Precio</p>
+                                <span className="text-4xl font-extrabold text-amber-950 dark:text-white">
+                                    ${producto.precio}
+                                </span>
+                            </div>
+                            
+                            <div className="mb-1">
+                                <span className={`px-4 py-1.5 rounded-full text-sm font-bold border ${
+                                    producto.stock > 0 
+                                    ? 'bg-green-100 border-green-300 text-green-800 dark:bg-green-900/30 dark:border-green-800 dark:text-green-400' 
+                                    : 'bg-red-100 border-red-300 text-red-800 dark:bg-red-900/30 dark:border-red-800 dark:text-red-400'
+                                }`}>
+                                    {producto.stock > 0 ? `Stock disponible: ${producto.stock}` : 'Sin Stock'}
+                                </span>
+                            </div>
                         </div>
+
+                        <div className="pt-5 border-t border-amber-900/20 dark:border-slate-700 flex-1">
+                            <h3 className="text-sm font-semibold text-amber-900/70 dark:text-slate-400 mb-3 uppercase tracking-wider">
+                                Descripción del producto
+                            </h3>
+                            <p className="text-amber-950 dark:text-slate-300 whitespace-pre-wrap leading-relaxed">
+                                {producto.descripcion || <span className="italic opacity-70">Este producto no cuenta con una descripción detallada.</span>}
+                            </p>
+                        </div>
+                        
+                        <div className="pt-6 flex justify-end gap-3 mt-auto">
+                            <button
+                                onClick={handleDelete}
+                                className="rounded-full px-6 py-2 text-sm font-semibold border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition dark:border-red-500 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-slate-900"
+                            >
+                                Eliminar
+                            </button>
+                            <Link
+                                to={`/products/editar/${producto.id}`}
+                                className="rounded-full px-6 py-2 text-sm font-semibold border-2 border-amber-950 text-amber-950 hover:bg-amber-950 hover:text-amber-200 transition dark:border-yellow-100 dark:text-yellow-100 dark:hover:bg-yellow-100 dark:hover:text-slate-900"
+                            >
+                                Editar producto
+                            </Link>
+                        </div>
+
                     </div>
 
-                    <p className="text-slate-300">
-                        <strong>Categoría / Tienda:</strong>{" "}
-                        {producto.categoriaId || producto?.["tienda"] || "General"}
-                    </p>
-
-                    <div>
-                        <label className="block mb-2 font-medium text-sm text-slate-300">
-                            Descripción
-                        </label>
-                        <textarea
-                            value={formulario.descripcion || ""}
-                            onChange={(e) =>
-                                setFormulario({
-                                    ...formulario,
-                                    descripcion: e.target.value,
-                                })
-                            }
-                            rows={4}
-                            className="w-full rounded-lg border border-slate-600 bg-slate-700 p-3 text-white resize-none focus:outline-none focus:ring-2 focus:ring-yellow-100"
-                        />
-                    </div>
-
-                    <div className="flex justify-end gap-3 pt-4 border-t border-slate-700">
-                        <button
-                            type="button"
-                            onClick={handleCancelar}
-                            className="px-5 py-2 rounded-full border border-slate-600 hover:bg-slate-700 text-sm font-medium transition cursor-pointer"
-                        >
-                            Cancelar
-                        </button>
-                        <button
-                            type="submit"
-                            className="px-5 py-2 rounded-full bg-yellow-100 hover:bg-yellow-200 text-slate-900 text-sm font-semibold transition cursor-pointer"
-                        >
-                            Guardar
-                        </button>
-                    </div>
-
-                </form>
-
-            </article>
-        </div>
+                </article>
+            </section>
+        </main>
     );
 }
