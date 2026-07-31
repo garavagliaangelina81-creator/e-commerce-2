@@ -1,1 +1,1 @@
-export const API_URL = 'e-commerce-2-production-b894.up.railway.app'; 
+export const API_URL = 'e-commerce-2-production-b894.up.railway.app/api'; 

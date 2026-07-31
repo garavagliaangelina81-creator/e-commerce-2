@@ -55,7 +55,7 @@ export default function ProductsNew() {
         }
 
         try {
-            const baseUrl = API_URL || "e-commerce-2-production-b894.up.railway.app";
+            const baseUrl = API_URL;
             const response = await fetch(`${baseUrl}/productos`, {
                 method: "POST",
                 body: formData,
