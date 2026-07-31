@@ -17,7 +17,7 @@ const controladorApiProducto = {
     obtenerTodos: async (req, res) => {
         try {
             const page = parseInt(req.query.page, 10) || 1;
-            const limit = parseInt(req.query.limit, 10) || 8;
+            const limit = parseInt(req.query.limit, 6) || 6;
 
             if (Number.isNaN(page) || page < 1 || Number.isNaN(limit) || limit < 1) {
                 return res.status(400).json({ error: 'page y limit deben ser enteros mayores o iguales a 1' });

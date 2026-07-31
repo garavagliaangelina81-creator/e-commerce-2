@@ -2,16 +2,24 @@ import { API_URL } from '../const/api';
 import { type Products } from '../types/products';
 
 // OBTENER TODOS LOS PRODUCTOS (paginados)
-export async function obtenerProductos(page = 1, limit = 8) {
+export async function obtenerProductosPaginados(page = 1, limit = 6) {
     try {
-        const response = await fetch(`${API_URL}/productos?page=${page}&limit=${limit}`);
-        if (!response.ok) throw new Error("Error en la respuesta de la red");
+        const baseUrl = (API_URL || "http://localhost:3000/api").replace(/\/$/, "");
+        const response = await fetch(`${baseUrl}/productos?page=${page}&limit=${limit}`);
         
-        const data = await response.json();
-        return data; 
+        if (!response.ok) {
+            throw new Error("Error al obtener los productos paginados");
+        }
+        
+        const json = await response.json();
+        // Devolvemos tanto el arreglo como el total para saber cuándo ocultar el botón
+        return {
+            productos: json.data || [],
+            total: json.paginacion?.totalProductos || 0
+        };
     } catch (error) {
-        console.error("Error obteniendo productos:", error);
-        throw error;
+        console.error("Error en obtenerProductosPaginados:", error);
+        return { productos: [], total: 0 };
     }
 }
 
