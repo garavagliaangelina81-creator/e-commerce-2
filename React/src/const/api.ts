@@ -1,1 +1,1 @@
-export const API_URL = 'http://localhost:3000/api'; 
+export const API_URL = 'e-commerce-2-production-b894.up.railway.app'; 

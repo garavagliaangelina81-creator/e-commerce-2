@@ -4,7 +4,7 @@ import { type Products } from '../types/products';
 // OBTENER TODOS LOS PRODUCTOS (paginados)
 export async function obtenerProductosPaginados(page = 1, limit = 6) {
     try {
-        const baseUrl = (API_URL || "http://localhost:3000/api").replace(/\/$/, "");
+        const baseUrl = (API_URL || "e-commerce-2-production-b894.up.railway.app").replace(/\/$/, "");
         const response = await fetch(`${baseUrl}/productos?page=${page}&limit=${limit}`);
         
         if (!response.ok) {

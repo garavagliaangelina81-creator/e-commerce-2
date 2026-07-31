@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react"; 
-// Asumimos que puedes importar la función o ajustarla según tu hook
 import { API_URL } from "../../../const/api"; 
 
 export default function ProductsList() {
@@ -17,7 +16,7 @@ export default function ProductsList() {
             if (esInicial) setStatus("loading");
             else setCargandoMas(true);
 
-            const baseUrl = (API_URL || "http://localhost:3000/api").replace(/\/$/, "");
+            const baseUrl = (API_URL || "e-commerce-2-production-b894.up.railway.app").replace(/\/$/, "");
             const response = await fetch(`${baseUrl}/productos?page=${numPagina}&limit=8`);
             
             if (!response.ok) throw new Error("Error al cargar");

@@ -95,7 +95,7 @@ export default function ProductEdit() {
         }
 
         try {
-            const baseUrl = API_URL || "http://localhost:3000";
+            const baseUrl = API_URL || "e-commerce-2-production-b894.up.railway.app";
             const response = await fetch(`${baseUrl}/productos/${id}`, {
                 method: "PUT",
                 body: formData,
