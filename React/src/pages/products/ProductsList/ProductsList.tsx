@@ -1,11 +1,60 @@
 import { Link } from "react-router";
-import { useState } from "react"; 
-import { useProductos } from "../../../hooks/useProductos";
+import { useState, useEffect } from "react"; 
+// Asumimos que puedes importar la función o ajustarla según tu hook
+import { API_URL } from "../../../const/api"; 
 
 export default function ProductsList() {
-    const { data: productos, status } = useProductos();
+    const [productos, setProductos] = useState<any[]>([]);
+    const [status, setStatus] = useState<"loading" | "error" | "success">("loading");
     const [busqueda, setBusqueda] = useState(""); 
-    
+    const [pagina, setPagina] = useState(1);
+    const [totalProductos, setTotalProductos] = useState(0);
+    const [cargandoMas, setCargandoMas] = useState(false);
+
+    // Función para traer los productos de la API de forma paginada
+    const fetchProductos = async (numPagina: number, esInicial = false) => {
+        try {
+            if (esInicial) setStatus("loading");
+            else setCargandoMas(true);
+
+            const baseUrl = (API_URL || "http://localhost:3000/api").replace(/\/$/, "");
+            const response = await fetch(`${baseUrl}/productos?page=${numPagina}&limit=8`);
+            
+            if (!response.ok) throw new Error("Error al cargar");
+
+            const json = await response.json();
+            const nuevosProductos = json.data || [];
+            const total = json.paginacion?.totalProductos || 0;
+
+            if (esInicial) {
+                setProductos(nuevosProductos);
+            } else {
+                // Acumulamos los nuevos productos con los que ya estaban en pantalla
+                setProductos((prev) => [...prev, ...nuevosProductos]);
+            }
+
+            setTotalProductos(total);
+            setStatus("success");
+        } catch (error) {
+            console.error(error);
+            setStatus("error");
+        } finally {
+            setCargandoMas(false);
+        }
+    };
+
+    // Carga inicial al montar el componente
+    useEffect(() => {
+        fetchProductos(1, true);
+    }, []);
+
+    // Manejador del botón "Ver más"
+    const handleVerMas = () => {
+        const siguientePagina = pagina + 1;
+        setPagina(siguientePagina);
+        fetchProductos(siguientePagina, false);
+    };
+
     if (status === "loading") {
         return <p className="p-10 text-center text-amber-950 dark:text-amber-200">Cargando productos...</p>;
     }
@@ -14,9 +63,13 @@ export default function ProductsList() {
         return <p className="p-10 text-center text-red-500">Error al cargar los productos</p>;
     }
     
-    const productosFiltrados = productos?.filter((producto) =>
+    // Filtro de búsqueda sobre los productos cargados
+    const productosFiltrados = productos.filter((producto) =>
         producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
     );
+
+    // Comprobamos si todavía hay más productos en la base de datos por mostrar
+    const quedanProductos = productos.length < totalProductos;
 
     return (
         <main className="min-h-full bg-gray-200 text-amber-950 dark:bg-slate-900 dark:text-slate-100 mt-4">
@@ -64,6 +117,20 @@ export default function ProductsList() {
                         </p>
                     )}
                 </div>
+
+                {/* BOTÓN "VER MÁS" AL FINAL DE LA LISTA */}
+                {quedanProductos && (
+                    <div className="mt-6 flex justify-center w-full">
+                        <button
+                            type="button"
+                            onClick={handleVerMas}
+                            disabled={cargandoMas}
+                            className="rounded-full px-6 py-2.5 text-sm font-semibold bg-amber-300 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 dark:text-slate-900 transition dark:hover:bg-yellow-200 shadow-md cursor-pointer disabled:opacity-50"
+                        >
+                            {cargandoMas ? "Cargando más..." : "Ver más productos"}
+                        </button>
+                    </div>
+                )}
 
             </section>
         </main>

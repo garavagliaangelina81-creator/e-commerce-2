@@ -3,7 +3,7 @@ import { fetchCategorias } from "../services/CategoriaServicio";
 import type { Categoria } from "../types/Categoria"
 import type { Status } from "../types/status";
 
-export function useCategorias(page = 1, limit = 8) {
+export function useCategorias(page = 1, limit = 6) {
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const [status, setStatus] = useState<Status>("loading");
     const [totalCategorias, setTotalCategorias] = useState<number>(0);

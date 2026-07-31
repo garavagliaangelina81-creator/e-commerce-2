@@ -68,6 +68,10 @@ export default function ProductEdit() {
         navigate("/products");
     };
 
+    const handleVolver = () => {
+        navigate("/products");
+    };
+
     // ENVÍO DEL FORMULARIO CON FORMDATA
    const handleGuardar = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -135,19 +139,29 @@ export default function ProductEdit() {
 
     return (
         <div className="p-5 w-full text-white">
-            <header className="flex items-center justify-between mb-6 w-full">
+<header className="flex items-center justify-between mb-6 w-full">
                 <h1 className="text-2xl font-semibold text-white">
                     Editar Producto &gt; #{producto.id}
                 </h1>
-                <button
-                    type="button"
-                    onClick={handleEliminar}
-                    className="rounded-full bg-yellow-100 px-5 py-2 text-sm font-semibold text-slate-900 transition hover:bg-red-500 hover:text-white cursor-pointer"
-                >
-                    Eliminar
-                </button>
+                
+                {/* DOCUMENTACIÓN: Envolvemos los botones en un div flex con 'gap-3' para mantenerlos juntos a la derecha */}
+                <div className="flex items-center gap-3">
+                    <button
+                        type="button"
+                        onClick={handleVolver}
+                        className="rounded-full px-4 py-2 text-sm font-medium bg-amber-200 text-amber-950 hover:bg-amber-950 hover:text-amber-200 dark:bg-yellow-100 dark:text-slate-900 transition dark:hover:bg-slate-950 dark:hover:text-yellow-100 cursor-pointer"
+                    >
+                        Volver
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleEliminar}
+                        className="rounded-full bg-yellow-100 px-5 py-2 text-sm font-semibold text-slate-900 transition hover:bg-red-500 hover:text-white cursor-pointer"
+                    >
+                        Eliminar
+                    </button>
+                </div>
             </header>
-
             <article className="rounded-xl border border-slate-800 bg-slate-800 p-6 shadow-xl space-y-5 w-full">
                 {/* VISTA PREVIA DE LA IMAGEN */}
                 {formulario.imagenActual || imagenFile ? (

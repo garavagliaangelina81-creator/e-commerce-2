@@ -2,7 +2,7 @@ import { API_URL } from '../const/api';
 import type { Categoria } from '../types/Categoria';
 
 // OBTENER TODAS (con paginación opcional)
-export async function fetchCategorias(page = 1, limit = 8) {
+export async function fetchCategorias(page = 1, limit = 6) {
     try {
         const response = await fetch(`${API_URL}/categorias?page=${page}&limit=${limit}`);
         return await response.json(); 
