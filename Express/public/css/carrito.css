@@ -231,7 +231,6 @@
     
     .carrito-item img {
         height: 100px;
-        object-fit: cover;
         border-radius: 20px;
         object-fit: contain;
         flex-shrink: 0;
