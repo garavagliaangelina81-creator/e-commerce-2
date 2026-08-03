@@ -45,3 +45,4 @@ CREATE TABLE IF NOT EXISTS items_pedido (
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
     FOREIGN KEY (id_producto) REFERENCES productos(id)
 );
+
