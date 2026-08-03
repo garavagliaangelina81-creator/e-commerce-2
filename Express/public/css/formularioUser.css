@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -6,11 +7,10 @@
 
 body {
     background-color: #f7f7f7;
-    font-family: Arial, Helvetica;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* botones */
-
+/* Botones y Enlaces Generales */
 button {
     background-color: #4E342E;
     color: #ffffff;
@@ -22,14 +22,17 @@ button {
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
 }
+
 button:hover {
     background-color: #FFF59D;
     color: #4E342E;
 }
+
 a {
     color: #5D4037;
     text-decoration: none;
 }
+
 .main-auth {
     display: flex;
     justify-content: center;
@@ -38,6 +41,7 @@ a {
     padding: 20px;
     background-color: #f7f7f7; 
 }
+
 .ingreso-card {
     background-color: #ffffff;
     border-radius: 8px;
@@ -49,23 +53,27 @@ a {
     display: flex;
     flex-direction: column;
 }
+
 .ingreso-card h1 {
     font-size: 24px;
     margin-bottom: 20px;
     color: #4E342E;
     text-align: center;
 }
+
 .ingreso-card form {
     display: flex;
     flex-direction: column;
     text-align: left; 
 }
+
 .ingreso-card label {
     font-size: 14px;
     margin-bottom: 5px;
     font-weight: bold;
     color: #5D4037;
 }
+
 .ingreso-card input {
     width: 100%;
     padding: 12px;
@@ -76,10 +84,12 @@ a {
     font-size: 16px;
     color: #333333;
 }
+
 .ingreso-card input:focus {
     outline: none;
     border-color: #4E342E;
 }
+
 .ingreso-card button {
     background-color: #4E342E; 
     color: #ffffff;
@@ -91,30 +101,101 @@ a {
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
 }
+
 .ingreso-card button:hover {
     background-color: #FFF59D;
     color: #4E342E;
 }
+
 .ingreso-card p {
     margin-top: 20px;
     font-size: 14px;
     color: #5D4037;
     text-align: center;
 }
+
 .ingreso-card a {
     color: #4E342E;
     text-decoration: none;
     font-weight: bold;
 }
+
 .ingreso-card a:hover {
     text-decoration: underline;
 }
+
 .volver {
-    text-decoration: none;    
-    display: flex;
-    align-self: flex-start;
-    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     color: #4E342E;
-    font-size: 1.2em;
+    font-size: 18px;
     font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 20px;
+    align-self: flex-start;
+    padding: 6px 10px 6px 0;
+}
+
+.volver .flecha {
+    font-size: 26px;
+    line-height: 1;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    display: inline-block;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.volver:hover .flecha {
+    transform: translateX(-4px);
+}
+
+@media (max-width: 768px) {
+    .main-auth {
+        padding: 12px; 
+        align-items: flex-start; 
+        padding-top: 25px;
+    }
+
+    .ingreso-card {
+        padding: 25px 18px; 
+        border-radius: 12px; 
+    }
+
+    .ingreso-card h1 {
+        font-size: 28px; 
+        margin-bottom: 22px;
+    }
+
+    .ingreso-card label {
+        font-size: 16px; 
+        margin-bottom: 8px;
+    }
+
+    .ingreso-card input {
+        padding: 14px 12px; 
+        margin-bottom: 22px;
+        font-size: 16px;
+    }
+
+    .ingreso-card button {
+        padding: 16px; 
+        font-size: 18px;
+        margin-top: 5px;
+    }
+
+    .ingreso-card p {
+        font-size: 15px; 
+        line-height: 1.4;
+    }
+
+    .volver {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .volver .flecha {
+        font-size: 30px;
+    }
 }
