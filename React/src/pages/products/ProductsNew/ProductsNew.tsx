@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { API_URL } from "../../../const/api"; 
-import { fetchCategorias } from "../../../services/CategoriaServicio";
 
 export default function ProductsNew() {
     const navigate = useNavigate();
 
-    //estado para el nuevo producto
     const [formulario, setFormulario] = useState({
         nombre: "",
         stock: 0,
         precio: 0,
         descripcion: "",
-        categoria_id: "1"
+        categoria_id: "" 
     });
 
     const [imagenFile, setImagenFile] = useState<File | null>(null);
@@ -20,9 +18,8 @@ export default function ProductsNew() {
     const [guardando, setGuardando] = useState(false);
     const [categorias, setCategorias] = useState<any[]>([]);
 
-    // Traemos las categorías desde el backend al cargar la página
     useEffect(() => {
-        const fetchCategorias = async () => {
+        const fetchCategoriasAPI = async () => {
             try {
                 const baseUrl = (API_URL).replace(/\/$/, "");
                 const response = await fetch(`${baseUrl}/categorias`);
@@ -34,20 +31,9 @@ export default function ProductsNew() {
                 console.error("Error al cargar categorías:", error);
             }
         };
-        fetchCategorias();
+        fetchCategoriasAPI();
     }, []);
 
-    // Manejador para enviar el formulario
-    const handleGuardar = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        // Validación básica
-        if (!formulario.nombre.trim() || !formulario.categoria_id) {
-            alert("El nombre y la categoría son obligatorios.");
-            return;
-        }
-
-    //controles para el stock
     const handleStockChange = (delta: number) => {
         setFormulario((prev) => ({
             ...prev,
@@ -55,18 +41,22 @@ export default function ProductsNew() {
         }));
     };
 
-    //boton cancelar: regresa a la lista de productos
     const handleCancelar = () => {
         navigate("/products");
     };
 
-    //envío del formulario al backend (post /productos)
     const handleGuardar = async (e: React.FormEvent) => {
         e.preventDefault();
         setErrores({ nombre: "" });
 
+        // Validación básica
         if (!formulario.nombre || !formulario.nombre.trim()) {
             setErrores({ nombre: "El nombre es requerido." });
+            return;
+        }
+
+        if (!formulario.categoria_id) {
+            alert("Por favor, selecciona una categoría.");
             return;
         }
 
@@ -84,7 +74,7 @@ export default function ProductsNew() {
         }
 
         try {
-            const baseUrl = API_URL;
+            const baseUrl = (API_URL).replace(/\/$/, "");
             const response = await fetch(`${baseUrl}/productos`, {
                 method: "POST",
                 body: formData,
@@ -111,7 +101,7 @@ export default function ProductsNew() {
         }
     };
 
-    //vista previa de la imagen local elegida
+    // Vista previa de la imagen local elegida
     const urlVistaPrevia = imagenFile ? URL.createObjectURL(imagenFile) : null;
 
     return (
@@ -123,7 +113,6 @@ export default function ProductsNew() {
             </header>
 
             <article className="rounded-xl border border-slate-800 bg-slate-800 p-6 shadow-xl space-y-5 w-full">
-                {/* VISTA PREVIA DE LA IMAGEN */}
                 {urlVistaPrevia ? (
                     <div className="relative w-60 h-60 rounded-xl overflow-hidden mb-4 border border-slate-700">
                         <img
@@ -176,16 +165,16 @@ export default function ProductsNew() {
 
                 {/* SELECTOR DE CATEGORÍA */}
                     <div>
-                        <label className="block mb-2 text-sm font-medium text-amber-950 dark:text-slate-300">Categoría *</label>
+                        <label className="block mb-2 text-sm font-medium text-slate-300">Categoría *</label>
                         <select
                             required
                             value={formulario.categoria_id}
                             onChange={(e) => setFormulario({ ...formulario, categoria_id: e.target.value })}
-                            className="w-full rounded-lg border border-amber-900/30 bg-white p-3 text-amber-950 focus:outline-none focus:ring-2 focus:ring-amber-950 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:ring-yellow-100 cursor-pointer"
+                            className="w-full rounded-lg border border-slate-600 bg-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-100 cursor-pointer"
                         >
                             <option value="" disabled>-- Selecciona una categoría --</option>
                             {categorias.map((cat) => (
-                                <option key={cat.categoria_id} value={cat.categoria_id}>
+                                <option key={cat.categoria_id || cat.id} value={cat.categoria_id || cat.id}>
                                     {cat.nombre_categoria || cat.nombre} 
                                 </option>
                             ))}
@@ -244,7 +233,7 @@ export default function ProductsNew() {
                         </div>
                     </div>
 
-                    {/* descripcion*/}
+                    {/* DESCRIPCIÓN */}
                     <div>
                         <label className="block mb-2 font-medium text-sm text-slate-300">
                             Descripción
@@ -263,7 +252,7 @@ export default function ProductsNew() {
                         />
                     </div>
 
-                    {/* botones */}
+                    {/* BOTONES */}
                     <div className="flex justify-end gap-3 pt-4 border-t border-slate-700">
                         <button
                             type="button"
@@ -284,5 +273,4 @@ export default function ProductsNew() {
             </article>
         </div>
     );
-}
 }
