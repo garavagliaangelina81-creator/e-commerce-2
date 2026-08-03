@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { API_URL } from "../../../const/api"; 
+import { fetchCategorias } from "../../../services/CategoriaServicio";
 
 export default function ProductsNew() {
     const navigate = useNavigate();
@@ -17,6 +18,35 @@ export default function ProductsNew() {
     const [imagenFile, setImagenFile] = useState<File | null>(null);
     const [errores, setErrores] = useState({ nombre: "" });
     const [guardando, setGuardando] = useState(false);
+    const [categorias, setCategorias] = useState<any[]>([]);
+
+    // Traemos las categorías desde el backend al cargar la página
+    useEffect(() => {
+        const fetchCategorias = async () => {
+            try {
+                const baseUrl = (API_URL || "http://localhost:3000/api").replace(/\/$/, "");
+                const response = await fetch(`${baseUrl}/categorias`);
+                if (response.ok) {
+                    const json = await response.json();
+                    // DOCUMENTACIÓN: Ajusta "json.data" si tu API devuelve el arreglo directamente en "json"
+                    setCategorias(json.data || json || []);
+                }
+            } catch (error) {
+                console.error("Error al cargar categorías:", error);
+            }
+        };
+        fetchCategorias();
+    }, []);
+
+    // Manejador para enviar el formulario
+    const handleGuardar = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // Validación básica
+        if (!formulario.nombre.trim() || !formulario.categoria_id) {
+            alert("El nombre y la categoría son obligatorios.");
+            return;
+        }
 
     //controles para el stock
     const handleStockChange = (delta: number) => {
@@ -48,7 +78,7 @@ export default function ProductsNew() {
         formData.append("precio", String(Number(formulario.precio) || 0));
         formData.append("stock", String(Number(formulario.stock) || 0));
         formData.append("descripcion", formulario.descripcion || "");
-        formData.append("categoria_id", String(Number(formulario.categoria_id) || 1));
+        formData.append("categoria_id", formulario.categoria_id);
 
         if (imagenFile) {
             formData.append("imagen", imagenFile);
@@ -145,6 +175,25 @@ export default function ProductsNew() {
                         ) : null}
                     </div>
 
+                {/* SELECTOR DE CATEGORÍA */}
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-amber-950 dark:text-slate-300">Categoría *</label>
+                        <select
+                            required
+                            value={formulario.categoria_id}
+                            onChange={(e) => setFormulario({ ...formulario, categoria_id: e.target.value })}
+                            className="w-full rounded-lg border border-amber-900/30 bg-white p-3 text-amber-950 focus:outline-none focus:ring-2 focus:ring-amber-950 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:ring-yellow-100 cursor-pointer"
+                        >
+                            <option value="" disabled>-- Selecciona una categoría --</option>
+                            {categorias.map((cat) => (
+                                // Asegúrate de usar las propiedades correctas según tu base de datos (id y nombre)
+                                <option key={cat.categoria_id} value={cat.categoria_id}>
+                                    {cat.nombre_categoria || cat.nombre} 
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block mb-2 font-medium text-sm text-slate-300">
@@ -237,4 +286,5 @@ export default function ProductsNew() {
             </article>
         </div>
     );
+}
 }
