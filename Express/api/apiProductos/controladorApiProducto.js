@@ -48,7 +48,7 @@ const controladorApiProducto = {
             }
 
             // Usamos await en caso de que buscarPorId sea asíncrono
-            const producto = await productoModelo.buscarPorId(id);
+            const producto = await productoServicio.buscarPorID(id);
 
             if (!producto) {
                 return res.status(404).json({ error: 'Producto no encontrado' });
@@ -71,7 +71,7 @@ const controladorApiProducto = {
                 nuevoProducto.imagen = `/img/${req.file.filename}`;
             }
 
-            const resultado = await productoModelo.crearProducto(nuevoProducto);
+            const resultado = await productoServicio.crearProducto(nuevoProducto);
             res.status(201).json(resultado);
         } catch (error) {
             console.error("Error al crear producto:", error);
@@ -129,7 +129,7 @@ const controladorApiProducto = {
                 return res.status(400).json({ error: 'El ID debe ser un número válido' });
             }
 
-            await productoModelo.eliminar(id);
+            await productoServicio.eliminar(id);
             res.status(204).send(); 
         } catch (error) {
             console.error("Error al eliminar producto:", error);

@@ -185,7 +185,6 @@ export default function ProductsNew() {
                         >
                             <option value="" disabled>-- Selecciona una categoría --</option>
                             {categorias.map((cat) => (
-                                // Asegúrate de usar las propiedades correctas según tu base de datos (id y nombre)
                                 <option key={cat.categoria_id} value={cat.categoria_id}>
                                     {cat.nombre_categoria || cat.nombre} 
                                 </option>
