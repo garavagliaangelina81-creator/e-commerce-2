@@ -17,8 +17,11 @@ const controlador404 = require('./src/controladores/404Controlador'); //requiere
 const middlewareError500 = require('./src/middlewares/error500');
 
 const app = express();
-app.use(cors({ origin: 'https://e-commerce-2-tan.vercel.app/' }));
-
+app.use(cors({ 
+    origin: 'https://e-commerce-2-tan.vercel.app', // <-- ¡Sin la barra al final!
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
 const PORT = 3000;
 
 app.use(session({
