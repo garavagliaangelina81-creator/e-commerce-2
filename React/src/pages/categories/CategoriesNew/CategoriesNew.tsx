@@ -23,7 +23,7 @@ export default function CategoriesNew() {
 
         try {
             const baseUrl = API_URL; 
-            const response = await fetch(`${baseUrl}/api/categorias`, {
+            const response = await fetch(`${baseUrl}/categorias`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

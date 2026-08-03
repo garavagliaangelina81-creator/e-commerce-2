@@ -3,10 +3,10 @@ const productoModelo = require('../../src/modelos/productModel');
 
 const controladorApiProducto = {
     // STATUS GENERAL DE PRODUCTOS
-    statusProducto: async (req, res) => {
+    statsProducto: async (req, res) => {
         try {
             const resultado = await productoServicio.obtenerTodos(1, 100);
-            res.json({ data: resultado.productos, count: resultado.total });
+            res.json({ count: resultado.total });
         } catch (error) {
             console.error("Error obteniendo status de productos:", error);
             res.status(500).json({ error: 'Hubo un problema al obtener el status de productos' });

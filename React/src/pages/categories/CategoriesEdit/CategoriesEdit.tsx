@@ -38,7 +38,7 @@ export default function CategoriesEdit() {
         try {
             const baseUrl = API_URL; 
             
-            const response = await fetch(`${baseUrl}/api/categorias/${id}`, {
+            const response = await fetch(`${baseUrl}/categorias/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

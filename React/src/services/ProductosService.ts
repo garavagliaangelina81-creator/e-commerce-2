@@ -23,6 +23,18 @@ export async function obtenerProductosPaginados(page = 1, limit = 6) {
     }
 }
 
+//OBTENER ESTADISTICAS DE PRODUCTOS
+export async function obtenerStatsProductos() {
+    try {
+        const baseUrl = (API_URL).replace(/\/$/, "");
+        const response = await fetch(`${baseUrl}/statsProducto`);
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching product stats:", error);
+        return { count: 0 };
+    }
+}
+
 // OBTENER UN PRODUCTO POR ID
 export async function obtenerProductoPorId(id: number) {
     try {

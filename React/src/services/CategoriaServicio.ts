@@ -12,6 +12,17 @@ export async function fetchCategorias(page = 1, limit = 6) {
     }
 }
 
+//OBTENER ESTADISTICAS
+export async function fetchStatsCategorias() {
+    try {
+        const response = await fetch(`${API_URL}/statsCategorias`);
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching category stats:", error);
+        return { count: 0 };
+    }
+}
+
 // OBTENER POR ID
 export async function fetchCategoriaPorID(categoriaId: number) {
     try {

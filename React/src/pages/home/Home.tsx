@@ -1,7 +1,11 @@
 import { Link } from "react-router";
 import Header from "../../components/layouts/Header/Header";
+import { fetchStatsCategorias } from "../../services/CategoriaServicio";
+import { obtenerStatsProductos } from "../../services/ProductosService";
 
 export default function Home() {
+
+
     return (
         <main className=" min-h-full  dark:bg-slate-900 dark:text-slate-100" >
             <Header />
@@ -9,7 +13,7 @@ export default function Home() {
                 <div className="grid gap-4">
                     <article className="flex items-center justify-between gap-4 rounded-xl border border-amber-950 bg-amber-100 dark:border-slate-800 dark:bg-slate-800/80 px-4 py-5 shadow-lg shadow-black/20 backdrop-blur-sm">
                         <div className="flex items-center gap-3">
-                                    <span className="text-lg font-medium text-amber-950 dark:text-yellow-100">Productos</span>
+                                    <span className="text-lg font-medium text-amber-950 dark:text-yellow-100"> {obtenerStatsProductos() || 0} Productos</span>
                         </div>
 
                         <div className="flex flex-wrap items-center gap-2">
@@ -23,7 +27,7 @@ export default function Home() {
 
                     <article className="flex items-center justify-between gap-4 rounded-xl border border-amber-950 bg-amber-100 dark:border-slate-800 dark:bg-slate-800/80 px-4 py-5 shadow-lg shadow-black/20 backdrop-blur-sm">
                         <div className="flex items-center gap-3">
-                                    <span className="text-lg font-medium text-amber-950 dark:text-yellow-100">Categorias</span>
+                                    <span className="text-lg font-medium text-amber-950 dark:text-yellow-100"> {fetchStatsCategorias() || 0} Categorias</span>
                         </div>
 
                         <div className="flex flex-wrap items-center gap-2">
