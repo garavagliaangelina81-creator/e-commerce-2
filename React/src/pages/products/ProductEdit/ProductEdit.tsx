@@ -135,7 +135,7 @@ export default function ProductEdit() {
         ? URL.createObjectURL(imagenFile) 
         : formulario.imagenActual.startsWith("http")
         ? formulario.imagenActual
-        : `http://localhost:3000${formulario.imagenActual}`;
+        : `${API_URL}${formulario.imagenActual}`;
 
     return (
         <div className="p-5 w-full text-white">
@@ -163,7 +163,6 @@ export default function ProductEdit() {
                 </div>
             </header>
             <article className="rounded-xl border border-slate-800 bg-slate-800 p-6 shadow-xl space-y-5 w-full">
-                {/* VISTA PREVIA DE LA IMAGEN */}
                 {formulario.imagenActual || imagenFile ? (
                     <div className="relative w-60 h-60 rounded-xl overflow-hidden mb-4 border border-slate-700">
                         <img
@@ -179,7 +178,6 @@ export default function ProductEdit() {
                 )}
 
                 <form onSubmit={handleGuardar} className="space-y-4 w-full">
-                    {/* INPUT EXCLUSIVO PARA ARCHIVO DE IMAGEN */}
                     <div>
                         <label className="block mb-2 font-medium text-sm text-slate-300">
                             Cambiar Imagen del Producto (Solo archivos locales)
