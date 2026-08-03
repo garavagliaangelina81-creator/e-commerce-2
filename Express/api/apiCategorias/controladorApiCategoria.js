@@ -1,9 +1,9 @@
 const categoriaServicio = require('../../src/servicios/categoriaServicio');
 
 const controladorApiCategoria = {
-    statusCategoria: async (req, res) => {
+    statsCategorias: async (req, res) => {
         const resultado = await categoriaServicio.obtenerTodos(1, 100);
-        res.json({ data: resultado.categorias, count: resultado.total });
+        res.json({ count: resultado.total });
     },
 
     obtenerTodos: async (req, res) => {

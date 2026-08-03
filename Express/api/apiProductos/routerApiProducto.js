@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // DEFINICIÓN DE RUTAS API DE PRODUCTOS
-apiRouterProducto.get('/statusProducto', controladorApiProducto.statusProducto); 
+apiRouterProducto.get('/statsProducto', controladorApiProducto.statsProducto); 
 apiRouterProducto.get('/productos', controladorApiProducto.obtenerTodos); 
 apiRouterProducto.get('/productos/:id', controladorApiProducto.obtenerPorId);
 
