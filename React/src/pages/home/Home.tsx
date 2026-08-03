@@ -15,8 +15,8 @@ export default function Home() {
                 const resProductos = await obtenerStatsProductos();
                 const resCategorias = await fetchStatsCategorias();
 
-                setTotalProductos(resProductos || 0);
-                setTotalCategorias(resCategorias || 0);
+                setTotalProductos(resProductos?.count || resProductos?.total || 0);
+                setTotalCategorias(resCategorias?.count || resCategorias?.total || 0);            
             } catch (error) {
                 console.error("Error al cargar las estadísticas:", error);
             }
