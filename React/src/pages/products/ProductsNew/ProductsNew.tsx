@@ -24,11 +24,10 @@ export default function ProductsNew() {
     useEffect(() => {
         const fetchCategorias = async () => {
             try {
-                const baseUrl = (API_URL || "http://localhost:3000/api").replace(/\/$/, "");
+                const baseUrl = (API_URL).replace(/\/$/, "");
                 const response = await fetch(`${baseUrl}/categorias`);
                 if (response.ok) {
                     const json = await response.json();
-                    // DOCUMENTACIÓN: Ajusta "json.data" si tu API devuelve el arreglo directamente en "json"
                     setCategorias(json.data || json || []);
                 }
             } catch (error) {
