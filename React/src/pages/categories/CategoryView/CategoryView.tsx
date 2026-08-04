@@ -22,7 +22,7 @@ export default function CategoryView() {
 
         if (eliminado) {
             alert("Categoría eliminada correctamente");
-            navigate("/categorias"); 
+            navigate("/categoriesList"); 
         } else {
             alert("Error al eliminar la categoría");
         }

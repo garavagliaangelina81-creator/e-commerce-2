@@ -217,7 +217,7 @@ export default function ProductsNew() {
 
                         <div>
                             <label className="block mb-2 font-medium text-sm text-slate-300">
-                                Precio ($)
+                                Precio (Puntos)
                             </label>
                             <input
                                 type="number"
