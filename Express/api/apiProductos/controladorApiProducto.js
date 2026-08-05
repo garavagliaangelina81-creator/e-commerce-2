@@ -1,5 +1,4 @@
 const productoServicio = require('../../src/servicios/productoServicios');
-const productoModelo = require('../../src/modelos/productModel');
 
 const controladorApiProducto = {
     // STATUS GENERAL DE PRODUCTOS
