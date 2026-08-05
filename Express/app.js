@@ -30,6 +30,13 @@ app.use(session({
     saveUninitialized: false,
     cookie: { httpOnly: true }
 }));
+
+app.use((req, res, next) => { //middleware global para verificar si el usuario esta logueado y pasar la información a las vistas
+    // res.locals hace que la variable sea accesible en cualquier archivo .ejs
+    res.locals.usuarioLogueado = req.session.usuarioLogueado || null;
+    next();
+});
+
 // "traductores" para que req.body funcione
 app.use(express.urlencoded({ extended: true })); //"traductor" de los datos que se envian desde el formulario al servidor
 app.use(express.json());
