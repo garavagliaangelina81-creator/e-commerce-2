@@ -144,7 +144,6 @@ export default function ProductEdit() {
                     Editar Producto &gt; #{producto.id}
                 </h1>
                 
-                {/* DOCUMENTACIÓN: Envolvemos los botones en un div flex con 'gap-3' para mantenerlos juntos a la derecha */}
                 <div className="flex items-center gap-3">
                     <button
                         type="button"
@@ -251,7 +250,7 @@ export default function ProductEdit() {
 
                         <div>
                             <label className="block mb-2 font-medium text-sm text-slate-300">
-                                Precio ($)
+                                Precio (Puntos)
                             </label>
                             <input
                                 type="number"

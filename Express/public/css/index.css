@@ -74,7 +74,29 @@
     background-color: #ddd;
 }
 
+.header-con-filtros {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 1rem;
+}
 
+
+.header-con-filtros select {
+    padding: 0.5rem;
+    border: 1px solid #4E342E;
+    border-radius: 10px;
+    background-color: #4E342E;
+    color:  white;
+    font-weight: bold;  
+    cursor: pointer;
+}
+
+option {
+    background-color:  #ebebeb;
+    font-weight: bold;  
+    color : #4E342E;
+}
 
 
 @media (max-width: 850px) {

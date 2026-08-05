@@ -98,7 +98,7 @@ export default function ProductView() {
                             <div>
                                 <p className="text-sm font-medium text-amber-900/70 dark:text-slate-400 mb-1">Precio</p>
                                 <span className="text-4xl font-extrabold text-amber-950 dark:text-white">
-                                    ${producto.precio}
+                                    {producto.precio} Puntos
                                 </span>
                             </div>
                             

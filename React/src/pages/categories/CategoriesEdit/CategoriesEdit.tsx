@@ -48,7 +48,7 @@ export default function CategoriesEdit() {
 
             if (response.ok) {
                 alert("Categoría modificada correctamente");
-                navigate("/categorias"); 
+                navigate("/categoriesList"); 
             } else {
                 setError("Error al modificar la categoría en el servidor");
             }

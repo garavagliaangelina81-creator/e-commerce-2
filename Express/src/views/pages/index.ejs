@@ -53,9 +53,21 @@
                 <% }) %>
             </div>
         </section>
+        
+        <section class="products-section">
+        <h2>Todos los productos</h2>
 
-    <section class="products-section">
-            <h2>Todos los productos</h2>
+        <div class="header-con-filtros">
+
+            <form action="/" method="GET" id="form-ordenar">
+                <select name="sort" id="sort" onchange="document.getElementById('form-ordenar').submit();">
+                    <option value="">Ordenar por...</option>
+                    <option value="asc" <%= locals.ordenActual === 'asc' ? 'selected' : '' %>>Menor a Mayor</option>
+                    <option value="desc" <%= locals.ordenActual === 'desc' ? 'selected' : '' %>>Mayor a Menor</option>
+                </select>
+            </form>
+        </div>
+
             <div class="products-grid-filas" id="grilla-todos-productos">
                 <% todos.forEach((producto, index) => { %>
                     <div class="item-producto <%= index >= 8 ? 'oculto' : '' %>">

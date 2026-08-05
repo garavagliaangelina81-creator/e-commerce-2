@@ -33,7 +33,7 @@ export default function CategoriesNew() {
 
             if (response.ok) {
                 alert("Categoría agregada correctamente");
-                navigate("/categorias"); 
+                navigate("/categoriesList"); 
             } else {
                 setError("Error al guardar la categoría en el servidor.");
             }
