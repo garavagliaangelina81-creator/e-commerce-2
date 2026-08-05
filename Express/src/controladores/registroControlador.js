@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const db = require('../db/database');
+const db = require('../db/database.js');
 
 const registroControlador = {
     mostrarRegistro: (req, res) => {
@@ -20,32 +20,36 @@ const registroControlador = {
             const { nombreU, apellido, email, password } = req.body;
 
             //verifica si el email ya esta registrado en la base de datos
-            db.get('SELECT * FROM usuarios WHERE email = ?', [email], async (err, usuarioExiste) => {
-                if(usuarioExiste) {
+            try {
+                const buscarUsuario = db.prepare('SELECT * FROM usuarios WHERE email = ?');
+                const usuarioExiste = buscarUsuario.get(email);
+                if (usuarioExiste) {
                     return res.render('pages/register', {
-                        errors: { email: {msg: 'El email ya esta registrado'} },
+                        errors: {
+                            email: { msg: 'El email ya esta registrado' }
+                        },
                         oldData: req.body
                     });
                 }
+            
                 const saltRounds = 10; //sirve para generar un hash seguro (10 es un numero de iteraciones, mientras mas alto mas seguro pero mas lento)
                 const hashPassword = await bcrypt.hash(password, saltRounds); //genera el hash de la contraseña
             
                 //inserta el nuevo usuario en la base de datos con el hash de la contraseña
-                db.run(`INSERT INTO usuarios (nombre, apellido, email, password_hash, rol) VALUES (?, ?, ?, ?, 'cliente')`, 
-                    [nombreU, apellido, email, hashPassword], (err) => {
-                        if (err) {
-                            console.error(err);
-                            return res.status(500).send('Error al registrar el usuario');
-                        }
-                        return res.redirect('/login');
-                    }
-                );
-            });
+                const insertarUsuario = db.prepare(`INSERT INTO usuarios (nombre, apellido, email, password_hash, rol) VALUES (?, ?, ?, ?, 'cliente')`);
+                insertarUsuario.run(nombreU, apellido, email, hashPassword);
+
+                return res.redirect('/login');
+
+                } catch (error) {
+                    console.error('Error al registrar el usuario:', error);
+                    return res.render('pages/500', { layout: false });
+                }
     },
     login: (req, res) => {
         res.render('pages/login', { layout: false });
     },
-    procesoLogin: (req, res) => {
+    procesoLogin: async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.render('pages/login', {
@@ -56,8 +60,11 @@ const registroControlador = {
         }
         const { email, password } = req.body;
 
-        //verifica si el email existe en la base de datos
-        db.get('SELECT * FROM usuarios WHERE email = ?', [email], async (err, usuarioALoguear) => {
+        try {
+            //verifica si el email existe en la base de datos
+            const stmtBuscar = db.prepare('SELECT * FROM usuarios WHERE email = ?');
+            const usuarioALoguear = stmtBuscar.get(email);
+
             if (!usuarioALoguear) {
                 return res.render('pages/login', {
                     errors: {
@@ -88,6 +95,7 @@ const registroControlador = {
                 req.session.usuarioLogueado = usuarioALoguear; //almacena la información del usuario en la sesión
                 return res.redirect('/');
             }
+            
             //si la contraseña es incorrecta, se renderiza la página de login con un mensaje de error
             return res.render('pages/login', {
                 errors: {
@@ -96,7 +104,12 @@ const registroControlador = {
                 oldData: req.body,
                 layout: false
             });
-        });
-    }
+
+        } catch (err) {
+            console.error(err);
+            return res.status(500).send('Error en el proceso de login');
+        }
+    }    
+
 };
 module.exports = registroControlador;

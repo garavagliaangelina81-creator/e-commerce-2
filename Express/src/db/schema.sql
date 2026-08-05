@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,                 
+    password_hash TEXT NOT NULL,
+    rol TEXT DEFAULT 'cliente',                 
     creado_en DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
