@@ -49,7 +49,7 @@ const registroControlador = {
     login: (req, res) => {
         res.render('pages/login', { layout: false });
     },
-    procesoLogin: async (req, res) => {
+    procesoLogin: async (req, res, next) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.render('pages/login', {
@@ -107,7 +107,7 @@ const registroControlador = {
 
         } catch (err) {
             console.error(err);
-            return res.status(500).send('Error en el proceso de login');
+            return next(err);
         }
     }    
 
