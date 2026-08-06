@@ -1,9 +1,7 @@
 import { createBrowserRouter } from 'react-router';
-// Importamos el guardia de seguridad y la vista de login
 import RutaProtegida from './components/RutaProtegida';
 import Login from './pages/Login'; 
 
-// Tus importaciones originales
 import AboutPage from './pages/about/AboutPage';
 import ProductsList from './pages/products/ProductsList/ProductsList';
 import ProductView from './pages/products/ProductView/ProductView';
@@ -18,16 +16,16 @@ import Home from './pages/home/Home';
 
 export const router = createBrowserRouter([
     {
-        // 1. RUTA PÚBLICA: Cualquiera puede acceder al formulario de login
+        // cualquiera puede acceder al formulario de login
         path: '/login',
         element: <Login />,
     },
     {
-        // 2. EL GUARDIA: Envuelve y protege todo lo que esté en sus "children"
+        // envuelve y protege todo lo que este en su children
         element: <RutaProtegida rolRequerido="admin" />,
         children: [
             {
-                // 3. TU ESTRUCTURA ORIGINAL: Queda intacta, pero ahora es privada
+                // la estructura general es privada
                 path: '/',
                 element: <Layout />,
                 children: [
@@ -72,7 +70,7 @@ export const router = createBrowserRouter([
                         element: <CategoriesEdit />,
                     },
                     {
-                        path: '*', // Ruta de fallback para errores 404
+                        path: '*', // ruta para errores 404
                         element: (
                             <picture className='mx-auto block w-full max-w-100 h-auto'>
                                 <source media='(prefers-color-scheme: light)' srcSet='/404Claro.png' />

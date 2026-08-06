@@ -2,26 +2,32 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 
-// definimos la ruta de tu base de datos local
 const localDbPath = path.join(__dirname, 'database.db');
+const preferredDbPath = process.env.DB_PATH
+    || process.env.DATABASE_PATH
+    || (process.env.RAILWAY_VOLUME_MOUNT_PATH
+        ? path.join(process.env.RAILWAY_VOLUME_MOUNT_PATH, 'database.db')
+        : localDbPath);
 
-// definimos la ruta de la base de datos en railway o en local si no estamos en railway
-const dbPath = process.env.DB_PATH || localDbPath;
+const dbDir = path.dirname(preferredDbPath);
+fs.mkdirSync(dbDir, { recursive: true });
 
-//si el archivo de la base de datos no existe en Railway pero sí en local, lo copiamos para no perder los datos
-if (process.env.DB_PATH && !fs.existsSync(dbPath) && fs.existsSync(localDbPath)) {
-    fs.copyFileSync(localDbPath, dbPath);
-    console.log('¡Base de datos local copiada al volumen de Railway con éxito!');
+if (preferredDbPath !== localDbPath && !fs.existsSync(preferredDbPath) && fs.existsSync(localDbPath)) {
+    fs.copyFileSync(localDbPath, preferredDbPath);
+    console.log(`[sqlite] copied local database to ${preferredDbPath}`);
 }
 
-// conectamos a la base de datos (la de la nube o la local)
-const db = new Database(dbPath);
+console.log(`[sqlite] using database at ${preferredDbPath}`);
 
-// se ejecuta el archivo schema.sql
+const db = new Database(preferredDbPath);
+
 const schemaPath = path.join(__dirname, 'schema.sql');
 if (fs.existsSync(schemaPath)) {
     const schema = fs.readFileSync(schemaPath, 'utf-8');
     db.exec(schema);
 }
+
+const userCount = db.prepare('SELECT COUNT(*) AS count FROM usuarios').get()?.count || 0;
+console.log(`[sqlite] usuarios in database: ${userCount}`);
 
 module.exports = db;

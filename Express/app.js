@@ -18,8 +18,20 @@ const controlador404 = require('./src/controladores/404Controlador'); //requiere
 const middlewareError500 = require('./src/middlewares/error500');
 
 const app = express();
-app.use(cors({ 
-    origin: 'https://e-commerce-2-tan.vercel.app', 
+const allowedOrigins = [
+    'https://e-commerce-2-tan.vercel.app',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173'
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('No permitido por CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
