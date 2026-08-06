@@ -12,29 +12,12 @@ const rutasCarrito = require('./src/routes/rutasCarrito');
 const rutasCheckout = require('./src/routes/rutasCheckout');
 const routerApiProducto = require('./api/apiProductos/routerApiProducto');
 const routerApiCategoria = require('./api/apiCategorias/routerApiCategoria')
-const routerApiLogin = require('./api/apiUsuario/routerApiUsuario');
 const carritoCantidadMiddleware = require('./src/middlewares/carritoCantidad');
 const controlador404 = require('./src/controladores/404Controlador'); //requiere el controlador 404
 const middlewareError500 = require('./src/middlewares/error500');
 
 const app = express();
-const allowedOrigins = [
-    'https://e-commerce-2-tan.vercel.app',
-    'http://localhost:5173',
-    'http://127.0.0.1:5173'
-];
-
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('No permitido por CORS'));
-        }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-}));
+app.use(cors());
 const PORT = 3000;
 
 app.use(session({
@@ -68,7 +51,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', routerApiProducto);
 app.use('/api', routerApiCategoria);
-app.use('/api', routerApiLogin);
 
 app.use(carritoCantidadMiddleware);
 
