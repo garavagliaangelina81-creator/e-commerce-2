@@ -1,5 +1,7 @@
 const express = require('express');
-const apiRouterCategoria = express.Router();
+const apiRouterUsuario = express.Router();
 const loginControlador = require('./loginApiControlador');
 
-apiRouterCategoria.post('/login', loginControlador.loginApi);
+apiRouterUsuario.post('/login', loginControlador.loginApi);
+
+module.exports = apiRouterUsuario;

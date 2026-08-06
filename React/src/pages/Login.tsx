@@ -2,38 +2,18 @@ import LoginForm from '../components/LoginForm';
 
 const Login = () => {
     return (
-        <div style={styles.pageContainer}>
-            <div style={styles.card}>
-                <h2 style={styles.title}>Panel de Administración</h2>
-                <p style={styles.subtitle}>Ingresa tus credenciales para continuar</p>
-                
-                {/* Instanciamos nuestro componente de formulario independiente */}
+        <div className="flex min-h-screen items-center justify-center bg-gray-200 px-4 py-10 text-amber-950 dark:bg-slate-900 dark:text-slate-100">
+            <div className="w-full max-w-md rounded-2xl border border-amber-950/20 bg-amber-100 p-8 shadow-xl shadow-black/10 dark:border-slate-800 dark:bg-slate-950/40">
+                <div className="mb-6 text-center">
+                    <h2 className="text-2xl font-semibold tracking-tight text-amber-950 dark:text-yellow-100">
+                        Iniciar sesión
+                    </h2>
+                </div>
+
                 <LoginForm />
-                
             </div>
         </div>
     );
-};
-
-// Estilos para centrar la tarjeta de login en la pantalla
-const styles = {
-    pageContainer: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        backgroundColor: '#f4f4f9'
-    },
-    card: {
-        backgroundColor: 'white',
-        padding: '40px',
-        borderRadius: '8px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-        width: '100%',
-        maxWidth: '400px'
-    },
-    title: { marginTop: 0, textAlign: 'center' as const, color: '#333' },
-    subtitle: { textAlign: 'center' as const, color: '#666', marginBottom: '20px' }
 };
 
 export default Login;

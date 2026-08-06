@@ -1,8 +1,8 @@
-// src/components/LoginForm.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../context/UserContext';
 import { loginServicio } from '../services/LoginServicio';
+
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,13 +18,8 @@ const LoginForm = () => {
         setIsLoading(true);
 
         try {
-            // Llamamos a nuestro servicio separado
             const data = await loginServicio(email, password);
-            
-            // Guardamos la sesión en el contexto global
             login(data.token, data.usuario);
-            
-            // Redirigimos al panel de administración (Layout principal)
             navigate('/');
         } catch (err: any) {
             setError(err.message);
@@ -34,49 +29,52 @@ const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={styles.form}>
-            {error && <div style={styles.errorBox}>{error}</div>}
-            
-            <div style={styles.inputGroup}>
-                <label htmlFor="email">Correo Electrónico</label>
-                <input 
-                    type="email" 
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            {error && (
+                <div className="rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+                    {error}
+                </div>
+            )}
+
+            <div className="flex flex-col gap-2">
+                <label htmlFor="email" className="text-sm font-medium text-amber-900/70 dark:text-slate-400">
+                    Correo electrónico
+                </label>
+                <input
+                    type="email"
                     id="email"
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    required 
-                    style={styles.input}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                     disabled={isLoading}
+                    className="w-full rounded-lg border border-amber-900/30 bg-white px-3 py-2.5 text-amber-950 shadow-sm outline-none transition focus:border-amber-950 focus:ring-2 focus:ring-amber-950/20 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:border-yellow-100 dark:focus:ring-yellow-100/20"
                 />
             </div>
-            
-            <div style={styles.inputGroup}>
-                <label htmlFor="password">Contraseña</label>
-                <input 
-                    type="password" 
+
+            <div className="flex flex-col gap-2">
+                <label htmlFor="password" className="text-sm font-medium text-amber-900/70 dark:text-slate-400">
+                    Contraseña
+                </label>
+                <input
+                    type="password"
                     id="password"
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required 
-                    style={styles.input}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                     disabled={isLoading}
+                    className="w-full rounded-lg border border-amber-900/30 bg-white px-3 py-2.5 text-amber-950 shadow-sm outline-none transition focus:border-amber-950 focus:ring-2 focus:ring-amber-950/20 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:border-yellow-100 dark:focus:ring-yellow-100/20"
                 />
             </div>
-            
-            <button type="submit" style={styles.button} disabled={isLoading}>
-                {isLoading ? 'Ingresando...' : 'Iniciar Sesión'}
+
+            <button
+                type="submit"
+                disabled={isLoading}
+                className="rounded-full bg-amber-200 px-4 py-2.5 text-sm font-semibold text-amber-950 transition hover:bg-amber-950 hover:text-amber-200 disabled:cursor-not-allowed disabled:opacity-70 dark:bg-yellow-100 dark:text-slate-900 dark:hover:bg-slate-950 dark:hover:text-yellow-100"
+            >
+                {isLoading ? 'Ingresando...' : 'Iniciar sesión'}
             </button>
         </form>
     );
-};
-
-// Estilos básicos en línea para mantener el componente ordenado
-const styles = {
-    form: { display: 'flex', flexDirection: 'column' as const, gap: '15px' },
-    inputGroup: { display: 'flex', flexDirection: 'column' as const, gap: '5px' },
-    input: { padding: '10px', borderRadius: '4px', border: '1px solid #ccc' },
-    button: { padding: '10px', backgroundColor: '#007BFF', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' },
-    errorBox: { padding: '10px', backgroundColor: '#ffcccc', color: '#cc0000', borderRadius: '4px', textAlign: 'center' as const }
 };
 
 export default LoginForm;
