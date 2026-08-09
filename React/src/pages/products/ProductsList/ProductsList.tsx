@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react"; 
 import { API_URL } from "../../../const/api"; 
+import Header from "../../../components/layouts/Header/Header";
 
 export default function ProductsList() {
     const [productos, setProductos] = useState<any[]>([]);
@@ -71,8 +72,9 @@ export default function ProductsList() {
     const quedanProductos = productos.length < totalProductos;
 
     return (
-        <main className="min-h-full bg-gray-200 text-amber-950 dark:bg-slate-900 dark:text-slate-100 mt-4">
-            <section className="mx-auto flex w-full max-w-5xl flex-col gap-4 rounded-2xl border-gray-200 bg-gray-200 dark:border-slate-950 dark:bg-slate-950/40 p-4 sm:p-6">
+        <main className="min-h-full bg-gray-200 text-amber-950 dark:bg-slate-900 dark:text-slate-100">
+            <Header/>
+            <section className="mt-6 mx-auto flex w-full max-w-5xl flex-col gap-4 rounded-2xl border-gray-200 bg-gray-200 dark:border-slate-950 dark:bg-slate-950/40 p-4 sm:p-6">
                 
                 <header className="flex items-center justify-between border-b border-amber-950 dark:border-slate-800 pb-4">
                     <h2 className="text-2xl font-semibold tracking-tight text-amber-950 dark:text-yellow-100">Productos</h2>

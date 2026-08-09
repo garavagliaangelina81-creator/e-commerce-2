@@ -13,6 +13,7 @@ import CategoriesNew from './pages/categories/CategoriesNew/CategoriesNew';
 import CategoriesEdit from './pages/categories/CategoriesEdit/CategoriesEdit';
 import Layout from './components/layouts/Layout';
 import Home from './pages/home/Home';
+import Perfil from './pages/Perfil';
 
 export const router = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
                     {
                         path: 'categorias/editar/:id',
                         element: <CategoriesEdit />,
+                    },
+                    {
+                        path: '/profile',
+                        element: <Perfil />
                     },
                     {
                         path: '*', // ruta para errores 404

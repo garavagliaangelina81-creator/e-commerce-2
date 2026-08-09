@@ -34,7 +34,7 @@ export default function NavBar({ setIsSidebarOpen }: { setIsSidebarOpen: (value:
                         </div>
             
                         <nav className="p-4 flex flex-col items-center gap-2">
-                            {/* CAMBIO CLAVE: Usar NavLink y className={linkClasses} */}
+                            {/* Usar NavLink y className={linkClasses} */}
                             <NavLink to="/" className={linkClasses} onClick={() => setIsSidebarOpen(false)}>🏠 Inicio</NavLink>
                             <NavLink to="/products" className={linkClasses} onClick={() => setIsSidebarOpen(false)}>📦 Productos</NavLink>
                             <NavLink to="/categoriesList" className={linkClasses} onClick={() => setIsSidebarOpen(false)}>🏷️ Categorías</NavLink>

@@ -1,7 +1,7 @@
 import { API_URL } from "../const/api";
 
 export const loginServicio = async (email: string, password: string) => {
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`${API_URL}/usuario/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
