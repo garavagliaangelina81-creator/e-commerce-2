@@ -1,7 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router";
 import { useProductoPorId } from "../../../hooks/useProductos"; 
 import { eliminarProducto } from "../../../services/ProductosService"; // Importamos el servicio
-import { API_URL } from "../../../const/api";
 
 export default function ProductView() {
     const { id } = useParams();
@@ -69,7 +68,7 @@ export default function ProductView() {
                                     src={
                                         producto.imagen.startsWith("http")
                                             ? producto.imagen
-                                            : `${API_URL}${producto.imagen}`
+                                            : `http://localhost:3000${producto.imagen}`
                                     }
                                     alt={producto.nombre}
                                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
