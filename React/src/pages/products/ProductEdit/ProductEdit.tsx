@@ -135,7 +135,7 @@ export default function ProductEdit() {
         ? URL.createObjectURL(imagenFile) 
         : formulario.imagenActual.startsWith("http")
         ? formulario.imagenActual
-        : `${API_URL}${formulario.imagenActual}`;
+        : `http://localhost:3000${producto.imagen}`
 
     return (
         <div className="p-5 w-full text-white">
