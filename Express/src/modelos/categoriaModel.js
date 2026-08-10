@@ -46,10 +46,10 @@ const categoriaModelo = {
     crearCategoria: (nuevaCategoria) => {
         const { nombre_categoria } = nuevaCategoria;
         const stmt = db.prepare(`
-            INSERT INTO categorias (nombre_categoria)
-            VALUES (?)
+            INSERT INTO categorias (nombre_categoria, imagen)
+            VALUES (?, ?)
         `);
-        const info = stmt.run(nombre_categoria);
+        const info = stmt.run(nombre_categoria, nuevaCategoria.imagen || null);
         return { categoria_id: info.lastInsertRowid, ...nuevaCategoria};
     },
 

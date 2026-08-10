@@ -48,6 +48,12 @@ const controladorApiCategoria = {
     crear: async (req, res) => {
         try {
             const nuevaCategoria = req.body; 
+            
+            // Si el middleware de multer adjuntó una imagen, asignamos la ruta del archivo
+            if (req.file) {
+                nuevaCategoria.imagen = `/img/${req.file.filename}`;
+            }
+
             const resultado = await categoriaServicio.crearCategoria(nuevaCategoria);
             res.status(201).json(resultado);
         } catch (error) {
@@ -55,7 +61,6 @@ const controladorApiCategoria = {
             res.status(500).json({ error: 'Hubo un problema al crear la categoria' });
         }
     },
-
     actualizar: async (req, res) => {
         try {
             const categoria_id = parseInt(req.params.id, 10);

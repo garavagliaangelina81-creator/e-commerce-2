@@ -54,4 +54,26 @@ try {
 } catch (error) {
     console.error("Error durante la migración de datos:", error);
 }
+
+// Función para actualizar la tabla de forma segura
+const actualizarTablaCategorias = () => {
+    try {
+        console.log("Verificando si es necesario actualizar la tabla 'categorias'...");
+        
+        db.prepare('ALTER TABLE categorias ADD COLUMN imagen TEXT').run();
+        
+        console.log("¡Éxito! La columna 'imagen' ha sido agregada a las categorías existentes.");
+    } catch (error) {
+        if (error.message.includes("duplicate column name")) {
+            console.log("La columna 'imagen' ya existe. No se requieren cambios.");
+        } else {
+            console.error("Hubo un error al alterar la tabla:", error.message);
+        }
+    }
+};
+
+actualizarTablaCategorias();
+
+
+
 module.exports = db;

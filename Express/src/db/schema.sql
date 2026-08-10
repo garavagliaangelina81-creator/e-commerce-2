@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS productos (
 -- Tabla de categorías
 CREATE TABLE IF NOT EXISTS categorias (
     categoria_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre_categoria TEXT NOT NULL
+    nombre_categoria TEXT NOT NULL,
+    imagen TEXT
 );
 
 -- Tabla de usuarios

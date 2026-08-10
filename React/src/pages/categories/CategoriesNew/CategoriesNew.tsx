@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { API_URL } from "../../../const/api"; 
 
-
 export default function CategoriesNew() {
     const navigate = useNavigate();
 
@@ -10,7 +9,15 @@ export default function CategoriesNew() {
         nombre_categoria: "",
     });
     
+    const [imagen, setImagen] = useState<File | null>(null);
     const [error, setError] = useState("");
+
+    // Función para manejar la selección del archivo
+    const handleImagenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setImagen(e.target.files[0]);
+        }
+    };
 
     const handleGuardar = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -21,14 +28,19 @@ export default function CategoriesNew() {
             return;
         }
 
+        // Preparamos el FormData para empaquetar texto y archivo
+        const formData = new FormData();
+        formData.append("nombre_categoria", formulario.nombre_categoria);
+        
+        if (imagen) {
+            formData.append("imagen", imagen);
+        }
+
         try {
             const baseUrl = API_URL; 
             const response = await fetch(`${baseUrl}/categorias`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formulario),
+                body: formData,
             });
 
             if (response.ok) {
@@ -69,12 +81,27 @@ export default function CategoriesNew() {
                                 placeholder=""
                                 className="w-full rounded-lg border border-amber-900/30 bg-white p-3 text-amber-950 focus:outline-none focus:ring-2 focus:ring-amber-950 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:ring-yellow-100"
                             />
-                            {error && (
-                                <p className="mt-1 text-xs font-semibold text-red-600 dark:text-red-400">
-                                    {error}
-                                </p>
-                            )}
                         </div>
+
+                        {/*  Nuevo Input para la imagen */}
+                        <div>
+                            <label className="mb-2 block text-sm font-medium text-amber-900/70 dark:text-slate-400">
+                                Imagen de la categoría
+                            </label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImagenChange}
+                                className="w-full rounded-lg border border-amber-900/30 bg-white p-2 text-amber-950 focus:outline-none focus:ring-2 focus:ring-amber-950 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:ring-yellow-100
+                                file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-amber-200 file:text-amber-950 hover:file:bg-amber-300 dark:file:bg-slate-600 dark:file:text-white dark:hover:file:bg-slate-500"
+                            />
+                        </div>
+
+                        {error && (
+                            <p className="mt-1 text-xs font-semibold text-red-600 dark:text-red-400">
+                                {error}
+                            </p>
+                        )}
 
                         <div className="mt-8 flex justify-end gap-4 border-t border-amber-900/20 pt-5 dark:border-slate-700">
                             <button
