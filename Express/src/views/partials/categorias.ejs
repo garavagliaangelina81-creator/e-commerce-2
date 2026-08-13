@@ -1,21 +1,21 @@
 <link rel="stylesheet" href="/css/categoria.css">
-<section class="meli-categorias-seccion">
-    <div class="meli-categorias-header">
+<section class="categorias-seccion">
+    <div class="categorias-header">
         <h2>Categorías</h2>
-        <a href="#" class="meli-link-cat">Mostrar todas las categorías</a>
+        <a href="#" class="categoria-link-cat">Mostrar todas las categorías</a>
     </div>
 
-    <div class="meli-categorias-grid">
+    <div class="categorias-grid">
     <% if (typeof categoriasBarra !== 'undefined') { %>
 
         <% categoriasBarra.forEach(categoria => { %>
-        <a href="/categoria/<%= categoria.categoria_id %>" class="meli-categoria-tarjeta">
+        <a href="/categoria/<%= categoria.categoria_id %>" class="categoria-tarjeta">
                     
-                    <div class="meli-cat-foto-box">
+                    <div class="cat-foto-box">
                         <img src="<%= categoria.imagen %>" alt="<%= categoria.nombre_categoria %>" onerror="this.src='/img/fallback.jpg'">
                     </div>
                     
-                    <div class="meli-cat-texto-box">
+                    <div class="cat-texto-box">
                         <span><%= categoria.nombre_categoria %></span>
                     </div>
                     

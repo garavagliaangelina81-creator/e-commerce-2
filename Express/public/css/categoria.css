@@ -3,13 +3,13 @@
     --marron-oscuro: #4E342E;     
 }
 
-.meli-categorias-seccion {
+.categorias-seccion {
     padding: 40px 5%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.meli-categorias-header {
+.categorias-header {
     display: flex;
     flex-direction: column; 
     align-items: center;    
@@ -18,23 +18,23 @@
     padding-bottom: 15px;
 }
 
-.meli-categorias-header h2 {
+.categorias-header h2 {
     color: var(--marron-oscuro);
     font-weight: 700;
     font-size: 1.8rem; 
     margin: 0;
 }
 
-.meli-link-cat {
+.categoria-link-cat {
     display: none;
 }
 
-.meli-link-cat:hover {
+.categoria-link-cat:hover {
     text-decoration: underline;
     color: var(--marron-oscuro);
 }
 
-.meli-categorias-grid {
+.categorias-grid {
     display: flex;
     flex-wrap: wrap;      
     justify-content: center; 
@@ -43,7 +43,7 @@
     border-bottom: 2px solid rgba(78, 52, 46, 0.1); 
 }
 
-.meli-categoria-tarjeta {
+.categoria-tarjeta {
     display: flex;
     align-items: center;      
     gap: 14px; 
@@ -57,14 +57,14 @@
     margin: 12px;
 }
 
-.meli-categoria-tarjeta:hover {
+.categoria-tarjeta:hover {
     transform: translateY(-3px); 
     background-color: var(--amarillo-pastel); 
     border-color: var(--marron-oscuro); 
     box-shadow: 0 6px 15px rgba(78, 52, 46, 0.12);
 }
 
-.meli-cat-foto-box {
+.cat-foto-box {
     width: 45px;   
     height: 45px;
     overflow: hidden;
@@ -74,7 +74,7 @@
     flex-shrink: 0;
 }
 
-.meli-cat-foto-box img {
+.cat-foto-box img {
     width: 100%;
     height: 100%;
     object-fit: cover; 
@@ -83,7 +83,7 @@
 
 }
 
-.meli-cat-texto-box span {
+.cat-texto-box span {
     color: var(--marron-oscuro);
     font-weight: 700; 
     font-size: 1.1rem; 
@@ -91,19 +91,19 @@
 }
 
 @media (max-width: 768px) {
-    .meli-categorias-seccion {
+    .categorias-seccion {
         padding: 20px 4%;
     }
 
-    .meli-categorias-header h2 {
+    .categorias-header h2 {
         font-size: 1.5rem;
     }
 
-    .meli-categorias-grid {
+    .categorias-grid {
         gap: 12px;
     }
 
-    .meli-categoria-tarjeta {
+    .categoria-tarjeta {
         width: calc(50% - 12px);
         min-width: 140px;
         justify-content: flex-start;
@@ -111,13 +111,13 @@
         border-radius: 40px;
     }
 
-    .meli-cat-texto-box span {
+    .cat-texto-box span {
         font-size: 0.95rem;
     }
 }
 
 @media (max-width: 480px) {
-    .meli-categoria-tarjeta {
+    .categoria-tarjeta {
         width: 100%;
     }
 }

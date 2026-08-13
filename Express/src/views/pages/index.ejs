@@ -2,8 +2,8 @@
 
 <main class="home-main">
 
-    <!-- Cuando mostrar el HERO -->
-    <% if (!locals.esBusqueda && !locals.esCategoria) { %>
+    <!-- el hero no se muestra si se filtra por categoría o si se muestran resultados de una búsqueda -->
+    <% if (!locals.esBusqueda && !locals.esCategoria) { %> <!-- locals sirve para acceder a datos que quiero renderizar-->
         <section id="hero">
             <div class="contenedor-hero">
                 <h2>Ofertas de temporada</h2>
@@ -16,7 +16,7 @@
         <%- include('../partials/categorias') %> <br>
     <% } %>
         
-    <!-- mostrar productos por categoría -->
+    <!-- filtro para mostrar productos por categoría -->
     <% if (locals.esCategoria) { %>
         <section class="products-section">
             <h2><%= categoriaActual %></h2>
@@ -28,7 +28,7 @@
             </div>
         </section>
     <% } %>
-
+        <!--resultados de una búsqueda-->
     <section class="products-section">
         <h2><%= locals.esBusqueda ? 'Resultados de tu búsqueda' : 'Te puede interesar' %></h2>
 
@@ -44,6 +44,7 @@
         </div>
     </section>
     
+    <!--si no es busqueda ni categoria, muestra todos los productos y los destacados-->
     <% if (!locals.esBusqueda && !locals.esCategoria) { %>
         <section class="products-section highlighted">
             <h2>Los productos más pedidos</h2>
@@ -57,6 +58,7 @@
         <section class="products-section">
         <h2>Todos los productos</h2>
 
+        <!--filtro para ordenar según precio-->
         <div class="header-con-filtros">
 
             <form action="/" method="GET" id="form-ordenar">
@@ -76,6 +78,7 @@
                 <% }) %>
             </div>
 
+            <!--boton ver más productos-->
             <% if (todos.length > 8) { %>
                 <div class="contenedor-ver-mas">
                     <button id="btn-ver-mas" class="btn-secundario">Ver más productos</button>
@@ -87,7 +90,7 @@
     <% } %>
 
 
-    <script>
+    <script> // script para el boton ver mas productos en la grilla de todos los productos
     document.addEventListener('DOMContentLoaded', () => {
         const btnVerMas = document.getElementById('btn-ver-mas');
         if (btnVerMas) {

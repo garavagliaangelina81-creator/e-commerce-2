@@ -1,5 +1,5 @@
 // Ahora importo la base de datos en vez del json
-// Solo el modelo va a hacer las consultas a la base de datos
+// Solo el modelo va a hacer las consultas a la base de datos, despues se llaman los metodos en servicio 
 
 const db = require('../db/database.js');
 

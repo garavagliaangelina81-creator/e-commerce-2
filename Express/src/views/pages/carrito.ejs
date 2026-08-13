@@ -1,9 +1,9 @@
 <main class="main-carrito">
     <section class="carrito">
         
-        <a class="volver" href="/"><span class="flecha">&larr;</span> Volver</a>
+        <a class="volver" href="/"><span class="flecha">&larr;</span> Volver</a> <!-- &larr es una flechita para que se vea en el despliegue-->
         
-        <% if (productos.length != 0) { %>
+        <% if (productos.length != 0) { %> <!--si hay productos en el carrito, muestra la vista de cada producto individual con la información correspondiente de la bd junto con la cantidad de productos y el total por producto en puntos -->
             <h1>Tu carrito</h1>
 
             <% productos.forEach(producto => { %>
@@ -15,8 +15,8 @@
                     <div class="carrito-item-acciones">
                         <div class="modificador-cantidad">
                             <a href ="/carrito/restar/<%= producto.id %>">-</a>
-                           <span class="cantidad"><%= producto.cantidad %></span>
-                             <a href ="/carrito/sumar/<%= producto.id %>">+</a>
+                            <span class="cantidad"><%= producto.cantidad %></span>
+                            <a href ="/carrito/sumar/<%= producto.id %>">+</a>
                         
                         </div>
                         <div class="precio-y-quitar">
@@ -27,7 +27,7 @@
 
                 </article>
             <% }); %>
-
+            <!-- footer del carrito donde se visualiza el total de todos los productos seleccionados y el total de todos, además del botón para redirigir al checkout o vaciar el carrito totalmente-->
             <div class="carrito-footer">
                 <div class="resumen-caja">
                     <div class="total-fila">
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-
+            <!-- si el carrito no tiene productos, se muestra un parrafo indicando que esta vacío-->
             <% } else { %>
                 <p id="carrito-vacio" >Tu carrito está vacío.</p>
             <% } %>

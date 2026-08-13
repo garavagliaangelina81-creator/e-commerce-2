@@ -1,6 +1,8 @@
 const productoModelo = require('../modelos/productModel');
 
 const productoServicio = {
+
+    //MÉTODOS NECESARIOS PARA EXPRESS
     obtenerTodos: (page, limit) => {
         return productoModelo.todos(page, limit);
     },
@@ -45,7 +47,7 @@ const productoServicio = {
         return productoModelo.ordenarPorPrecio(criterio);
     },
 
-    // MÉTODOS CRUD COMPLEMENTARIOS:
+    // MÉTODOS CRUD PARA REACT:
     crearProducto: (nuevoProducto) => {
         return productoModelo.crearProducto(nuevoProducto);
     },

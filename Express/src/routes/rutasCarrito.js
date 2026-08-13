@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const autenticacionMiddleware = require('../middlewares/autenticacion');
-// Importar el controlador
 const carritoControlador = require('../controladores/carritoControlador');
 const carritoServicio = require('../servicios/carritoServicio');
 

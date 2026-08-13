@@ -261,38 +261,7 @@ a {
     border-radius: 5px;
 }
 
-.contenedor-checkout { 
-    max-width: 800px; 
-    margin: 40px auto;
-    padding: 40px; 
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
 
-.checkout-buttons {
-    display: flex; 
-    gap: 20px; 
-    justify-content: center; 
-    margin-top: 30px;
-}
-
-.checkout-buttons button {
-    background-color: #4E342E;
-    color: #ffffff;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.checkout-buttons button:hover {
-    background-color: #FFF59D;
-    color: #4E342E;
-}
 
 footer {
     background-color: #FFF59D; 

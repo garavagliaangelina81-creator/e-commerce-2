@@ -1,7 +1,7 @@
 const productoServicio = require('../servicios/productoServicios');
 
 const carritoServicio = {
-    inicializar: (session) => {
+    inicializar: (session) => { //con express session los datos (productos agregados) en el carrito se mantienen mientras se sigue navegando por la página
         if (!session.cart) {
             session.cart = [];
         }
@@ -23,7 +23,7 @@ const carritoServicio = {
             existe.cantidad += 1;
             //aseguramos que el precio se mantega real desde la base de datos
             existe.precio = productoOriginal.precio;
-        } else { //nose guarda informacion sensible en la sesion, solo lo basico para la vista
+        } else { //no se guarda informacion sensible en la sesion, solo lo basico para la vista
             // el precio real viene directo de sqlite
                 session.cart.push({
                     id: productoOriginal.id,
@@ -74,7 +74,7 @@ const carritoServicio = {
     session.cart = [];
 }, 
 // calcular totales usando datos reales
-calcularTotal: (session) => { // ¡Ahora sí es una propiedad limpia del objeto!
+calcularTotal: (session) => { 
         if (!session.cart || session.cart.length === 0) {
             return 0;
         }
@@ -83,7 +83,7 @@ calcularTotal: (session) => { // ¡Ahora sí es una propiedad limpia del objeto!
             //buscamos el producto en sqlite en cada vuelta del bucle para garantizar que el precio es el real
             const productoOriginal = productoServicio.buscarPorID(producto.id);
             const precioReal = productoOriginal ? productoOriginal.precio : producto.precio;
-             
+            
             //forzamos a actualizar el objeto de la sesion con el precio real manipulado
             producto.precio = precioReal;
                 return total + (producto.precio * producto.cantidad);

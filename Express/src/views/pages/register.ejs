@@ -1,3 +1,5 @@
+
+<!-- se le agrega el DOCTYPE y se envuelve en la etiqueta html porque no usa el layout-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +10,7 @@
         <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        
+    
         
         <main class="main-auth">
             <div class="ingreso-card">
@@ -16,7 +18,8 @@
                 <a class="volver" href="/"><span class="flecha">&larr;</span> Volver</a>
                 
                 <h1>Registro de Usuario</h1>
-                <form action="/register" method="post">
+                <!--cada input tiene su error correspondiente de validación -->
+                <form action="/register" method="post"> <!-- usa el metodo post porque envia los datos a la bd-->
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombreU" placeholder="Nombre de usuario" required value="<%= locals.oldData ? oldData.nombreU : '' %>" >
                     <% if (locals.errors && errors.nombreU) { %>
