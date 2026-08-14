@@ -76,7 +76,7 @@ verCategoria: async (req, res) => {
         // normalizamos el id
         const idNormalizado = productoServicio.normalized(req.params.id);
 
-        // bonus, si no es número, pasamos al siguiente middleware
+        //  si no es número, pasamos al siguiente middleware
         if(idNormalizado === null){
             return next();
         }

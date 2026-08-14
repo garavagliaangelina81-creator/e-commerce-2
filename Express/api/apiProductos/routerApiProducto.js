@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const controladorApiProducto = require('./controladorApiProducto'); // Asegúrate de que apunte al archivo del controlador
+const controladorApiProducto = require('./controladorApiProducto'); 
 
 const apiRouterProducto = express.Router();
 

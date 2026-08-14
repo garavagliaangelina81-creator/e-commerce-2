@@ -113,7 +113,7 @@ const controladorApiProducto = {
             
             res.json({ success: true, message: "Producto actualizado", data: resultado });
         } catch (error) {
-            // DIAGNÓSTICO: Imprimimos el error exacto en la terminal del servidor
+            
             console.error("ERROR CRÍTICO AL ACTUALIZAR:", error.message);
             res.status(500).json({ error: error.message });
         }
