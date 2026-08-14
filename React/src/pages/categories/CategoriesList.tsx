@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { useCategorias } from "../../../hooks/useCategorias";
-import Header from "../../../components/layouts/Header/Header";
+import { useCategorias } from "../../hooks/useCategorias";
+import Header from "../../components/layouts/Header/Header";
 
 export default function CategoriesList() {
     const { data: categorias, status } = useCategorias();

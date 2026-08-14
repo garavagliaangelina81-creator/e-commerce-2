@@ -1,6 +1,6 @@
 import { useNavigate, useParams, Link } from "react-router"; // Sumamos Link
-import { useCategorias } from "../../../hooks/useCategorias"; 
-import { eliminarCategoria } from "../../../services/CategoriaServicio"; 
+import { useCategorias } from "../../hooks/useCategorias"; 
+import { eliminarCategoria } from "../../services/CategoriaServicio"; 
 
 export default function CategoryView() {
     const { id } = useParams();

@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react"; 
-import { API_URL } from "../../../const/api"; 
-import Header from "../../../components/layouts/Header/Header";
+import { API_URL } from "../../const/api"; 
+import Header from "../../components/layouts/Header/Header";
 
 export default function ProductsList() {
     const [productos, setProductos] = useState<any[]>([]);

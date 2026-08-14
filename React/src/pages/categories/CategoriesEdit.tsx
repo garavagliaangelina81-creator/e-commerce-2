@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useCategorias } from "../../../hooks/useCategorias";
-import { API_URL } from "../../../const/api"; 
+import { useCategorias } from "../../hooks/useCategorias";
+import { API_URL } from "../../const/api"; 
 
 export default function CategoriesEdit() {
     const { id } = useParams();

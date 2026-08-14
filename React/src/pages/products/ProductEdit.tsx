@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router";
-import { eliminarProducto } from "../../../services/ProductosService";
-import { useProductoPorId } from "../../../hooks/useProductos";
+import { eliminarProducto } from "../../services/ProductosService";
+import { useProductoPorId } from "../../hooks/useProductos";
 import { useState, useEffect } from "react";
-import { API_URL } from "../../../const/api"; 
+import { API_URL } from "../../const/api"; 
 
 export default function ProductEdit() {
     const { id } = useParams();

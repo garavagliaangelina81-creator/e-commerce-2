@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router";
-import { useProductoPorId } from "../../../hooks/useProductos"; 
-import { eliminarProducto } from "../../../services/ProductosService"; // Importamos el servicio
+import { useProductoPorId } from "../../hooks/useProductos"; 
+import { eliminarProducto } from "../../services/ProductosService"; // Importamos el servicio
 
 export default function ProductView() {
     const { id } = useParams();

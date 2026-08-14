@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { API_URL } from "../../../const/api"; 
+import { API_URL } from "../../const/api"; 
 
 export default function ProductsNew() {
     const navigate = useNavigate();
